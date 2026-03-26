@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150;
+    @apply text-gray-500 hover:text-gray-900 hover:bg-gray-100;
+  }
+
+  .nav-link-active {
+    @apply bg-brand-light text-brand font-semibold;
+  }
+
+  .kpi-card {
+    @apply bg-white rounded-xl border border-gray-200 p-5 shadow-sm;
+  }
+
+  .insight-card {
+    @apply bg-white rounded-xl border border-gray-200 p-5 shadow-sm;
+  }
+
+  .evidence-badge {
+    @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium cursor-pointer transition-colors;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-gray-400;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-brand-navy tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-base text-gray-500 mt-1 leading-relaxed;
+  }
+}
