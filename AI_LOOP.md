@@ -194,6 +194,90 @@ Also include:
 1. the command used to start the app locally
 2. a brief note describing each implemented route
 
-## Implementer -> Controller
+## IMPLEMENTER -> CONTROLLER
 
-Pending.
+### Understanding
+
+Packet MSP-002-P1 calls for a leadership-grade scaffold with 6 screens, shared navigation, reusable KPI/insight/evidence primitives, and honest seeded/deferred states — without fake live integrations, AI shell behavior, or browser-side secret exposure.
+
+I treated evidence visibility and honest deferred labeling as non-negotiable: every metric carries an evidence badge, every capability gap carries a DeferredBadge or explicit status note, and the brief builder's AI generation button is disabled with a plain explanation.
+
+### Work Done
+
+**Initialized apps/web** — Next.js 15, React 19, TypeScript, Tailwind CSS 3. Config files: `package.json`, `next.config.ts`, `tsconfig.json`, `tailwind.config.ts`, `postcss.config.mjs`, `.env.example` (OPENAI_API_KEY server-side only).
+
+**Seed data (`lib/seed-data.ts`)** — 6 hero KPIs (4 real World Bank values extracted 2026-03-26, 1 FCSC headline, 1 illustrative/deferred); 3 insight cards (momentum/opportunity/risk); watchlist item; 7 sector rows; 6 emirate rows; 3 roadmap phases. All entries carry `evidence_type`, source, date, caveats.
+
+**Shared components:**
+- `SideNav.tsx` — 6-item navigation with active-state highlighting
+- `EvidenceDrawer.tsx` — slide-in right panel with metadata, type badge, formula, caveats, illustrative warning
+- `KpiCard.tsx` — value, delta, unit, deferred state with hover tooltip
+- `InsightCard.tsx` — signal type badge (momentum/opportunity/risk/action), summary, evidence count
+- `PageHeader.tsx` — title, subtitle, badge variant, action slot
+- `DeferredBadge.tsx` — explicit "content deferred" placeholder
+
+**6 routes implemented:**
+
+| Route | Content |
+| --- | --- |
+| `/` | Leadership Dashboard — "UAE Starts From Strength" narrative band, 6 KPI cards, 3 insight cards, watchlist, Operation 300bn tracker (illustrative + DeferredBadge), recommended brief |
+| `/uae-position` | Narrative header, real World Bank peer comparison table (UAE/KSA/SGP/KOR/NLD), 6 competitiveness dimensions with evidence status |
+| `/sectors` | Prioritization framing, 7 sector cards with signal type and evidence labels, opportunity + risk callouts |
+| `/emirates` | Portfolio framing, 6 emirate role cards with strengths and portfolio notes, cross-emirate logic section |
+| `/brief-builder` | Structured brief scaffold (issue, evidence items, options A/B/C, risks, actions), AI generation explicitly disabled with deferred state |
+| `/roadmap` | AI-Native framing, 3-horizon roadmap (Foundation/Build/Scale), governance model, capability priorities, 4 visible risk cards |
+
+**Deployment runbook:** `docs/deployment-runbook.md` updated with validated build output, route table, implemented vs. deferred feature inventory.
+
+**Git note:** P0 bootstrap and P1 web scaffold landed in a single initial commit — no prior git history existed. Future packets will be committed as separate vertical slices per CLAUDE.md §3.
+
+### Validation
+
+```bash
+cd apps/web && npm install
+# 104 packages added, 0 vulnerabilities
+
+cd apps/web && npm run build
+# ✓ Compiled successfully in 2.8s
+# ✓ Generating static pages (9/9)
+# No TypeScript errors, no lint errors
+
+# Route (app)                              Size  First Load JS
+# ┌ ○ /                                 1.73 kB         107 kB
+# ├ ○ /brief-builder                      130 B         102 kB
+# ├ ○ /emirates                           130 B         102 kB
+# ├ ○ /roadmap                            130 B         102 kB
+# ├ ○ /sectors                            162 B         106 kB
+# └ ○ /uae-position                     1.71 kB         104 kB
+```
+
+Start command:
+
+```bash
+cd apps/web && npm run dev
+# App at http://localhost:3000
+```
+
+All 6 routes render. Evidence drawer opens on every KPI card. All deferred states are explicitly labeled. No secrets in browser code. Build is clean.
+
+### Risks / Concerns
+
+1. **Single initial commit** — P0 bootstrap and P1 scaffold in the same root commit due to no prior git history. Future packets will be cleanly separated.
+2. **Peer comparison years may differ** — The World Bank table uses latest available year per country. KSA manufacturing is a 2022 estimate. Table carries a caveat; acceptable for demo but should be harmonized for formal review.
+3. **Operation 300bn baseline is illustrative** — The "~AED 196bn / 65%" figure is a DeferredBadge placeholder. The real value requires FCSC structured export (not yet complete).
+4. **No automated tests in this packet** — Scaffold has no business logic to unit test. Tests deferred to the packet that introduces ETL and data contracts. Build + manual verification is the validation record here.
+5. **Google Fonts import** — `globals.css` imports Inter via Google Fonts CDN. Cosmetic fallback only if offline; no functional impact.
+
+### Questions / Decisions Needed
+
+1. **Peer country list** — UAE Position page shows KSA, Singapore, South Korea, Netherlands. Should this be confirmed or revised before benchmark charts are built?
+2. **Sector list** — 7 sectors are directional. Should Codex approve or revise before scoring logic is built in MSP-003/004?
+3. **Operation 300bn real figure** — If the correct manufacturing GDP baseline is available from FCSC, it should replace the illustrative tracker value.
+4. **Next packet priority** — Is the next packet MSP-003 (ETL/data) or MSP-004 (wire real data to dashboard)? The scaffold is ready to receive either.
+
+### Review Diff Command
+
+```bash
+git show --stat HEAD
+git show HEAD -- apps/web/ docs/deployment-runbook.md
+```
