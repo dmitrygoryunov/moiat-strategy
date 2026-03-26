@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SideNav } from "@/components/layout/SideNav";
+import { TopNav } from "@/components/layout/TopNav";
 
 export const metadata: Metadata = {
   title: "MoIAT Strategy Intelligence",
@@ -16,12 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-50">
-        <div className="flex min-h-screen">
-          <SideNav />
-          <main className="flex-1 min-w-0">
-            <div className="max-w-6xl mx-auto px-8 py-8">{children}</div>
-          </main>
-        </div>
+        <TopNav />
+        <main>
+          <div className="max-w-[1400px] mx-auto px-8 py-8">{children}</div>
+        </main>
       </body>
     </html>
   );

@@ -30,11 +30,14 @@ export const APP_DATA_CONTEXT = {
   /** Current prototype context: the date the prototype is being reviewed */
   as_of: "March 2026",
   as_of_iso: "2026-03-26",
-  /** The period most headline indicators reflect */
+  /** The latest complete annual year available */
   data_vintage: "FY 2024",
+  /** Latest sub-annual official pulse period */
+  latest_pulse_period: "9M 2025",
+  latest_pulse_note: "Latest official pulse: FCSC 9M 2025 (published 2026-02-20)",
   /** Human-readable note for the dashboard data bar */
   data_vintage_note:
-    "Most headline indicators reflect 2024 annual data — the latest complete official year available as of March 2026.",
+    "Pulse-plus-annual model: latest official pulse (9M 2025 / H1 2025, FCSC) plus latest complete annual snapshot (FY 2024, World Bank / Ministry of Economy). Extracted 2026-03-26.",
   /** When the raw data files were downloaded */
   extraction_date: "2026-03-26",
   extraction_label: "Extracted 2026-03-26",
@@ -61,6 +64,12 @@ export interface EvidenceMeta {
   caveats?: string;
   /** Short caveat for inline card display — max ~80 chars */
   caveat_short?: string;
+  /**
+   * Freshness classification — distinguishes pulse data from annual structural data.
+   * "Latest official pulse"          → sub-annual FCSC release (9M 2025 / H1 2025)
+   * "Latest complete annual snapshot" → most recent full-year official data (FY 2024)
+   */
+  freshness_label?: "Latest official pulse" | "Latest complete annual snapshot";
   confidence: "high" | "medium" | "low";
   evidence_type: EvidenceType;
   methodology_notes?: string;
@@ -114,40 +123,139 @@ export interface EmirateRow {
 // ─────────────────────────────────────────────
 // HERO KPIs — Leadership Dashboard
 //
-// Sources:
-//   - World Bank Open Data API (extracted 2026-03-26) — data/raw/world_bank/
-//   - FCSC / UAE National Accounts 2024 (PRD proof points, to be confirmed against
-//     structured UAE.Stat export when available)
+// Pulse-plus-annual model (as of March 2026):
 //
-// All values reflect FY 2024 annual data.
+//   Latest official pulse:
+//     - FCSC 9M 2025 (published 2026-02-20) — GDP growth, non-oil GDP growth, GDP value
+//     - FCSC H1 2025 (published 2025-12-11) — non-oil GDP share
+//
+//   Latest complete annual snapshot:
+//     - World Bank FY 2024 — manufacturing value added % GDP
+//     - Ministry of Economy trade map endpoint — non-oil foreign trade 2024
+//
 // Current context date is March 2026.
 // ─────────────────────────────────────────────
 
 export const heroKpis: KpiDef[] = [
   {
+    id: "real_gdp_growth",
+    label: "Real GDP Growth",
+    value: "5.1%",
+    delta: "9M 2025",
+    delta_direction: "neutral",
+    unit_label: "annual %",
+    evidence: {
+      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_id: "fcsc_gdp_growth_9m_2025",
+      publisher: "Federal Competitiveness and Statistics Centre",
+      geography: "UAE",
+      unit: "% real growth",
+      extraction_date: "2026-03-26",
+      display_period: "9M 2025",
+      period_label: "9M 2025 · FCSC official",
+      freshness_label: "Latest official pulse",
+      caveats:
+        "FCSC press release published 2026-02-20. Period covers first 9 months of 2025. This is the freshest official growth figure available as of March 2026 — full-year 2025 data is not yet published.",
+      caveat_short: "FCSC 9M 2025 · Full-year 2025 not yet published",
+      confidence: "high",
+      evidence_type: "official",
+    },
+  },
+  {
+    id: "non_oil_gdp_growth",
+    label: "Non-Oil GDP Growth",
+    value: "6.1%",
+    delta: "9M 2025",
+    delta_direction: "neutral",
+    unit_label: "real growth",
+    evidence: {
+      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_id: "fcsc_non_oil_gdp_growth_9m_2025",
+      publisher: "Federal Competitiveness and Statistics Centre",
+      geography: "UAE",
+      unit: "% real growth",
+      extraction_date: "2026-03-26",
+      display_period: "9M 2025",
+      period_label: "9M 2025 · FCSC official",
+      freshness_label: "Latest official pulse",
+      caveats:
+        "FCSC press release published 2026-02-20. Covers first 9 months of 2025. Non-oil sector growth is the primary MoIAT tracking indicator for diversification progress.",
+      caveat_short: "FCSC 9M 2025 · primary diversification indicator",
+      confidence: "high",
+      evidence_type: "official",
+    },
+  },
+  {
     id: "non_oil_gdp_share",
     label: "Non-Oil GDP Share",
-    value: "75.5%",
-    delta: "+0.8pp vs 2023",
+    value: "77.5%",
+    delta: "+2pp vs FY 2024",
     delta_direction: "up",
     unit_label: "of real GDP",
     evidence: {
-      source_name: "FCSC / UAE National Accounts 2024",
-      source_id: "fcsc_uae_nat_accounts_2024",
+      source_name: "FCSC / Non-oil GDP of the UAE grows by 5.7% in H1 2025",
+      source_id: "fcsc_non_oil_share_h1_2025",
       publisher: "Federal Competitiveness and Statistics Centre",
       geography: "UAE",
       unit: "% of real GDP",
       extraction_date: "2026-03-26",
-      display_period: "FY 2024",
-      period_label: "FY 2024 · Official annual",
+      display_period: "H1 2025",
+      period_label: "H1 2025 · FCSC official",
+      freshness_label: "Latest official pulse",
       formula: "Non-oil real GDP / Total real GDP × 100",
       caveats:
-        "Based on FCSC 2024 national accounts press release. Detailed sub-national breakdown subject to final publication. Structured UAE.Stat export not yet in repository — figure to be confirmed once available.",
-      caveat_short: "FCSC press release · FY 2024 · Pending structured export",
+        "FCSC press release published 2025-12-11. Covers first half of 2025. Compared to FY 2024 official figure of 75.5% — showing continued structural diversification momentum.",
+      caveat_short: "FCSC H1 2025 · vs FY 2024 at 75.5%",
       confidence: "high",
       evidence_type: "official",
-      methodology_notes:
-        "Figure referenced in PRD proof points (AED 1.342T non-oil / AED 1.776T total = 75.5%). Extraction date 2026-03-26.",
+    },
+  },
+  {
+    id: "gdp_value",
+    label: "GDP Value",
+    value: "AED 1.4T",
+    delta: "9M 2025",
+    delta_direction: "neutral",
+    unit_label: "first 9 months",
+    evidence: {
+      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_id: "fcsc_gdp_value_9m_2025",
+      publisher: "Federal Competitiveness and Statistics Centre",
+      geography: "UAE",
+      unit: "AED trillion",
+      extraction_date: "2026-03-26",
+      display_period: "9M 2025",
+      period_label: "9M 2025 · FCSC official",
+      freshness_label: "Latest official pulse",
+      caveats:
+        "FCSC press release published 2026-02-20. AED 1.4 trillion covers the first 9 months of 2025 — not a full-year figure. Full-year 2025 data not yet published as of March 2026.",
+      caveat_short: "9M 2025 only — not a full-year figure",
+      confidence: "high",
+      evidence_type: "official",
+    },
+  },
+  {
+    id: "non_oil_exports_proxy",
+    label: "Non-Oil Foreign Trade",
+    value: "AED 2.97T",
+    delta: "2024 total",
+    delta_direction: "neutral",
+    unit_label: "total trade value",
+    evidence: {
+      source_name: "Ministry of Economy & Tourism — International Trade Map endpoint",
+      source_id: "moet_trade_total_2024",
+      publisher: "Ministry of Economy & Tourism, UAE",
+      geography: "UAE",
+      unit: "AED trillion",
+      extraction_date: "2026-03-26",
+      display_period: "2024",
+      period_label: "2024 · Ministry of Economy",
+      freshness_label: "Latest complete annual snapshot",
+      caveats:
+        "Data sourced from Ministry of Economy trade map API endpoint (trademap.economy.ae). 2024 is the latest year returned. Total trade: AED 2,971.3 billion (re-exports 717.8B + non-oil exports 559.3B + imports 1,694.1B). Top partners: China, India, Saudi Arabia, Türkiye, Iraq.",
+      caveat_short: "MoE trade map · re-exports + non-oil exports + imports · 2024",
+      confidence: "high",
+      evidence_type: "official",
     },
   },
   {
@@ -166,6 +274,7 @@ export const heroKpis: KpiDef[] = [
       extraction_date: "2026-03-26",
       display_period: "FY 2024",
       period_label: "FY 2024 · World Bank API",
+      freshness_label: "Latest complete annual snapshot",
       formula: "World Bank indicator NV.IND.MANF.ZS — Manufacturing, value added (% of GDP)",
       caveats:
         "Raw value is 9.37% for 2024. Rounded to 9.4% for display. World Bank data for ARE is sourced from national accounts and may differ slightly from FCSC direct publication.",
@@ -173,101 +282,6 @@ export const heroKpis: KpiDef[] = [
       confidence: "high",
       evidence_type: "official",
     },
-  },
-  {
-    id: "real_gdp_growth",
-    label: "Real GDP Growth",
-    value: "4.0%",
-    delta: "+0.3pp vs 2023",
-    delta_direction: "up",
-    unit_label: "annual %",
-    evidence: {
-      source_name: "World Bank — NY.GDP.MKTP.KD.ZG",
-      source_id: "wb_ny_gdp_mktp_kd_zg_2024",
-      publisher: "World Bank Open Data",
-      geography: "UAE (ARE)",
-      unit: "Annual %",
-      extraction_date: "2026-03-26",
-      display_period: "FY 2024",
-      period_label: "FY 2024 · World Bank API",
-      formula: "World Bank indicator NY.GDP.MKTP.KD.ZG — GDP growth (annual %)",
-      caveats:
-        "Raw World Bank value is 3.99% for 2024 — consistent with FCSC official headline of 4.0%. Values are from repository file data/raw/world_bank/are_gdp_growth_annual.json.",
-      caveat_short: "World Bank 3.99% · aligns with FCSC 4.0% headline · FY 2024",
-      confidence: "high",
-      evidence_type: "official",
-    },
-  },
-  {
-    id: "fdi_net_inflows_pct_gdp",
-    label: "FDI Net Inflows",
-    value: "8.3%",
-    delta: "+1.1pp vs 2023",
-    delta_direction: "up",
-    unit_label: "% of GDP",
-    evidence: {
-      source_name: "World Bank — BX.KLT.DINV.WD.GD.ZS",
-      source_id: "wb_bx_klt_dinv_wd_gd_zs_2024",
-      publisher: "World Bank Open Data",
-      geography: "UAE (ARE)",
-      unit: "% of GDP",
-      extraction_date: "2026-03-26",
-      display_period: "FY 2024",
-      period_label: "FY 2024 · World Bank API",
-      formula: "World Bank indicator BX.KLT.DINV.WD.GD.ZS — FDI, net inflows (% of GDP)",
-      caveats:
-        "Raw value is 8.26% for 2024. This covers total-economy FDI. Industrial or manufacturing-sector FDI breakdown is not available in the current data cache — Ministry of Economy structured export is pending.",
-      caveat_short: "Total-economy FDI · industrial breakdown pending · FY 2024",
-      confidence: "high",
-      evidence_type: "official",
-    },
-  },
-  {
-    id: "non_oil_exports_proxy",
-    label: "Non-Oil Foreign Trade",
-    value: "AED 2.8T",
-    delta: "FY 2024 total",
-    delta_direction: "neutral",
-    unit_label: "total trade value",
-    evidence: {
-      source_name: "FCSC / UAE National Trade Summary",
-      source_id: "fcsc_trade_2024",
-      publisher: "Federal Competitiveness and Statistics Centre",
-      geography: "UAE",
-      unit: "AED trillion",
-      extraction_date: "2026-03-26",
-      display_period: "FY 2024",
-      period_label: "FY 2024 · FCSC headline",
-      caveats:
-        "Based on FCSC 2024 press-release headline figure. Product-level and partner-level trade breakdown requires UN Comtrade access (API returned 401 — subscription pending; see data/raw/source_manifests/download-manifest.md).",
-      caveat_short: "FCSC headline · product detail pending Comtrade access · FY 2024",
-      confidence: "high",
-      evidence_type: "official",
-    },
-  },
-  {
-    id: "top_sector_momentum",
-    label: "Top Sector Momentum",
-    value: "Advanced Manuf.",
-    unit_label: "leading signal",
-    evidence: {
-      source_name: "Illustrative — sector scoring not yet wired",
-      source_id: "illustrative_sector_momentum",
-      publisher: "Prototype scaffold",
-      geography: "UAE",
-      unit: "Sector label",
-      extraction_date: "2026-03-26",
-      display_period: "Illustrative",
-      period_label: "Illustrative · not real data",
-      caveats:
-        "Illustrative workflow data — to be replaced by live ministry data in production. Sector momentum scoring requires UN Comtrade product-level ETL and UNIDO manufacturing structure data, both currently unavailable.",
-      caveat_short: "Illustrative placeholder — not real ministry data",
-      confidence: "low",
-      evidence_type: "illustrative",
-    },
-    deferred: true,
-    deferred_reason:
-      "Sector momentum scoring requires UN Comtrade and UNIDO ETL (access pending). Value shown is a scaffold placeholder.",
   },
 ];
 
@@ -280,11 +294,11 @@ export const dashboardInsights: InsightCard[] = [
   {
     id: "insight_momentum_nonoil",
     signal_type: "momentum",
-    title: "Non-oil GDP share has grown steadily over five years",
+    title: "Non-oil GDP share reaches 77.5% — diversification momentum is accelerating",
     summary:
-      "As of the latest official annual snapshot (FY 2024), the UAE's non-oil share of real GDP stands at 75.5%, up from a lower base in 2019–2020. This sustained structural shift — driven by services, trade, and manufacturing — is the foundational evidence for MoIAT's industrial strategy narrative.",
-    evidence_ids: ["non_oil_gdp_share", "real_gdp_growth"],
-    data_period: "FY 2024",
+      "The latest FCSC official pulse (H1 2025) puts non-oil GDP at 77.5% of real output — up from 75.5% in FY 2024. Non-oil sector real growth reached 6.1% in the first 9 months of 2025. This sustained structural shift is the foundational evidence for MoIAT's industrial strategy narrative and the freshest available signal as of March 2026.",
+    evidence_ids: ["non_oil_gdp_share", "non_oil_gdp_growth"],
+    data_period: "H1 2025 / 9M 2025",
   },
   {
     id: "insight_opportunity_manuf",
@@ -298,11 +312,11 @@ export const dashboardInsights: InsightCard[] = [
   {
     id: "insight_risk_concentration",
     signal_type: "risk",
-    title: "Trade partner concentration is an unquantified resilience risk",
+    title: "Trade partner concentration is a quantifiable but unresolved resilience risk",
     summary:
-      "At AED 2.8 trillion, non-oil foreign trade is substantial (FY 2024). However, without product-level and partner-level data — pending UN Comtrade subscription — the concentration risk cannot be precisely measured. The signal is directional: initial evidence suggests high partner dependency in key export categories.",
+      "At AED 2.97 trillion total, non-oil foreign trade is substantial (2024, Ministry of Economy). Top-5 partners — China, India, Saudi Arabia, Türkiye, Iraq — account for a material share of flows. Without product-level decomposition — pending UN Comtrade subscription — the precise concentration risk cannot be measured.",
     evidence_ids: ["non_oil_exports_proxy"],
-    data_period: "FY 2024",
+    data_period: "2024",
     deferred: true,
   },
 ];
@@ -313,13 +327,13 @@ export const dashboardInsights: InsightCard[] = [
 
 export const watchlistItem = {
   id: "watchlist_fdi_concentration",
-  title: "Total FDI strength may mask industrial sector weakness",
+  title: "Strong trade and FDI headlines may mask industrial sector concentration",
   summary:
-    "FDI at 8.3% of GDP is a strong headline (FY 2024, World Bank). However, without industrial-sector breakdown — requiring Ministry of Economy structured export, not yet in the data cache — it is not possible to confirm how much reaches manufacturing and technology-intensive activities. This is a known evidence gap that the next data packet should close.",
+    "Non-oil foreign trade reached AED 2.97 trillion in 2024 (Ministry of Economy) and the top-5 trade partners account for a disproportionate share of flows. FDI at 8.3% of GDP is strong (FY 2024, World Bank), but without industrial-sector FDI breakdown — Ministry of Economy structured export pending — it is not possible to confirm how much reaches manufacturing. Both gaps should be closed before the next sector strategy review.",
   evidence_type: "illustrative" as EvidenceType,
-  data_period: "FY 2024",
+  data_period: "2024",
   deferred_note:
-    "Industrial FDI breakdown requires Ministry of Economy structured data export. Currently a headline figure only.",
+    "Industrial FDI decomposition and product-level trade concentration analysis require Ministry of Economy and UN Comtrade structured exports. Both are pending.",
 };
 
 // ─────────────────────────────────────────────

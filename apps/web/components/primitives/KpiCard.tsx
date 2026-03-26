@@ -36,6 +36,17 @@ export function KpiCard({ kpi }: KpiCardProps) {
         )}
       </div>
 
+      {/* Freshness label — pulse vs annual */}
+      {kpi.evidence.freshness_label && !kpi.deferred && (
+        <div className={`text-[9px] font-semibold px-1.5 py-0.5 rounded inline-block mb-1.5 ${
+          kpi.evidence.freshness_label === "Latest official pulse"
+            ? "bg-signal-momentum-bg text-signal-momentum"
+            : "bg-brand-light text-brand"
+        }`}>
+          {kpi.evidence.freshness_label}
+        </div>
+      )}
+
       {/* Data period — always visible, distinguishes from extraction date */}
       <div className="text-[10px] text-gray-400 mb-2 font-medium">
         {kpi.evidence.period_label}

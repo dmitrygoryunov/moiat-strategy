@@ -38,17 +38,22 @@ export default function LeadershipDashboard() {
         </Link>
       </PageHeader>
 
-      {/* Data context bar — makes the three-tier date model visible at a glance */}
-      <div className="flex items-center gap-6 bg-white border border-gray-200 rounded-lg px-5 py-3 mb-6 text-xs shadow-sm">
+      {/* Data context bar — pulse-plus-annual model at a glance */}
+      <div className="flex flex-wrap items-center gap-4 bg-white border border-gray-200 rounded-lg px-5 py-3 mb-6 text-xs shadow-sm">
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-medium" />
-          <span className="text-gray-500">Prototype context:</span>
+          <span className="text-gray-500">Context:</span>
           <span className="font-semibold text-brand-navy">{APP_DATA_CONTEXT.as_of}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-signal-momentum" />
-          <span className="text-gray-500">Data vintage:</span>
-          <span className="font-semibold text-gray-700">{APP_DATA_CONTEXT.data_vintage} annual</span>
+          <span className="text-gray-500">Latest pulse:</span>
+          <span className="font-semibold text-signal-momentum">{APP_DATA_CONTEXT.latest_pulse_period}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+          <span className="text-gray-500">Latest annual:</span>
+          <span className="font-semibold text-gray-700">{APP_DATA_CONTEXT.data_vintage}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
@@ -64,19 +69,21 @@ export default function LeadershipDashboard() {
       <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
         <div className="max-w-3xl">
           <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
-            Chapter 1 · UAE Starts From Strength
+            Chapter 1 · UAE Starts From Strength · Latest official pulse: 9M 2025
           </div>
           <h2 className="text-xl font-bold leading-snug mb-2">
-            As of March 2026, the latest official annual snapshot shows the UAE
-            starting from a position of genuine strength
+            As of March 2026, the latest official pulse shows real GDP growing at
+            5.1% with non-oil GDP accelerating to 6.1% through September 2025
           </h2>
           <p className="text-sm text-blue-100 leading-relaxed">
-            The most recent complete official data — FY 2024 — shows non-oil GDP
-            at 75.5% of real output, manufacturing value added at 9.4% of GDP,
-            and real GDP growth at 4.0%. These are the strongest structural
-            indicators the UAE has recorded. The challenge ahead is not ambition:
-            it is precision — which sectors, which emirates, which interventions,
-            and which measurable KPIs move the needle toward the 2031 targets.
+            The freshest available official data — FCSC 9M 2025 — shows UAE real
+            GDP reaching AED 1.4 trillion with 5.1% real growth and non-oil GDP
+            growing at 6.1%. The H1 2025 pulse puts non-oil GDP share at 77.5%,
+            up from 75.5% in the FY 2024 annual snapshot. Manufacturing value
+            added stands at 9.4% of GDP (FY 2024, World Bank). The challenge
+            ahead is not ambition: it is precision — which sectors, which
+            emirates, which interventions, and which KPIs move the needle toward
+            the 2031 Operation 300bn targets.
           </p>
         </div>
       </div>
@@ -88,7 +95,7 @@ export default function LeadershipDashboard() {
             National KPI Snapshot
           </h2>
           <span className="text-xs text-gray-400">
-            FY 2024 annual data · World Bank API + FCSC · Extracted 2026-03-26
+            Mixed vintage · 9M 2025 pulse (FCSC) + FY 2024 annual (World Bank / MoE) · Extracted 2026-03-26
           </span>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -105,7 +112,7 @@ export default function LeadershipDashboard() {
             Signal Overview
           </h2>
           <span className="text-xs text-gray-400">
-            Rule-based signals from FY 2024 data · AI summarisation deferred
+            Rule-based signals · 9M 2025 pulse + FY 2024 annual · AI summarisation deferred
           </span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -210,11 +217,11 @@ export default function LeadershipDashboard() {
               industrial policy effort through 2026–2031?
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-3">
-              FY 2024 data confirms manufacturing VA is rising and FDI inflows
-              are strong. The open question — requiring Comtrade and complexity
-              data — is which adjacencies to target to close the gap with
-              Singapore-tier complexity benchmarks before the 2031 Operation
-              300bn deadline.
+              The latest pulse (9M 2025) confirms non-oil GDP growth at 6.1% and
+              real GDP at 5.1%. FY 2024 data shows manufacturing VA at 9.4% of
+              GDP. The open question — requiring Comtrade and complexity data —
+              is which adjacencies to target to close the gap with Singapore-tier
+              complexity benchmarks before the 2031 Operation 300bn deadline.
             </p>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-[10px] bg-signal-momentum-bg text-signal-momentum px-2 py-0.5 rounded font-medium">
@@ -224,7 +231,7 @@ export default function LeadershipDashboard() {
                 Opportunity signal
               </span>
               <span className="text-[10px] text-gray-400">
-                FY 2024 · 3 official evidence sources
+                9M 2025 pulse + FY 2024 annual · 5 official evidence sources
               </span>
             </div>
           </div>

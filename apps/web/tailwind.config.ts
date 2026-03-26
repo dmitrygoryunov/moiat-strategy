@@ -13,7 +13,7 @@ const config: Config = {
           DEFAULT: "#1A3A5C",
           medium: "#1E6FA5",
           light: "#E8F1F8",
-          gold: "#B08D57",
+          gold: "#C9A84C",
         },
         signal: {
           momentum: "#1B6B4E",

@@ -164,6 +164,17 @@ export function EvidenceDrawer({
                 value={evidence.display_period}
                 note="The period this value represents"
               />
+              {evidence.freshness_label && (
+                <DateModelRow
+                  tier="Freshness"
+                  value={evidence.freshness_label}
+                  note={
+                    evidence.freshness_label === "Latest official pulse"
+                      ? "Sub-annual FCSC release — freshest available"
+                      : "Most recent complete official annual data"
+                  }
+                />
+              )}
               <DateModelRow
                 tier="Extracted"
                 value={evidence.extraction_date}
