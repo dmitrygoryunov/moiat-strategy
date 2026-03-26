@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
+import { BriefGenerateSection } from "@/components/ai/BriefGenerateSection";
 import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
 // Brief template scaffold — AI generation deferred pending server-side OpenAI integration.
@@ -114,8 +115,8 @@ export default function BriefBuilderPage() {
       <PageHeader
         title="Decision Brief Builder"
         subtitle="Structure a ministerial decision brief from evidence — issue, options, risks, and next actions"
-        badge={`Scaffold · AI generation deferred · ${APP_DATA_CONTEXT.as_of}`}
-        badgeVariant="deferred"
+        badge={`AI-assisted · Approved evidence only · ${APP_DATA_CONTEXT.as_of}`}
+        badgeVariant="live"
       />
 
       {/* Executive framing band */}
@@ -301,41 +302,8 @@ export default function BriefBuilderPage() {
           </ul>
         </section>
 
-        {/* Generate section */}
-        <section className="bg-gray-50 rounded-xl border border-dashed border-gray-200 p-5">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm font-semibold text-gray-600 mb-1">
-                Generate & Export
-              </div>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                AI-assisted prose generation and PDF export are planned for MSP-005.{" "}
-                <code className="font-mono bg-gray-100 px-1 py-0.5 rounded text-[10px]">OPENAI_API_KEY</code>{" "}
-                is kept server-side only.
-              </p>
-            </div>
-            <button
-              disabled
-              className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-gray-200 text-gray-400 cursor-not-allowed"
-              title="AI generation not yet implemented"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Generate Brief
-            </button>
-          </div>
-        </section>
+        {/* Generate section — live AI */}
+        <BriefGenerateSection brief={briefTemplate} />
       </div>
     </div>
   );

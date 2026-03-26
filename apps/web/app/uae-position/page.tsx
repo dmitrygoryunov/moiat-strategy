@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
 import { DeferredBadge } from "@/components/primitives/DeferredBadge";
 import { EvidenceDrawer } from "@/components/primitives/EvidenceDrawer";
+import { UAEAISummary } from "@/components/ai/UAEAISummary";
 import type { EvidenceMeta } from "@/lib/seed-data";
 import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
@@ -254,6 +255,9 @@ export default function UAEPositionPage() {
           ))}
         </div>
       </section>
+
+      {/* AI leadership readout */}
+      <UAEAISummary />
 
       {/* Annual structural benchmark table */}
       <section className="mb-8">
