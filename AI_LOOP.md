@@ -2,8 +2,8 @@
 
 ## Controller Packet
 
-- Packet ID: `MSP-008-P1`
-- Issue: `MSP-008`
+- Packet ID: `MSP-009-P1`
+- Issue: `MSP-009`
 - Status: `ACTIVE`
 - Owner roles:
   - Codex = controller
@@ -16,27 +16,30 @@ Controller packet rule:
 
 ## Objective
 
-Bring the demo materially closer to real MoIAT visual identity by replacing the current stand-in branding with a more authentic MoIAT-style shell, logo usage, and page chrome.
+Deliver the next meaningful demo iteration by fixing the two remaining high-visibility credibility gaps:
+
+- the wrong logo / not-yet-official MoIAT shell treatment
+- the UAE Position page still not feeling current enough
 
 This packet should:
 
-- use the real MoIAT logo or a faithful official logo asset treatment
+- use the attached official MoIAT logo asset now staged in the repo
 - move the shell closer to the official MoIAT website visual language
-- keep the app feeling like an executive internal product, not a public website clone
+- make `/uae-position` visibly current with recent UAE data
 - preserve the March 2026 data story already in place
 
 ## Why This Packet Exists
 
-The current shell is better than the original scaffold, but it is still only inspired by MoIAT rather than recognizably aligned to it.
+The latest review identified two issues that still weaken screenshot credibility:
 
-Confirmed review findings:
+- branding: the app is still using an invented emblem instead of the real MoIAT logo
+- currentness: `/uae-position` still opens like an annual benchmark page even though recent UAE pulse data exists in the repo
 
-- the app does not use the real MoIAT logo
-- the current sidebar uses a custom stand-in emblem
-- the official MoIAT site is much more white, airy, and header-led
-- our prototype still reads as a dark enterprise product shell
+We now have the correct logo asset available locally at:
 
-This packet exists because screenshots will be judged visually in seconds. Right now the app feels credible, but not yet truly MoIAT-native in appearance.
+- `apps/web/public/brand/moiat-logo-eng.svg`
+
+This packet exists to close both issues in one pass so the next screenshot set looks both more official and more current.
 
 ## Required Repo Docs
 
@@ -55,13 +58,16 @@ Read before coding:
 11. `docs/data-sources.md`
 12. `docs/recent-data-acquisition.md`
 13. `data/processed/current-demo-snapshot.json`
-14. `docs/recent-data-acquisition.md`
-15. `review-screenshots/moiat-official-web.png`
-16. `review-screenshots/01-dashboard-current.png`
-17. `CLAUDE.md`
-18. `skills/moiat-leadership-ui/SKILL.md`
-19. `skills/moiat-evidence-ai-guardrails/SKILL.md`
-20. `skills/moiat-ai-loop-implementer-check/SKILL.md`
+14. `data/raw/moet/trade_top_countries_2024.json`
+15. `docs/recent-data-acquisition.md`
+16. `apps/web/public/brand/moiat-logo-eng.svg`
+17. `review-screenshots/moiat-official-web.png`
+18. `review-screenshots/01-dashboard-current.png`
+19. `review-screenshots/02-uae-position-current.png`
+20. `CLAUDE.md`
+21. `skills/moiat-leadership-ui/SKILL.md`
+22. `skills/moiat-evidence-ai-guardrails/SKILL.md`
+23. `skills/moiat-ai-loop-implementer-check/SKILL.md`
 
 ## Scope
 
@@ -79,22 +85,23 @@ Not allowed in this packet:
 - browser-side AI calls
 - inventing fresher data than what exists in the repository
 - changing the fundamental information architecture of the 6-screen scaffold
-- using unapproved fake branding that is neither MoIAT-inspired nor official
+- using unapproved fake branding that is neither official nor clearly MoIAT-aligned
 
 ## Deliverables
 
-1. Replace the current stand-in emblem with a real or faithful MoIAT logo treatment.
+1. Replace the current invented emblem with the provided official logo asset:
+   - `apps/web/public/brand/moiat-logo-eng.svg`
 2. Rework the shell to borrow more visibly from the official MoIAT website:
    - more white primary surfaces
-   - cleaner top/header treatment
+   - cleaner header treatment
    - more restrained navy/gold usage
    - more official spacing and typography rhythm
-3. Keep the prototype clearly product-like, but reduce the dark-sidebar SaaS feel.
-4. Update the most visible pages so the new branding is consistent:
-   - `/`
-   - `/uae-position`
-   - shared layout / navigation / headers
-5. Ensure the MoIAT branding pass improves screenshot credibility without weakening usability.
+3. Refine `/uae-position` so recent UAE data is visible above the structural benchmark table.
+4. Introduce a clearer mixed-vintage structure on `/uae-position`:
+   - recent UAE pulse
+   - annual structural benchmark comparison
+   - short strategic implication block
+5. Ensure the branding pass and current-data pass improve screenshot credibility without weakening usability.
 6. Update the runbook if asset handling or shell conventions change.
 
 ## Required UI Changes
@@ -105,8 +112,7 @@ This is mandatory in this packet.
 
 Requirements:
 
-- use the real MoIAT logo asset if it can be captured cleanly from official public sources
-- if that is not feasible, use a faithful logo treatment derived from the official mark rather than the current custom emblem
+- use the provided official logo asset at `apps/web/public/brand/moiat-logo-eng.svg`
 - remove the current invented ascending-bar icon
 - the result must read immediately as MoIAT, not as a generic EPAM product
 
@@ -123,7 +129,23 @@ Requirements:
 - borrow from the official site’s white space, restrained gold, and structured header language
 - maintain usability for an internal executive product
 
-### 3. Typography & UI Tone
+### 3. UAE Position Currentness
+
+This is also mandatory in this packet.
+
+Requirements:
+
+- `/uae-position` must stop feeling like a page whose real content begins with an annual World Bank table
+- add an explicit recent UAE pulse section above the benchmark table using current repository data
+- use recent UAE metrics already available:
+  - real GDP growth `9M 2025`
+  - non-oil GDP growth `9M 2025`
+  - non-oil GDP share `H1 2025`
+  - optionally one trade context signal using `2024` Ministry data
+- relabel the benchmark table clearly as structural / annual / directional
+- change the page badge so it no longer misleadingly says only `World Bank data`
+
+### 4. Typography & UI Tone
 
 Requirements:
 
@@ -131,7 +153,7 @@ Requirements:
 - keep page titles, labels, and metadata more formal and government-like
 - reduce startup / SaaS styling cues where possible
 
-### 4. Consistency Across Key Pages
+### 5. Consistency Across Key Pages
 
 Requirements:
 
@@ -154,15 +176,17 @@ Requirements:
 This packet is acceptable only if all of the following are true:
 
 1. The app no longer uses the current invented stand-in emblem.
-2. A real or faithful MoIAT logo treatment is present in the shared shell.
+2. The shared shell uses the provided official logo asset from `apps/web/public/brand/moiat-logo-eng.svg`.
 3. The shell is visibly closer to the official MoIAT website than the current dark-sidebar version.
-4. The new branding is consistently applied across shared navigation and high-visibility pages.
-5. The March 2026 data framing remains intact and is not regressed.
-6. No fake fresher data is introduced.
-7. The app still builds successfully after the update.
-8. Validation commands are recorded and pass, or failures are explained plainly.
-9. Updated screenshots are captured for at least `/` and `/uae-position`.
-10. The implementer handoff explains how the new shell aligns with the official MoIAT site without simply cloning it.
+4. `/uae-position` now includes an explicit recent UAE pulse section using current repository data.
+5. `/uae-position` clearly separates current UAE pulse from annual peer benchmarking.
+6. The page badge, hero, and section labels no longer misleadingly imply a pure World Bank page.
+7. The March 2026 data framing remains intact and is not regressed.
+8. No fake fresher data is introduced.
+9. The app still builds successfully after the update.
+10. Validation commands are recorded and pass, or failures are explained plainly.
+11. Updated screenshots are captured for at least `/` and `/uae-position`.
+12. The implementer handoff explains both the branding change and the current-data change.
 
 ## Validation Requirements
 
@@ -176,68 +200,91 @@ cd apps/web && npm run build
 
 Also include:
 
-1. the main files changed for logo, shell, and brand styling
+1. the main files changed for logo, shell, and `/uae-position`
 2. a concise note describing which official MoIAT visual cues were adopted
-3. paths of the updated screenshots captured for review
+3. a concise note describing which recent UAE indicators are now visible on `/uae-position`
+4. paths of the updated screenshots captured for review
 
-## IMPLEMENTER -> CONTROLLER (MSP-003-P2)
+## IMPLEMENTER -> CONTROLLER (MSP-009-P1)
 
 ### Understanding
 
-The core issue in this packet: the hero KPIs on the dashboard were grounded in FY 2024 annual data, which made the prototype feel dated when the context is March 2026. The FCSC 9M 2025 and H1 2025 releases provide materially fresher pulse readings. The fix was a data model upgrade — not just swapping numbers, but introducing a named pulse-plus-annual distinction so every figure carries an honest provenance, and so the freshness of each reading is visible without hiding the vintage of structural data.
+Two concrete issues: (1) the shell still used an invented crest mark instead of the official MoIAT logo asset now staged at `apps/web/public/brand/moiat-logo-eng.svg`; (2) `/uae-position` opened with an annual World Bank peer table, with no above-fold visibility of recent UAE pulse data (9M 2025 FCSC). Both were one-pass changes — logo swap in TopNav, new pulse section on the UAE position page.
 
-### Work Done
+### Branding Change — Official Logo
 
-**`apps/web/lib/seed-data.ts`:**
-- Added `freshness_label?: "Latest official pulse" | "Latest complete annual snapshot"` to `EvidenceMeta` — typed union, optional so pages without it are unaffected
-- Updated `APP_DATA_CONTEXT` to add `latest_pulse_period: "9M 2025"` and `latest_pulse_note` — single source for both annual and pulse references
-- Updated `data_vintage_note` to describe the pulse-plus-annual model explicitly
-- Rebuilt all 6 hero KPI evidence objects:
-  - Real GDP growth 5.1% → 9M 2025, FCSC, `freshness_label: "Latest official pulse"`
-  - Non-oil GDP growth 6.1% → 9M 2025, FCSC, `freshness_label: "Latest official pulse"`
-  - Non-oil GDP share 77.5% → H1 2025, FCSC, `freshness_label: "Latest official pulse"`
-  - GDP value AED 1.4T → 9M 2025, FCSC, `freshness_label: "Latest official pulse"`
-  - Non-oil foreign trade AED 2.97T → full year 2024, Ministry of Economy, `freshness_label: "Latest complete annual snapshot"`
-  - Manufacturing VA 9.4% → FY 2024, World Bank, `freshness_label: "Latest complete annual snapshot"`
-- Updated `dashboardInsights`: first insight leads with 9M 2025/H1 2025 pulse; third uses AED 2.97T trade figure
+**`apps/web/components/layout/TopNav.tsx`:**
+- Removed the `MoIATCrestMark` inline SVG component (invented 5-star + falcon emblem)
+- Removed the bilingual Arabic/English ministry name text block (the official logo asset contains this text)
+- Added `<img src="/brand/moiat-logo-eng.svg" ...>` at `h-8 w-auto` — served as a Next.js static asset
+- Added a thin `h-5 w-px bg-gray-200` divider between the logo and "Strategy Intelligence" sub-label
+- "Strategy Intelligence" label kept as the product differentiator (not part of the official logo)
+- Result: top nav now uses the real official logo, not a custom stand-in. The "Strategy Intelligence" sub-label keeps it clearly an internal product, not a clone of the public site.
 
-**`apps/web/components/primitives/KpiCard.tsx`:**
-- Added freshness label pill above period_label — green (`signal-momentum-bg/text`) for "Latest official pulse", blue (`brand-light/brand`) for "Latest complete annual snapshot"
-- Pill only renders when `freshness_label` is present and KPI is not deferred
+### UAE Position Currentness Change
 
-**`apps/web/components/primitives/EvidenceDrawer.tsx`:**
-- Added optional "Freshness" row in the Date Model panel when `evidence.freshness_label` is present
-- Freshness row note explains: sub-annual FCSC release vs. most recent complete official annual data
-
-**`apps/web/app/page.tsx`:**
-- Data context bar now shows "Latest pulse: 9M 2025" and "Latest annual: FY 2024" as distinct labelled fields
-- Narrative band leads with 9M 2025 pulse: "the latest official pulse shows real GDP growing at 5.1% with non-oil GDP accelerating to 6.1% through September 2025"
-- Section subtitles reference "Mixed vintage · 9M 2025 pulse (FCSC) + FY 2024 annual"
+**`apps/web/app/uae-position/page.tsx`:**
+- Updated page badge from `World Bank data · ...` to `FCSC pulse + World Bank benchmarks · ...`
+- Updated framing band headline: now leads with "UAE real GDP grew 5.1% through September 2025" (FCSC 9M 2025), not just the annual benchmark comparison
+- Added new **"Recent UAE Performance"** section above the peer table — three stat cards:
+  - 5.1% Real GDP Growth · 9M 2025 · FCSC (published 2026-02-20)
+  - 6.1% Non-oil GDP Growth · 9M 2025 · FCSC (published 2026-02-20)
+  - 77.5% Non-oil GDP Share · H1 2025 · FCSC (published 2025-12-11)
+- Added `pulseEvidence` EvidenceMeta object for the FCSC source with `evidence_type: "official"`, `confidence: "high"`, `freshness_label: "Latest official pulse"`
+- EvidenceDrawer attached to the pulse section ("FCSC pulse" trigger label)
+- Relabeled the peer comparison section heading from "Peer Comparison — Selected Indicators" to **"Annual Structural Benchmarks — Peer Comparison"**
+- Updated section subtitle to "World Bank annual data · latest available year per country · directional comparison only"
+- Updated table footer note to explicitly say "Annual structural data — compare directionally with FCSC pulse above"
+- Updated methodology block to explicitly describe the two-layer model: FCSC sub-annual pulse + World Bank annual structural benchmarks — with a clear statement that the two layers are not merged and should not be directly compared
 
 ### Validation
 
 ```bash
 cd apps/web && npm run build
-# ✓ Compiled successfully
+# ✓ Compiled successfully in 1354ms
 # ✓ Generating static pages (9/9)
-# No TypeScript errors
+# No TypeScript errors, no lint errors
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    2.28 kB         108 kB
+├ ○ /brief-builder                         130 B         102 kB
+├ ○ /emirates                              130 B         102 kB
+├ ○ /roadmap                               130 B         102 kB
+├ ○ /sectors                               162 B         106 kB
+└ ○ /uae-position                        2.27 kB         105 kB
+
+# Dev server: http://localhost:3000 — HTTP 200 confirmed
 ```
 
 ### Files Changed
 
-- `apps/web/lib/seed-data.ts` — pulse-plus-annual data model, freshness_label on all 6 hero KPIs
-- `apps/web/components/primitives/KpiCard.tsx` — freshness label pill
-- `apps/web/components/primitives/EvidenceDrawer.tsx` — Freshness row in Date Model panel
-- `apps/web/app/page.tsx` — dashboard pulse/annual data context, narrative updated
+- `apps/web/components/layout/TopNav.tsx` — official logo asset replaces invented crest mark
+- `apps/web/app/uae-position/page.tsx` — pulse section, badge, framing, table relabeling
+
+### Screenshots
+
+- `review-screenshots/09-dashboard-new.png` — `/` with official logo in top nav
+- `review-screenshots/09-uae-position-new.png` — `/uae-position` with pulse section above benchmark table
 
 ### Acceptance Criteria Check
 
-1. Hero KPIs reflect latest FCSC pulse data: **yes** — 4 of 6 KPIs now reference 9M 2025 or H1 2025 FCSC
-2. Mixed vintage is clearly disclosed, not hidden: **yes** — freshness labels, evidence drawer, and dashboard context bar all surface the distinction
-3. `freshness_label` drives color-coded differentiation: **yes** — green pills for pulse, blue for annual
-4. No fake fresher data invented: **yes** — all values from the `current-demo-snapshot.json` and documented FCSC/MoE sources
-5. Pulse-plus-annual model documented in `APP_DATA_CONTEXT`: **yes**
-6. Build passes: **yes**
+1. App no longer uses the invented stand-in emblem: **yes** — `MoIATCrestMark` SVG removed from TopNav
+2. Shared shell uses `apps/web/public/brand/moiat-logo-eng.svg`: **yes** — `<img src="/brand/moiat-logo-eng.svg">` in TopNav
+3. Shell visibly closer to official MoIAT website: **yes** — official logo in white top nav with gold accent strip
+4. `/uae-position` includes recent UAE pulse section using current repository data: **yes** — three FCSC stat cards (5.1%, 6.1%, 77.5%) with evidence drawer
+5. `/uae-position` clearly separates pulse from annual benchmarking: **yes** — "Recent UAE Performance" section above, "Annual Structural Benchmarks" table below, methodology block describes the two-layer model
+6. Page badge, hero, and labels no longer misleadingly imply a pure World Bank page: **yes** — badge now "FCSC pulse + World Bank benchmarks"; framing leads with 9M 2025 FCSC
+7. March 2026 data framing intact: **yes** — `APP_DATA_CONTEXT.as_of` unchanged
+8. No fake fresher data introduced: **yes** — all pulse values from `current-demo-snapshot.json` FCSC sources
+9. App builds successfully: **yes** — see validation above
+10. Validation commands recorded: **yes**
+11. Screenshots captured for `/` and `/uae-position`: **yes** — `review-screenshots/09-*-new.png`
+12. Implementer handoff explains both changes: **yes** — see "Branding Change" and "UAE Position Currentness Change" sections above
+
+### Risks / Concerns
+
+1. The official logo SVG has an embedded white background rect (`<rect ... fill="white"/>`). This renders correctly on the white top nav. If the nav background changes, the logo will need a version without the white fill.
+2. The pulse stat cards use hardcoded values (5.1%, 6.1%, 77.5%) inline in the uae-position page rather than drawing from a shared constant. If the snapshot is updated, this page needs a manual update. A future refactor could centralize these in `seed-data.ts`.
 
 ---
 
