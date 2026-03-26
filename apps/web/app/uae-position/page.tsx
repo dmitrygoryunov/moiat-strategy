@@ -153,23 +153,25 @@ export default function UAEPositionPage() {
       />
 
       {/* Narrative header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
-        <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Strategic framing · as of {APP_DATA_CONTEXT.as_of}
+      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+            UAE Position · {APP_DATA_CONTEXT.as_of}
+          </div>
+          <h2 className="text-xl font-bold leading-snug mb-2">
+            UAE is ahead on several foundations — the strategic opportunity is
+            closing the complexity gap before 2031
+          </h2>
+          <p className="text-sm text-blue-100 leading-relaxed">
+            The UAE leads regional peers on GDP growth (5.1%, 9M 2025) and FDI
+            attractiveness (8.3% of GDP, FY 2024). Against manufacturing-led
+            benchmarks — Singapore at 21%, South Korea at 26% — the
+            manufacturing complexity gap is wide and the opportunity is
+            significant. The central question for MoIAT is how to close that
+            gap through targeted sector and emirate decisions over the next
+            five years.
+          </p>
         </div>
-        <h2 className="text-lg font-bold text-brand-navy mb-2 leading-snug">
-          The UAE is a strong regional platform — the strategic opportunity is
-          deepening industrial complexity before 2031
-        </h2>
-        <p className="text-sm text-gray-600 leading-relaxed max-w-3xl">
-          Using FY 2024 data extracted in March 2026, the UAE leads its regional
-          peers on GDP growth and FDI attractiveness. Against manufacturing-led
-          benchmarks — Singapore at 21% manufacturing GDP share, South Korea at
-          26% — the complexity gap is wide and the opportunity is significant.
-          The central question for MoIAT is how to close that gap through
-          targeted sector and emirate prioritisation decisions over the next five
-          years.
-        </p>
       </div>
 
       {/* Peer comparison table */}

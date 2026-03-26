@@ -51,22 +51,38 @@ export default function RoadmapPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {[
             {
-              icon: "⚡",
+              icon: (
+                <svg className="w-5 h-5 text-brand-medium" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              ),
               title: "Faster signal-to-action",
               body: "Reduce the time from a data signal to a ministerial decision from weeks to days through automated KPI monitoring and pre-structured brief templates with locked evidence sources.",
             },
             {
-              icon: "🔗",
+              icon: (
+                <svg className="w-5 h-5 text-brand-medium" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              ),
               title: "Better emirate integration",
               body: "Connect sub-national industrial data across all seven emirates so MoIAT can coordinate national industrial policy rather than simply aggregate separate reporting.",
             },
             {
-              icon: "📌",
+              icon: (
+                <svg className="w-5 h-5 text-brand-medium" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              ),
               title: "Explicit KPI ownership",
               body: "Every KPI has an assigned owner, a known source, and a defined refresh cadence. Accountability is visible in the operating rhythm and surfaced in the prototype's evidence layer.",
             },
             {
-              icon: "🧭",
+              icon: (
+                <svg className="w-5 h-5 text-brand-medium" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              ),
               title: "Explicit strategy-execution link",
               body: "Strategy, regulation, and operational execution are connected through a shared evidence layer — not siloed in separate ministry systems with incompatible KPI definitions.",
             },
@@ -75,7 +91,7 @@ export default function RoadmapPage() {
               key={item.title}
               className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm"
             >
-              <div className="text-2xl mb-3">{item.icon}</div>
+              <div className="mb-3 p-2 bg-brand-light rounded-lg inline-flex">{item.icon}</div>
               <h3 className="text-sm font-semibold text-gray-900 mb-2">
                 {item.title}
               </h3>

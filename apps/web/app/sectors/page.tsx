@@ -1,5 +1,4 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
-import { DeferredBadge } from "@/components/primitives/DeferredBadge";
 import { sectorRows, APP_DATA_CONTEXT } from "@/lib/seed-data";
 import Link from "next/link";
 
@@ -55,23 +54,23 @@ export default function SectorsPage() {
       />
 
       {/* Framing */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
-        <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Prioritisation framework · as of {APP_DATA_CONTEXT.as_of}
+      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+            Sector Prioritisation · {APP_DATA_CONTEXT.as_of}
+          </div>
+          <h2 className="text-xl font-bold leading-snug mb-2">
+            Not every sector deserves equal attention — precision is the
+            strategic advantage
+          </h2>
+          <p className="text-sm text-blue-100 leading-relaxed">
+            The portfolio below organises UAE industrial sectors by current
+            strength, growth attractiveness, strategic importance, and risk
+            exposure. Classification is directional, drawing on FY 2024 data
+            and MoIAT public context. Full quantitative scoring awaits UN
+            Comtrade and UNIDO data connections.
+          </p>
         </div>
-        <h2 className="text-lg font-bold text-brand-navy mb-2 leading-snug">
-          Not all sectors deserve equal policy attention — the question is which
-          to accelerate, which to protect, and where to build capability from scratch
-        </h2>
-        <p className="text-sm text-gray-600 leading-relaxed max-w-3xl mb-4">
-          The sector view organises the national industrial portfolio into four
-          categories based on current strength, growth attractiveness, strategic
-          importance, and risk exposure. The classification below is directional
-          and draws on FY 2024 World Bank indicators, MoIAT public context, and
-          modeled signals. Precise sector scoring will sharpen significantly once
-          UN Comtrade and UNIDO manufacturing data are connected.
-        </p>
-        <DeferredBadge reason="Full quantitative sector scoring requires UN Comtrade product-level data (API subscription pending — 401 error logged in download manifest) and UNIDO industrial statistics (HTML snapshot only). Current classification is directional." />
       </div>
 
       {/* Core questions summary */}

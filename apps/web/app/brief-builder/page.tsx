@@ -1,5 +1,4 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
-import { DeferredBadge } from "@/components/primitives/DeferredBadge";
 import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
 // Brief template scaffold — AI generation deferred pending server-side OpenAI integration.
@@ -10,27 +9,27 @@ const briefTemplate = {
   issue:
     "Manufacturing sector adjacency: where should UAE concentrate industrial policy effort through 2026–2031?",
   framing:
-    `As of ${APP_DATA_CONTEXT.as_of}, the latest available FY 2024 official data shows manufacturing value added at 9.4% of GDP and FDI net inflows at 8.3% of GDP — both strong signals. The non-oil GDP share has reached 75.5%. The strategic question for MoIAT is not whether to act, but where: which sector adjacencies offer the highest combination of strategic value, UAE platform advantage, and achievable complexity uplift before the 2031 Operation 300bn deadline. Answering this precisely requires completing the UN Comtrade and Harvard Atlas data connections.`,
+    `As of ${APP_DATA_CONTEXT.as_of}, the latest official pulse (FCSC 9M 2025) shows non-oil GDP growing at 6.1% with real GDP at 5.1%. Non-oil GDP share reached 77.5% in H1 2025, up from 75.5% in FY 2024. Manufacturing value added stands at 9.4% of GDP (FY 2024, World Bank). The strategic question for MoIAT is not whether to act, but where: which sector adjacencies offer the highest combination of strategic value, UAE platform advantage, and achievable complexity uplift before the 2031 Operation 300bn deadline. Answering this precisely requires completing the UN Comtrade and Harvard Atlas data connections.`,
   evidence: [
+    {
+      id: "non_oil_growth",
+      label: "Non-oil GDP growth: 6.1%",
+      period: "9M 2025",
+      source: "FCSC (press release 2026-02-20)",
+      type: "official" as const,
+    },
+    {
+      id: "non_oil_share",
+      label: "Non-oil GDP share: 77.5%",
+      period: "H1 2025",
+      source: "FCSC (press release 2025-12-11)",
+      type: "official" as const,
+    },
     {
       id: "manuf_va",
       label: "Manufacturing value added: 9.4% of GDP",
       period: "FY 2024",
       source: "World Bank (NV.IND.MANF.ZS)",
-      type: "official" as const,
-    },
-    {
-      id: "fdi_inflows",
-      label: "FDI net inflows: 8.3% of GDP",
-      period: "FY 2024",
-      source: "World Bank (BX.KLT.DINV.WD.GD.ZS)",
-      type: "official" as const,
-    },
-    {
-      id: "non_oil_share",
-      label: "Non-oil GDP share: 75.5%",
-      period: "FY 2024",
-      source: "FCSC / UAE National Accounts",
       type: "official" as const,
     },
     {
@@ -119,38 +118,23 @@ export default function BriefBuilderPage() {
         badgeVariant="deferred"
       />
 
-      {/* AI generation notice */}
-      <div className="bg-white rounded-xl border border-orange-200 p-5 mb-8 shadow-sm">
-        <div className="flex items-start gap-3">
-          <svg
-            className="w-5 h-5 text-signal-action mt-0.5 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <div>
-            <div className="text-sm font-semibold text-signal-action mb-1">
-              AI Brief Generation — Deferred
-            </div>
-            <p className="text-xs text-gray-600 leading-relaxed">
-              Server-side AI summarisation from structured evidence inputs is
-              designed but not yet wired.{" "}
-              <code className="text-xs bg-gray-100 px-1 py-0.5 rounded font-mono">
-                OPENAI_API_KEY
-              </code>{" "}
-              is configured server-side only and will be connected in packet
-              MSP-005. The section structure, evidence items, and option framing
-              below are real and reviewable. The brief reflects FY 2024 data
-              with context date {APP_DATA_CONTEXT.as_of}.
-            </p>
+      {/* Executive framing band */}
+      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+            Decision Brief · {APP_DATA_CONTEXT.as_of}
           </div>
+          <h2 className="text-xl font-bold leading-snug mb-2">
+            Manufacturing sector adjacency: where should UAE concentrate
+            industrial policy effort through 2026–2031?
+          </h2>
+          <p className="text-sm text-blue-100 leading-relaxed">
+            The latest official pulse (9M 2025) confirms non-oil GDP growth at
+            6.1% and non-oil GDP share at 77.5%. Manufacturing value added
+            stands at 9.4% of GDP. This brief structures the evidence,
+            trade-offs, and options available to leadership before the next
+            sector strategy review.
+          </p>
         </div>
       </div>
 
@@ -237,9 +221,7 @@ export default function BriefBuilderPage() {
             })}
           </div>
           <p className="text-xs text-gray-400 mt-3">
-            3 of 5 evidence items are confirmed official FY 2024 data. 2 items
-            are deferred pending data access. Brief confidence will improve when
-            Comtrade and Harvard Atlas are connected.
+            3 of 5 evidence items are confirmed official data (9M 2025 / H1 2025 pulse + FY 2024 annual). 2 items are deferred pending data access. Brief confidence will improve when Comtrade and Harvard Atlas are connected.
           </p>
         </section>
 
@@ -319,22 +301,18 @@ export default function BriefBuilderPage() {
           </ul>
         </section>
 
-        {/* Export / generate section */}
-        <section className="bg-gray-50 rounded-xl border border-dashed border-gray-300 p-6">
+        {/* Generate section */}
+        <section className="bg-gray-50 rounded-xl border border-dashed border-gray-200 p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="text-sm font-semibold text-gray-700 mb-1">
+              <div className="text-sm font-semibold text-gray-600 mb-1">
                 Generate & Export
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                AI-assisted prose generation from structured evidence inputs and
-                downloadable PDF export are planned for the next implementation
-                packet (MSP-005).
+              <p className="text-xs text-gray-400 leading-relaxed">
+                AI-assisted prose generation and PDF export are planned for MSP-005.{" "}
+                <code className="font-mono bg-gray-100 px-1 py-0.5 rounded text-[10px]">OPENAI_API_KEY</code>{" "}
+                is kept server-side only.
               </p>
-              <DeferredBadge
-                reason={`Server-side OpenAI integration and PDF export deferred to MSP-005. OPENAI_API_KEY is kept server-side only per CLAUDE.md §8. Context date: ${APP_DATA_CONTEXT.as_of}.`}
-                className="mt-3"
-              />
             </div>
             <button
               disabled

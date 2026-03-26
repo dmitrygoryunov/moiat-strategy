@@ -124,29 +124,33 @@ export function SideNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-64 min-h-screen bg-white border-r border-gray-200 flex flex-col">
+    <nav className="w-64 min-h-screen bg-brand-navy flex flex-col">
       {/* Logo / product identity */}
-      <div className="px-5 py-5 border-b border-gray-100">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-md bg-brand-navy flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-xs font-bold">M</span>
-          </div>
+      <div className="px-5 pt-6 pb-5 border-b border-white/10">
+        <div className="flex items-center gap-3 mb-3">
+          {/* Emblem: ascending-bar mark representing industrial growth */}
+          <svg viewBox="0 0 30 30" fill="none" className="w-7 h-7 flex-shrink-0">
+            <rect x="1" y="19" width="5" height="9" rx="1.5" fill="white" fillOpacity="0.4" />
+            <rect x="8" y="14" width="5" height="14" rx="1.5" fill="white" fillOpacity="0.6" />
+            <rect x="15" y="9" width="5" height="19" rx="1.5" fill="white" fillOpacity="0.8" />
+            <rect x="22" y="4" width="5" height="24" rx="1.5" fill="#B08D57" />
+          </svg>
           <div>
-            <div className="text-xs font-bold text-brand-navy leading-none tracking-wide">
+            <div className="text-sm font-bold text-white leading-tight tracking-wide">
               MoIAT
             </div>
-            <div className="text-[10px] text-gray-400 leading-none mt-0.5 tracking-wide">
+            <div className="text-[9px] text-white/50 leading-tight mt-0.5 tracking-wide">
               Strategy Intelligence
             </div>
           </div>
         </div>
+        <div className="text-[8px] text-white/25 leading-snug tracking-widest uppercase">
+          Ministry of Industry &amp; Advanced Technology
+        </div>
       </div>
 
       {/* Navigation links */}
-      <div className="flex-1 px-3 py-4 space-y-0.5">
-        <div className="px-2 mb-3">
-          <span className="section-label">Navigation</span>
-        </div>
+      <div className="flex-1 px-3 py-5 space-y-0.5">
         {navItems.map((item) => {
           const isActive =
             item.href === "/"
@@ -156,11 +160,15 @@ export function SideNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
+                isActive
+                  ? "bg-white text-brand-navy"
+                  : "text-white/65 hover:text-white hover:bg-white/10"
+              }`}
             >
               <span
                 className={
-                  isActive ? "text-brand" : "text-gray-400"
+                  isActive ? "text-brand-medium" : "text-white/35"
                 }
               >
                 {item.icon}
@@ -172,9 +180,9 @@ export function SideNav() {
       </div>
 
       {/* Footer — prototype label */}
-      <div className="px-5 py-4 border-t border-gray-100">
-        <div className="text-[10px] text-gray-400 leading-snug">
-          <span className="font-medium text-gray-500">Prototype</span>
+      <div className="px-5 py-4 border-t border-white/10">
+        <div className="text-[10px] text-white/30 leading-snug">
+          <span className="font-medium text-white/50">Prototype</span>
           {" · "}
           EPAM × MoIAT
           <br />

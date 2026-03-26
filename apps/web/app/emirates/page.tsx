@@ -31,23 +31,22 @@ export default function EmiratesPage() {
       />
 
       {/* Portfolio framing */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
-        <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Portfolio logic · as of {APP_DATA_CONTEXT.as_of}
+      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+            Emirate Portfolio · {APP_DATA_CONTEXT.as_of}
+          </div>
+          <h2 className="text-xl font-bold leading-snug mb-2">
+            Industrial strength is a coordinated portfolio — each emirate plays
+            a distinct role that MoIAT can amplify
+          </h2>
+          <p className="text-sm text-blue-100 leading-relaxed">
+            Rather than ranking emirates by size alone, this view frames each by
+            strategic industrial role: what it does best, how it connects to the
+            national ambition, and where it has untapped potential. The portfolio
+            logic reflects MoIAT&apos;s federation coordination mandate.
+          </p>
         </div>
-        <h2 className="text-lg font-bold text-brand-navy mb-2 leading-snug">
-          The UAE&apos;s industrial strength is a portfolio story — each emirate
-          plays a distinct role that MoIAT can coordinate and amplify
-        </h2>
-        <p className="text-sm text-gray-600 leading-relaxed max-w-3xl mb-4">
-          Rather than ranking emirates by size or output alone, this view frames
-          each by its strategic industrial role: what it does best, how it
-          connects to the national ambition, and where it has untapped potential.
-          This framing reflects MoIAT&apos;s coordination mandate across the
-          federation and the need for cross-emirate portfolio logic rather than
-          seven parallel strategies.
-        </p>
-        <DeferredBadge reason="Sub-national economic statistics for UAE emirates are not available as structured public exports in the current data cache. Quantitative emirate-level KPIs require UAE.Stat sub-national tables or Ministry of Economy emirate-level data — neither is yet in the repository. This view uses structured contextual analysis based on public institutional and policy sources." />
       </div>
 
       {/* Emirate cards */}
