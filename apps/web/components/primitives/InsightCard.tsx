@@ -60,8 +60,8 @@ export function InsightCard({ insight }: InsightCardProps) {
           <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
           {config.label}
         </span>
-        <span className="text-xs text-gray-400 flex-shrink-0">
-          {insight.date}
+        <span className="text-[10px] text-gray-400 flex-shrink-0 font-medium">
+          {insight.data_period}
         </span>
       </div>
 

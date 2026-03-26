@@ -6,6 +6,7 @@ import {
   heroKpis,
   dashboardInsights,
   watchlistItem,
+  APP_DATA_CONTEXT,
 } from "@/lib/seed-data";
 import Link from "next/link";
 
@@ -14,9 +15,7 @@ export default function LeadershipDashboard() {
     <div>
       <PageHeader
         title="Leadership Dashboard"
-        subtitle="UAE industrial strategy — evidence-led weekly overview"
-        badge="Live scaffold · seed data"
-        badgeVariant="deferred"
+        subtitle="UAE industrial strategy — evidence-led overview"
       >
         <Link
           href="/brief-builder"
@@ -39,6 +38,28 @@ export default function LeadershipDashboard() {
         </Link>
       </PageHeader>
 
+      {/* Data context bar — makes the three-tier date model visible at a glance */}
+      <div className="flex items-center gap-6 bg-white border border-gray-200 rounded-lg px-5 py-3 mb-6 text-xs shadow-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-medium" />
+          <span className="text-gray-500">Prototype context:</span>
+          <span className="font-semibold text-brand-navy">{APP_DATA_CONTEXT.as_of}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-signal-momentum" />
+          <span className="text-gray-500">Data vintage:</span>
+          <span className="font-semibold text-gray-700">{APP_DATA_CONTEXT.data_vintage} annual</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+          <span className="text-gray-500">Extracted:</span>
+          <span className="font-semibold text-gray-700">{APP_DATA_CONTEXT.extraction_date}</span>
+        </div>
+        <div className="ml-auto text-gray-400 italic hidden lg:block">
+          {APP_DATA_CONTEXT.data_vintage_note}
+        </div>
+      </div>
+
       {/* Narrative band */}
       <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
         <div className="max-w-3xl">
@@ -46,14 +67,16 @@ export default function LeadershipDashboard() {
             Chapter 1 · UAE Starts From Strength
           </div>
           <h2 className="text-xl font-bold leading-snug mb-2">
-            The UAE enters 2024 with a strong non-oil foundation and rising
-            industrial momentum
+            As of March 2026, the latest official annual snapshot shows the UAE
+            starting from a position of genuine strength
           </h2>
           <p className="text-sm text-blue-100 leading-relaxed">
-            Non-oil GDP represents 75.5% of real output. Manufacturing value
-            added has reached 9.4% of GDP. Real GDP grew at 4.0%. The
-            challenge ahead is not ambition — it is precision: which sectors,
-            which emirates, which interventions, and which measurable KPIs.
+            The most recent complete official data — FY 2024 — shows non-oil GDP
+            at 75.5% of real output, manufacturing value added at 9.4% of GDP,
+            and real GDP growth at 4.0%. These are the strongest structural
+            indicators the UAE has recorded. The challenge ahead is not ambition:
+            it is precision — which sectors, which emirates, which interventions,
+            and which measurable KPIs move the needle toward the 2031 targets.
           </p>
         </div>
       </div>
@@ -62,10 +85,10 @@ export default function LeadershipDashboard() {
       <section className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-semibold text-gray-700">
-            National KPI Overview
+            National KPI Snapshot
           </h2>
           <span className="text-xs text-gray-400">
-            Sources: World Bank, FCSC / UAE.Stat · Extracted 2026-03-26
+            FY 2024 annual data · World Bank API + FCSC · Extracted 2026-03-26
           </span>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -82,7 +105,7 @@ export default function LeadershipDashboard() {
             Signal Overview
           </h2>
           <span className="text-xs text-gray-400">
-            Rule-based signals · AI summarization deferred
+            Rule-based signals from FY 2024 data · AI summarisation deferred
           </span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -108,13 +131,18 @@ export default function LeadershipDashboard() {
                 </h3>
               </div>
             </div>
-            <p className="text-xs text-gray-500 leading-relaxed mb-4">
+            <p className="text-xs text-gray-500 leading-relaxed mb-3">
               {watchlistItem.summary}
             </p>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-signal-risk bg-signal-risk-bg px-2 py-0.5 rounded font-medium">
-                Evidence gap — illustrative
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] text-signal-risk bg-signal-risk-bg px-2 py-0.5 rounded font-medium">
+                  Evidence gap
+                </span>
+                <span className="text-[10px] text-gray-400">
+                  {watchlistItem.data_period}
+                </span>
+              </div>
               <Link
                 href="/brief-builder"
                 className="text-xs text-brand-medium hover:underline font-medium"
@@ -157,21 +185,18 @@ export default function LeadershipDashboard() {
               <div className="flex items-center justify-between mt-1.5">
                 <span className="text-[10px] text-gray-400">2021 baseline</span>
                 <span className="text-[10px] text-gray-400">
-                  65% of target · est. 2024
+                  ~65% · illustrative
                 </span>
                 <span className="text-[10px] text-gray-400">2031 target</span>
               </div>
             </div>
-            <DeferredBadge
-              reason="Progress figure is illustrative. Exact manufacturing GDP value requires FCSC/UAE.Stat structured export."
-              className="mt-2"
-            />
+            <DeferredBadge reason="Progress figure is illustrative. The real manufacturing GDP value requires a structured FCSC/UAE.Stat export — not yet in the data cache." />
           </div>
         </section>
       </div>
 
       {/* Recommended brief */}
-      <section className="mb-2">
+      <section>
         <h2 className="text-sm font-semibold text-gray-700 mb-3">
           Recommended Decision Brief
         </h2>
@@ -181,14 +206,15 @@ export default function LeadershipDashboard() {
               Suggested brief
             </div>
             <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
-              Manufacturing sector adjacency: where should UAE prioritize in
-              2025?
+              Manufacturing sector adjacency: where should UAE concentrate
+              industrial policy effort through 2026–2031?
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-3">
-              Manufacturing VA is rising and FDI is strong, but the complexity
-              profile suggests an untapped opportunity in higher-value
-              industries. This brief would frame the options, trade-offs, and
-              evidence base for a targeted sector intervention decision.
+              FY 2024 data confirms manufacturing VA is rising and FDI inflows
+              are strong. The open question — requiring Comtrade and complexity
+              data — is which adjacencies to target to close the gap with
+              Singapore-tier complexity benchmarks before the 2031 Operation
+              300bn deadline.
             </p>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-[10px] bg-signal-momentum-bg text-signal-momentum px-2 py-0.5 rounded font-medium">
@@ -198,7 +224,7 @@ export default function LeadershipDashboard() {
                 Opportunity signal
               </span>
               <span className="text-[10px] text-gray-400">
-                2 evidence sources
+                FY 2024 · 3 official evidence sources
               </span>
             </div>
           </div>

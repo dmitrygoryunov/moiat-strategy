@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
 import { DeferredBadge } from "@/components/primitives/DeferredBadge";
-import { sectorRows } from "@/lib/seed-data";
+import { sectorRows, APP_DATA_CONTEXT } from "@/lib/seed-data";
 import Link from "next/link";
 
 const statusConfig = {
@@ -42,65 +42,61 @@ const evidenceTypeConfig = {
 
 export default function SectorsPage() {
   const strongSectors = sectorRows.filter((s) => s.status === "strong");
-  const opportunitySectors = sectorRows.filter(
-    (s) => s.status === "opportunity"
-  );
+  const opportunitySectors = sectorRows.filter((s) => s.status === "opportunity");
   const strategicSectors = sectorRows.filter((s) => s.status === "strategic");
 
   return (
     <div>
       <PageHeader
         title="Sector Prioritization"
-        subtitle="Which sectors should MoIAT prioritize for national industrial policy?"
-        badge="Scaffold · modeled signals"
+        subtitle="Which sectors should MoIAT prioritise for national industrial policy through 2031?"
+        badge={`Directional · modeled signals · ${APP_DATA_CONTEXT.as_of}`}
         badgeVariant="deferred"
       />
 
       {/* Framing */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
         <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Prioritization framework
+          Prioritisation framework · as of {APP_DATA_CONTEXT.as_of}
         </div>
         <h2 className="text-lg font-bold text-brand-navy mb-2 leading-snug">
-          Not all sectors deserve equal attention — the question is which to
-          accelerate, which to protect, and which to develop from scratch
+          Not all sectors deserve equal policy attention — the question is which
+          to accelerate, which to protect, and where to build capability from scratch
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed max-w-3xl mb-4">
-          The sector view organizes the national industrial portfolio into four
-          categories: sectors where the UAE is already strong and should be
-          defended and scaled; sectors with strong growth opportunity that are
-          currently underdeveloped; sectors with strategic national importance
-          facing concentrated risks; and emerging sectors requiring early
-          positioning.
+          The sector view organises the national industrial portfolio into four
+          categories based on current strength, growth attractiveness, strategic
+          importance, and risk exposure. The classification below is directional
+          and draws on FY 2024 World Bank indicators, MoIAT public context, and
+          modeled signals. Precise sector scoring will sharpen significantly once
+          UN Comtrade and UNIDO manufacturing data are connected.
         </p>
-        <DeferredBadge
-          reason="Full sector scoring requires UN Comtrade product-level data (access pending) and UNIDO industrial statistics (download not yet complete). Current classification is directional and modeled."
-        />
+        <DeferredBadge reason="Full quantitative sector scoring requires UN Comtrade product-level data (API subscription pending — 401 error logged in download manifest) and UNIDO industrial statistics (HTML snapshot only). Current classification is directional." />
       </div>
 
-      {/* Core questions */}
+      {/* Core questions summary */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         {[
           {
-            q: "Which sectors are already strong?",
+            q: "Already strong?",
             count: strongSectors.length,
             color: "text-signal-momentum",
             bg: "bg-signal-momentum-bg",
           },
           {
-            q: "Which are attractive but underdeveloped?",
+            q: "Attractive but underdeveloped?",
             count: opportunitySectors.length,
             color: "text-signal-opportunity",
             bg: "bg-signal-opportunity-bg",
           },
           {
-            q: "Which matter strategically but face risks?",
+            q: "Strategically critical?",
             count: strategicSectors.length,
             color: "text-brand",
             bg: "bg-brand-light",
           },
           {
-            q: "Which require cross-emirate coordination?",
+            q: "Cross-emirate coordination required?",
             count: "TBD",
             color: "text-gray-400",
             bg: "bg-gray-100",
@@ -120,9 +116,14 @@ export default function SectorsPage() {
 
       {/* Sector card grid */}
       <section className="mb-8">
-        <h2 className="text-sm font-semibold text-gray-700 mb-4">
-          Sector Overview
-        </h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-semibold text-gray-700">
+            Sector Overview
+          </h2>
+          <span className="text-xs text-gray-400">
+            FY 2024 data where available · directional classification
+          </span>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {sectorRows.map((sector) => {
             const status = statusConfig[sector.status];
@@ -130,24 +131,20 @@ export default function SectorsPage() {
             return (
               <div
                 key={sector.id}
-                className={`bg-white rounded-xl border p-5 shadow-sm ${status.border} border`}
+                className={`bg-white rounded-xl border p-5 shadow-sm ${status.border}`}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2.5">
-                    <span
-                      className={`w-2 h-2 rounded-full flex-shrink-0 ${status.dot}`}
-                    />
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${status.dot}`} />
                     <h3 className="text-sm font-semibold text-gray-900">
                       {sector.name}
                     </h3>
                   </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span
-                      className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${status.bg} ${status.color}`}
-                    >
-                      {status.label}
-                    </span>
-                  </div>
+                  <span
+                    className={`flex-shrink-0 text-[11px] font-semibold px-2 py-0.5 rounded-full ${status.bg} ${status.color}`}
+                  >
+                    {status.label}
+                  </span>
                 </div>
 
                 <p className="text-xs text-gray-600 leading-relaxed mb-3">
@@ -182,44 +179,46 @@ export default function SectorsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <section>
           <h2 className="text-sm font-semibold text-gray-700 mb-3">
-            Top Opportunity Signal
+            Leading Opportunity Signal
           </h2>
           <div className="bg-white rounded-xl border border-signal-opportunity/20 p-5 shadow-sm">
             <div className="text-[11px] font-semibold uppercase tracking-wide text-signal-opportunity bg-signal-opportunity-bg px-2.5 py-1 rounded-full inline-flex mb-3">
               Opportunity
             </div>
             <h3 className="text-sm font-semibold text-gray-900 mb-2">
-              Pharma & Food Security adjacency to existing UAE logistics
-              platform
+              Pharma and food security sectors are underdeveloped relative to the
+              existing UAE logistics and cold-chain platform
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed">
-              The UAE&apos;s free zone and cold-chain logistics infrastructure creates
-              a natural platform for pharma and agri-tech manufacturing that is
-              currently underutilized relative to the national investment already
-              made in these areas. Export complexity data (pending Comtrade
-              access) would sharpen this signal.
+              As of March 2026, UAE free zone and cold-chain infrastructure
+              represents an underutilised foundation for pharma and agri-tech
+              manufacturing entry. FY 2024 FDI data is strong but does not yet
+              isolate industrial-sector flows. Export complexity adjacency
+              analysis — pending Comtrade and Harvard Atlas access — will
+              quantify how close this opportunity is to current UAE capabilities.
             </p>
           </div>
         </section>
 
         <section>
           <h2 className="text-sm font-semibold text-gray-700 mb-3">
-            Top Risk Signal
+            Leading Risk Signal
           </h2>
           <div className="bg-white rounded-xl border border-signal-risk/20 p-5 shadow-sm">
             <div className="text-[11px] font-semibold uppercase tracking-wide text-signal-risk bg-signal-risk-bg px-2.5 py-1 rounded-full inline-flex mb-3">
               Risk
             </div>
             <h3 className="text-sm font-semibold text-gray-900 mb-2">
-              Petrochemical and downstream exposure to long-run energy
-              transition
+              Petrochemical and downstream sectors face medium-term demand risk
+              from the energy transition in key export markets
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed">
-              While the petrochemical sector remains a strong contributor today,
-              the transition trajectory across key export markets creates a
-              medium-term demand risk. The question for MoIAT is when to
-              accelerate diversification investment relative to continued
-              downstream optimization.
+              The petrochemical sector remains a strong contributor to national
+              industrial output as of FY 2024 data. However, the medium-term
+              demand outlook in Europe and East Asia — the UAE&apos;s primary
+              petrochemical export markets — is sensitive to energy transition
+              policy. The timing and scale of this risk require a dedicated
+              monitoring track and diversification investment planning.
             </p>
           </div>
         </section>
@@ -243,15 +242,16 @@ export default function SectorsPage() {
           </svg>
           <div>
             <div className="text-sm font-semibold text-brand mb-1">
-              Evidence & Data Status
+              Data & Evidence Status · {APP_DATA_CONTEXT.as_of}
             </div>
             <p className="text-xs text-brand/80 leading-relaxed">
-              Sector classification in this view is directional and based on
-              modeled signals from World Bank indicators plus MoIAT public
-              context. Full sector scoring will require UN Comtrade product-level
-              exports (API access pending) and UNIDO manufacturing structure
-              data. Evidence badges on each card indicate the current data
-              confidence level.
+              Sector classification in this view is directional, based on FY 2024
+              World Bank indicators and MoIAT public policy context. Full
+              quantitative scoring requires UN Comtrade product-level exports (API
+              access pending) and UNIDO manufacturing structure data (download not
+              complete). Evidence confidence badges on each card reflect current
+              data quality. No values have been fabricated — gaps are shown as
+              deferred.
             </p>
           </div>
         </div>

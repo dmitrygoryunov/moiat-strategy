@@ -2,12 +2,15 @@ import { PageHeader } from "@/components/primitives/PageHeader";
 import { DeferredBadge } from "@/components/primitives/DeferredBadge";
 import { EvidenceDrawer } from "@/components/primitives/EvidenceDrawer";
 import type { EvidenceMeta } from "@/lib/seed-data";
+import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
-// Peer comparison data — real World Bank indicator values
-// Source: World Bank API, extracted 2026-03-26
+// Peer comparison — World Bank indicators, latest available year per country.
+// UAE figure is FY 2024. Other countries reflect latest available (2022–2024).
+// This is a directional comparison, not a harmonised single-year table.
 const peerData = [
   {
     country: "UAE",
+    period: "2024",
     gdp_growth: 4.0,
     manuf_pct_gdp: 9.4,
     fdi_pct_gdp: 8.3,
@@ -16,6 +19,7 @@ const peerData = [
   },
   {
     country: "Saudi Arabia",
+    period: "2022",
     gdp_growth: 1.3,
     manuf_pct_gdp: 11.8,
     fdi_pct_gdp: 3.1,
@@ -24,6 +28,7 @@ const peerData = [
   },
   {
     country: "Singapore",
+    period: "2023",
     gdp_growth: 1.1,
     manuf_pct_gdp: 21.2,
     fdi_pct_gdp: 19.4,
@@ -32,6 +37,7 @@ const peerData = [
   },
   {
     country: "South Korea",
+    period: "2023",
     gdp_growth: 2.5,
     manuf_pct_gdp: 26.1,
     fdi_pct_gdp: 0.9,
@@ -40,6 +46,7 @@ const peerData = [
   },
   {
     country: "Netherlands",
+    period: "2023",
     gdp_growth: 0.9,
     manuf_pct_gdp: 12.3,
     fdi_pct_gdp: 38.2,
@@ -50,14 +57,16 @@ const peerData = [
 
 const peerEvidence: EvidenceMeta = {
   source_name: "World Bank Open Data — multiple indicators",
-  source_id: "wb_peer_comparison_2024",
+  source_id: "wb_peer_comparison_multi",
   publisher: "World Bank",
-  geography: "Multiple (ARE, SAU, SGP, KOR, NLD)",
+  geography: "UAE, Saudi Arabia, Singapore, South Korea, Netherlands",
   unit: "Various (% of GDP, annual %)",
   extraction_date: "2026-03-26",
-  source_period: "2022–2024 (latest available per country)",
+  display_period: "2022–2024 (latest per country)",
+  period_label: "2022–2024 · latest available per country",
   caveats:
-    "Peer values drawn from World Bank latest available year per country. Years may differ by 1–2 years across comparators. Saudi Arabia manufacturing figure is 2022 estimate. Comparison is directional, not definitive.",
+    "Each country's values reflect the latest available year in the World Bank API as of extraction date 2026-03-26. UAE values are FY 2024. Saudi Arabia manufacturing figure is 2022. Other peers are 2023. Years differ by up to two years — this is a directional comparison, not a harmonised single-year ranking.",
+  caveat_short: "Latest available year per country — not harmonised to a single year",
   confidence: "medium",
   evidence_type: "official",
 };
@@ -66,52 +75,52 @@ const competitivenessAreas = [
   {
     area: "Industrial Structure",
     uae_summary:
-      "Manufacturing at 9.4% of GDP (2024), growing from a low base. Diversified services sector dominant. Free zone industrial clusters driving non-oil output.",
+      "Manufacturing at 9.4% of GDP (FY 2024, World Bank). Services sector dominant at over 50% of non-oil output. Free zone industrial clusters are the primary engine of non-oil manufacturing growth.",
     status: "strength",
     data_status: "available",
   },
   {
     area: "Export Mix & Complexity",
     uae_summary:
-      "High export-to-GDP ratio (>100%). Mix includes re-exports, hydrocarbons, and growing manufacturing. Complexity profile shows adjacency potential toward higher-value industry.",
+      "Total exports exceed 100% of GDP (re-exports, hydrocarbons, and growing manufacturing). The complexity profile — how sophisticated the export basket is — shows a meaningful gap relative to Singapore and South Korea. Adjacency analysis pending full Comtrade and Harvard Atlas access.",
     status: "opportunity",
     data_status: "partial",
     deferred_note:
-      "Full Harvard Atlas complexity score pending bulk data access.",
+      "Full export complexity scoring requires Harvard Atlas bulk data (access not yet secured) and UN Comtrade product-level data (API subscription pending).",
   },
   {
     area: "FDI Attractiveness",
     uae_summary:
-      "FDI at 8.3% of GDP — strong by regional and global standards. Free zone infrastructure is a competitive differentiator. Industrial sector breakdown not yet isolated.",
+      "FDI at 8.3% of GDP (FY 2024, World Bank) — strong by both regional and global standards. Free zone infrastructure is a differentiated competitive advantage. The critical gap: without an industrial-sector FDI breakdown, the headline figure may overstate manufacturing-directed investment.",
     status: "strength",
     data_status: "partial",
     deferred_note:
-      "Sector-level FDI split requires Ministry of Economy structured export.",
+      "Sector-level FDI decomposition requires Ministry of Economy structured data export — not yet in the repository cache.",
   },
   {
     area: "Digital Government Readiness",
     uae_summary:
-      "UAE consistently scores well on global e-government and digital readiness indices. Strong foundation for AI-Native ministry operations.",
+      "UAE consistently ranks among the top globally on e-government and digital readiness indices. Digital infrastructure quality is a genuine competitive advantage and the foundational platform for an AI-Native MoIAT operating model.",
     status: "strength",
     data_status: "available",
   },
   {
-    area: "Innovation & Tech Adoption",
+    area: "Innovation & Technology Output",
     uae_summary:
-      "Patent activity growing from a low base. WIPO data shows trademark filings accelerating. Innovation-output metrics lag innovation-input investment.",
+      "Patent and trademark activity is growing from a low base (WIPO data, extracted as HTML snapshot — tabular extraction pending). Innovation-output metrics still lag significantly behind innovation-input investment, which is the pattern of a market in early transition toward knowledge-based industry.",
     status: "risk",
     data_status: "partial",
     deferred_note:
-      "WIPO tabular data requires second-pass extraction (current snapshot is HTML only).",
+      "WIPO tabular data extraction not yet complete — current repository holds HTML snapshot only. Structured IP statistics available in second data pass.",
   },
   {
     area: "Regulatory Enablement",
     uae_summary:
-      "ICV, ITTI, and Industrial Registry provide strong policy instruments. Regulatory turnaround time and license cycle metrics are MoIAT-native and require ministry data connection.",
+      "ICV, ITTI, and the Industrial Registry are strong policy instruments with real operational reach. Regulatory turnaround time, licence cycle time, and conformity processing metrics are MoIAT-native KPIs that require direct ministry data connection — not yet available in the public data cache.",
     status: "opportunity",
     data_status: "deferred",
     deferred_note:
-      "Regulatory efficiency KPIs require live ministry data. Illustrative values only in this prototype.",
+      "Regulatory efficiency KPIs require live ministry data. Any values shown in this section are illustrative workflow placeholders only.",
   },
 ];
 
@@ -138,36 +147,42 @@ export default function UAEPositionPage() {
     <div>
       <PageHeader
         title="UAE Position & Peer Benchmarking"
-        subtitle="Where the UAE sits relative to peers across key industrial competitiveness dimensions"
-        badge="World Bank data · 2024"
+        subtitle="Where the UAE stands relative to peers across key industrial competitiveness dimensions"
+        badge={`World Bank data · ${APP_DATA_CONTEXT.extraction_label}`}
         badgeVariant="live"
       />
 
       {/* Narrative header */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
         <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
-          Strategic framing
+          Strategic framing · as of {APP_DATA_CONTEXT.as_of}
         </div>
         <h2 className="text-lg font-bold text-brand-navy mb-2 leading-snug">
-          The UAE is a strong regional platform — the next challenge is
-          deepening industrial complexity
+          The UAE is a strong regional platform — the strategic opportunity is
+          deepening industrial complexity before 2031
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed max-w-3xl">
-          Compared to regional peers, the UAE leads on GDP growth and FDI
-          attractiveness. Compared to manufacturing-led benchmarks like
-          Singapore or South Korea, the opportunity to grow manufacturing&apos;s
-          share of GDP and increase export complexity is significant. The
-          strategic question for MoIAT is how to close that complexity gap
-          through targeted sector and emirate prioritization.
+          Using FY 2024 data extracted in March 2026, the UAE leads its regional
+          peers on GDP growth and FDI attractiveness. Against manufacturing-led
+          benchmarks — Singapore at 21% manufacturing GDP share, South Korea at
+          26% — the complexity gap is wide and the opportunity is significant.
+          The central question for MoIAT is how to close that gap through
+          targeted sector and emirate prioritisation decisions over the next five
+          years.
         </p>
       </div>
 
       {/* Peer comparison table */}
       <section className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-gray-700">
-            Peer Comparison — Selected Indicators
-          </h2>
+          <div>
+            <h2 className="text-sm font-semibold text-gray-700">
+              Peer Comparison — Selected Indicators
+            </h2>
+            <p className="text-xs text-gray-400 mt-0.5">
+              Latest available year per country · not harmonised to a single year · directional only
+            </p>
+          </div>
           <EvidenceDrawer
             evidence={peerEvidence}
             triggerLabel="Peer comparison"
@@ -181,6 +196,9 @@ export default function UAEPositionPage() {
                 <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500">
                   Country
                 </th>
+                <th className="text-center px-3 py-3 text-xs font-semibold text-gray-500">
+                  Year
+                </th>
                 <th className="text-right px-5 py-3 text-xs font-semibold text-gray-500">
                   GDP Growth
                 </th>
@@ -191,7 +209,7 @@ export default function UAEPositionPage() {
                   FDI % GDP
                 </th>
                 <th className="px-5 py-3 text-xs font-semibold text-gray-500">
-                  Role
+                  Comparator role
                 </th>
               </tr>
             </thead>
@@ -214,6 +232,11 @@ export default function UAEPositionPage() {
                       }`}
                     >
                       {row.country}
+                    </span>
+                  </td>
+                  <td className="px-3 py-3.5 text-center">
+                    <span className="text-xs text-gray-400 font-medium">
+                      {row.period}
                     </span>
                   </td>
                   <td className="px-5 py-3.5 text-right">
@@ -252,8 +275,7 @@ export default function UAEPositionPage() {
           </table>
           <div className="px-5 py-2.5 bg-gray-50 border-t border-gray-100">
             <span className="text-[10px] text-gray-400">
-              World Bank indicators · Latest available year per country ·
-              Extracted 2026-03-26 · Directional comparison only
+              World Bank Open Data API · Extracted {APP_DATA_CONTEXT.extraction_date} · Years vary per country · Directional comparison only
             </span>
           </div>
         </div>
@@ -265,6 +287,9 @@ export default function UAEPositionPage() {
           <h2 className="text-sm font-semibold text-gray-700">
             Competitiveness Dimensions
           </h2>
+          <span className="text-xs text-gray-400">
+            As of {APP_DATA_CONTEXT.as_of} · FY 2024 data where available
+          </span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {competitivenessAreas.map((area) => {
@@ -317,12 +342,14 @@ export default function UAEPositionPage() {
               Methodology & Evidence Access
             </div>
             <p className="text-xs text-brand/80 leading-relaxed">
-              All peer comparison figures are drawn from the World Bank Open
-              Data API (extracted 2026-03-26). Peer selection is illustrative —
-              the controlled peer list will be finalized with MoIAT in the next
-              phase. Harvard Atlas complexity data and WIPO innovation metrics
-              are referenced but not yet loaded; those sections are marked
-              accordingly.
+              All peer comparison figures come from the World Bank Open Data API
+              (extracted {APP_DATA_CONTEXT.extraction_date}). The peer set shown
+              is illustrative — the controlled comparator list will be confirmed
+              with MoIAT in the next phase. Harvard Atlas complexity data and
+              WIPO innovation metrics are referenced but not yet fully loaded;
+              those dimensions are marked accordingly. The data vintage for UAE
+              figures is FY 2024. Values for other countries reflect the latest
+              available year in the World Bank dataset, which varies by 1–2 years.
             </p>
           </div>
         </div>

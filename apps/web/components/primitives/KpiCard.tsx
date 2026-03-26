@@ -10,18 +10,18 @@ export function KpiCard({ kpi }: KpiCardProps) {
   const isDeltaDown = kpi.delta_direction === "down";
 
   return (
-    <div className="kpi-card relative group">
+    <div className="kpi-card relative group flex flex-col">
       {kpi.deferred && (
         <div className="absolute top-3 right-3">
           <DeferredPill reason={kpi.deferred_reason} />
         </div>
       )}
 
-      <div className="mb-3">
+      <div className="mb-2">
         <span className="section-label">{kpi.label}</span>
       </div>
 
-      <div className="flex items-end gap-2.5 mb-2">
+      <div className="flex items-end gap-2 mb-1">
         <span
           className={`text-3xl font-bold tracking-tight leading-none ${
             kpi.deferred ? "text-gray-300" : "text-brand-navy"
@@ -30,14 +30,19 @@ export function KpiCard({ kpi }: KpiCardProps) {
           {kpi.deferred ? "—" : kpi.value}
         </span>
         {kpi.unit_label && (
-          <span className="text-xs text-gray-400 mb-0.5 leading-tight max-w-[80px]">
+          <span className="text-xs text-gray-400 mb-0.5 leading-tight">
             {kpi.unit_label}
           </span>
         )}
       </div>
 
+      {/* Data period — always visible, distinguishes from extraction date */}
+      <div className="text-[10px] text-gray-400 mb-2 font-medium">
+        {kpi.evidence.period_label}
+      </div>
+
       {kpi.delta && !kpi.deferred && (
-        <div className="flex items-center gap-1 mb-3">
+        <div className="flex items-center gap-1 mb-2">
           <span
             className={`text-xs font-medium ${
               isDeltaUp
@@ -52,10 +57,17 @@ export function KpiCard({ kpi }: KpiCardProps) {
         </div>
       )}
 
+      {/* Short caveat — honest inline note */}
+      {kpi.evidence.caveat_short && !kpi.deferred && (
+        <div className="text-[10px] text-gray-400 leading-snug mb-3 flex-1">
+          {kpi.evidence.caveat_short}
+        </div>
+      )}
+
       <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
         <EvidenceDrawer evidence={kpi.evidence} triggerLabel={kpi.label} />
         {kpi.deferred && (
-          <span className="text-[10px] text-gray-400">Data pending</span>
+          <span className="text-[10px] text-gray-400 italic">Data pending</span>
         )}
       </div>
     </div>
@@ -82,7 +94,7 @@ function DeferredPill({ reason }: { reason?: string }) {
         Deferred
       </span>
       {reason && (
-        <div className="absolute right-0 top-6 w-56 bg-gray-800 text-white text-[10px] rounded-md px-2.5 py-2 z-10 leading-relaxed opacity-0 group-hover/pill:opacity-100 pointer-events-none transition-opacity shadow-lg">
+        <div className="absolute right-0 top-6 w-60 bg-gray-800 text-white text-[10px] rounded-md px-2.5 py-2 z-10 leading-relaxed opacity-0 group-hover/pill:opacity-100 pointer-events-none transition-opacity shadow-lg">
           {reason}
         </div>
       )}

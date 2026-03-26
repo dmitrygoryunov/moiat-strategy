@@ -1,44 +1,51 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
 import { DeferredBadge } from "@/components/primitives/DeferredBadge";
+import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
-// Brief template scaffold — AI generation deferred pending server-side OpenAI integration
-// This page shows the structural UX flow. The "Generate" action is labeled as deferred.
+// Brief template scaffold — AI generation deferred pending server-side OpenAI integration.
+// This page shows the structural workflow and section content.
+// The "Generate" button is explicitly disabled with a plain explanation.
 
 const briefTemplate = {
   issue:
-    "Manufacturing sector adjacency: where should UAE prioritize in 2025–2026?",
+    "Manufacturing sector adjacency: where should UAE concentrate industrial policy effort through 2026–2031?",
   framing:
-    "Manufacturing value added has reached 9.4% of GDP (2024) and FDI inflows are at 8.3% of GDP — both strong signals. However, the export complexity profile suggests an opportunity gap in higher-value industries. The strategic question is whether MoIAT should concentrate resources on accelerating existing strong sectors or on building new capability in adjacent areas.",
+    `As of ${APP_DATA_CONTEXT.as_of}, the latest available FY 2024 official data shows manufacturing value added at 9.4% of GDP and FDI net inflows at 8.3% of GDP — both strong signals. The non-oil GDP share has reached 75.5%. The strategic question for MoIAT is not whether to act, but where: which sector adjacencies offer the highest combination of strategic value, UAE platform advantage, and achievable complexity uplift before the 2031 Operation 300bn deadline. Answering this precisely requires completing the UN Comtrade and Harvard Atlas data connections.`,
   evidence: [
     {
       id: "manuf_va",
-      label: "Manufacturing value added: 9.4% of GDP (2024)",
-      source: "World Bank",
+      label: "Manufacturing value added: 9.4% of GDP",
+      period: "FY 2024",
+      source: "World Bank (NV.IND.MANF.ZS)",
       type: "official" as const,
     },
     {
       id: "fdi_inflows",
-      label: "FDI net inflows: 8.3% of GDP (2024)",
-      source: "World Bank",
+      label: "FDI net inflows: 8.3% of GDP",
+      period: "FY 2024",
+      source: "World Bank (BX.KLT.DINV.WD.GD.ZS)",
       type: "official" as const,
     },
     {
       id: "non_oil_share",
-      label: "Non-oil GDP share: 75.5% (2024)",
-      source: "FCSC / UAE.Stat",
+      label: "Non-oil GDP share: 75.5%",
+      period: "FY 2024",
+      source: "FCSC / UAE National Accounts",
       type: "official" as const,
     },
     {
       id: "complexity",
-      label: "Export complexity adjacency — pending",
-      source: "Harvard Atlas (access pending)",
+      label: "Export complexity adjacency score — pending",
+      period: "Pending",
+      source: "Harvard Atlas (bulk data access not yet secured)",
       type: "illustrative" as const,
       deferred: true,
     },
     {
       id: "comtrade",
       label: "Product-level export analysis — pending",
-      source: "UN Comtrade (subscription pending)",
+      period: "Pending",
+      source: "UN Comtrade (API subscription — 401 error on current access)",
       type: "illustrative" as const,
       deferred: true,
     },
@@ -46,36 +53,41 @@ const briefTemplate = {
   options: [
     {
       id: "opt_a",
-      label: "Option A: Concentrate on advanced manufacturing scale-up",
+      label: "Option A: Accelerate existing strong sectors up the value chain",
       summary:
-        "Prioritize sectors where the UAE already has established industrial platforms (petrochemicals, metals, building materials) and accelerate their move up the value chain through ICV and ITTI incentives.",
-      tradeoff: "Lower transformation risk. Preserves existing industrial employment. But may not generate the step-change in complexity that Operation 300bn aspirations require.",
+        "Concentrate ICV, ITTI, and investment facilitation on sectors where UAE already has an established industrial base — petrochemicals, metals, building materials — and drive them toward higher-complexity, higher-margin output.",
+      tradeoff:
+        "Lower transformation risk and quicker near-term Operation 300bn contribution. But this path may not generate the structural complexity shift needed to close the Singapore/South Korea gap within the 2031 horizon.",
     },
     {
       id: "opt_b",
-      label: "Option B: Seed new capability in pharma, food tech, and medtech",
+      label: "Option B: Build new capability in pharma, food tech, and medtech",
       summary:
-        "Target sectors where UAE has comparative advantages in logistics, cold chain, and talent access but low current manufacturing base. Use free zone platforms and regulatory fast-tracks to attract anchor investors.",
-      tradeoff: "Higher upside but longer lead times. Requires sustained policy commitment and cross-emirate coordination. Evidence base for this option is currently partial (Comtrade data pending).",
+        "Target sectors where UAE has comparative logistics and infrastructure advantages but low current manufacturing base. Use free zone regulatory fast-tracks and anchor investor targeting to catalyse entry.",
+      tradeoff:
+        "Higher complexity upside but longer lead times and higher execution risk. Requires sustained cross-emirate coordination and committed policy continuity. Evidence base for adjacency scoring is currently partial — Comtrade data pending.",
     },
     {
       id: "opt_c",
-      label: "Option C: Portfolio approach — both tracks with differentiated timelines",
+      label: "Option C: Portfolio approach — parallel tracks with differentiated KPIs",
       summary:
-        "Run scale-up and seed tracks in parallel with differentiated KPIs and review cadences. Protects near-term Operation 300bn progress while positioning for medium-term complexity shift.",
-      tradeoff: "More resource-intensive. Requires clear portfolio governance and discipline on where not to invest. Recommended if leadership confirms both objectives are non-negotiable.",
+        "Run acceleration and seeding tracks simultaneously with separate performance metrics, review cadences, and resource allocations. Protects near-term targets while positioning for medium-term complexity growth.",
+      tradeoff:
+        "Most resource-intensive. Requires strong portfolio governance and disciplined prioritisation of what not to do. Recommended if leadership confirms both objectives are simultaneously non-negotiable.",
     },
   ],
   risks: [
-    "Evidence base for sector adjacency scoring is not yet complete (Comtrade and Harvard Atlas pending).",
-    "Emirate coordination risk: without aligned ICV incentives across free zones, firms may arbitrage rather than invest.",
-    "FDI concentration risk: total FDI is strong but industrial sector breakdown is not yet available — headline figure may overstate manufacturing-directed investment.",
+    `Evidence base is incomplete as of ${APP_DATA_CONTEXT.as_of}: Comtrade product data and Harvard Atlas complexity scores are not yet loaded. The sector adjacency recommendation will strengthen materially once these are connected.`,
+    "Cross-emirate ICV incentive arbitrage risk: without aligned incentive structures across free zones, investors may arbitrage regulatory differences rather than committing to manufacturing investment.",
+    "FDI headline strength may mask industrial sector weakness: total FDI at 8.3% of GDP is strong, but without industrial-sector decomposition (Ministry of Economy export pending), manufacturing-directed FDI cannot be confirmed.",
+    "Regulatory continuity risk: policy instruments like ICV and ITTI require sustained operational discipline to be effective. Coverage and enforcement consistency need monitoring.",
   ],
   actions: [
-    "Commission full Comtrade and Harvard Atlas analysis to sharpen sector adjacency scores.",
-    "Initiate cross-emirate working session on industrial land and incentive alignment.",
-    "Review ICV and ITTI coverage rates across target sectors.",
-    "Present option framework to Undersecretary for strategic direction.",
+    "Commission full Comtrade and Harvard Atlas analysis to produce quantitative sector adjacency scores — this is the highest-priority data gap for this brief.",
+    "Initiate cross-emirate working session on industrial land allocation, ICV incentive harmonisation, and free zone manufacturing policy alignment.",
+    "Commission Ministry of Economy industrial FDI breakdown to validate whether headline FDI flows are reaching manufacturing sectors.",
+    "Review current ICV and ITTI coverage rates across the seven target sectors identified in this prototype.",
+    "Present option framework to Undersecretary for strategic direction before the next sector review cycle.",
   ],
 };
 
@@ -102,8 +114,8 @@ export default function BriefBuilderPage() {
     <div>
       <PageHeader
         title="Decision Brief Builder"
-        subtitle="Structure a ministerial decision brief from evidence — issue, options, risks, actions"
-        badge="Scaffold · AI generation deferred"
+        subtitle="Structure a ministerial decision brief from evidence — issue, options, risks, and next actions"
+        badge={`Scaffold · AI generation deferred · ${APP_DATA_CONTEXT.as_of}`}
         badgeVariant="deferred"
       />
 
@@ -128,15 +140,15 @@ export default function BriefBuilderPage() {
               AI Brief Generation — Deferred
             </div>
             <p className="text-xs text-gray-600 leading-relaxed">
-              Server-side AI summarization from structured evidence inputs is
-              designed but not yet wired. The brief below is a structured
-              scaffold showing the workflow and section structure.{" "}
+              Server-side AI summarisation from structured evidence inputs is
+              designed but not yet wired.{" "}
               <code className="text-xs bg-gray-100 px-1 py-0.5 rounded font-mono">
                 OPENAI_API_KEY
               </code>{" "}
-              is kept server-side only and will be connected in the next packet.
-              The section structure, evidence references, and option framing are
-              all real and reviewable.
+              is configured server-side only and will be connected in packet
+              MSP-005. The section structure, evidence items, and option framing
+              below are real and reviewable. The brief reflects FY 2024 data
+              with context date {APP_DATA_CONTEXT.as_of}.
             </p>
           </div>
         </div>
@@ -157,7 +169,12 @@ export default function BriefBuilderPage() {
 
         {/* Supporting evidence */}
         <section className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-          <div className="section-label mb-3">Supporting Evidence</div>
+          <div className="flex items-center justify-between mb-3">
+            <div className="section-label">Supporting Evidence</div>
+            <span className="text-xs text-gray-400">
+              Data vintage: {APP_DATA_CONTEXT.data_vintage} · Extracted {APP_DATA_CONTEXT.extraction_date}
+            </span>
+          </div>
           <div className="space-y-2.5">
             {briefTemplate.evidence.map((ev) => {
               const config = typeConfig[ev.type];
@@ -205,6 +222,9 @@ export default function BriefBuilderPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-[10px] font-medium text-gray-400">
+                      {ev.period}
+                    </span>
                     <span className="text-xs text-gray-400">{ev.source}</span>
                     <span
                       className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${config.bg} ${config.color}`}
@@ -217,9 +237,9 @@ export default function BriefBuilderPage() {
             })}
           </div>
           <p className="text-xs text-gray-400 mt-3">
-            2 of 5 evidence items are currently deferred (data access pending).
-            Brief confidence will improve when Comtrade and Harvard Atlas are
-            connected.
+            3 of 5 evidence items are confirmed official FY 2024 data. 2 items
+            are deferred pending data access. Brief confidence will improve when
+            Comtrade and Harvard Atlas are connected.
           </p>
         </section>
 
@@ -307,18 +327,19 @@ export default function BriefBuilderPage() {
                 Generate & Export
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
-                AI-assisted prose generation from structured evidence and
+                AI-assisted prose generation from structured evidence inputs and
                 downloadable PDF export are planned for the next implementation
-                packet.
+                packet (MSP-005).
               </p>
               <DeferredBadge
-                reason="Server-side OpenAI integration and PDF export are deferred to packet MSP-005. OPENAI_API_KEY is configured server-side only."
+                reason={`Server-side OpenAI integration and PDF export deferred to MSP-005. OPENAI_API_KEY is kept server-side only per CLAUDE.md §8. Context date: ${APP_DATA_CONTEXT.as_of}.`}
                 className="mt-3"
               />
             </div>
             <button
               disabled
               className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-gray-200 text-gray-400 cursor-not-allowed"
+              title="AI generation not yet implemented"
             >
               <svg
                 className="w-4 h-4"
