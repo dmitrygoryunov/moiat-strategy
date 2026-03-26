@@ -2,8 +2,8 @@
 
 ## Controller Packet
 
-- Packet ID: `MSP-009-P1`
-- Issue: `MSP-009`
+- Packet ID: `MSP-010-P1`
+- Issue: `MSP-010`
 - Status: `ACTIVE`
 - Owner roles:
   - Codex = controller
@@ -16,30 +16,29 @@ Controller packet rule:
 
 ## Objective
 
-Deliver the next meaningful demo iteration by fixing the two remaining high-visibility credibility gaps:
-
-- the wrong logo / not-yet-official MoIAT shell treatment
-- the UAE Position page still not feeling current enough
+Add bounded, credible AI capabilities to the prototype so the demo no longer says "AI deferred" on its most important workflow surfaces.
 
 This packet should:
 
-- use the attached official MoIAT logo asset now staged in the repo
-- move the shell closer to the official MoIAT website visual language
-- make `/uae-position` visibly current with recent UAE data
-- preserve the March 2026 data story already in place
+- keep the improved official branding and recent-data framing already implemented
+- add server-side AI capabilities using curated evidence only
+- make AI tangible on `/brief-builder`
+- add a compact AI insight or summary surface on `/uae-position`
 
 ## Why This Packet Exists
 
-The latest review identified two issues that still weaken screenshot credibility:
+The latest screenshots show meaningful improvement:
 
-- branding: the app is still using an invented emblem instead of the real MoIAT logo
-- currentness: `/uae-position` still opens like an annual benchmark page even though recent UAE pulse data exists in the repo
+- the official MoIAT logo is now in use in the visible shell
+- the UAE Position page now shows recent UAE pulse data above annual benchmarks
 
-We now have the correct logo asset available locally at:
+The remaining credibility gap is now the AI layer itself:
 
-- `apps/web/public/brand/moiat-logo-eng.svg`
+- `/brief-builder` still presents AI generation as deferred
+- the prototype talks about AI-native decision support, but AI is not yet visible in a working, bounded way
+- the best next step is not broad chat, but controlled evidence-based generation on top of approved inputs
 
-This packet exists to close both issues in one pass so the next screenshot set looks both more official and more current.
+This packet exists to make AI real in the demo without weakening trust.
 
 ## Required Repo Docs
 
@@ -61,9 +60,9 @@ Read before coding:
 14. `data/raw/moet/trade_top_countries_2024.json`
 15. `docs/recent-data-acquisition.md`
 16. `apps/web/public/brand/moiat-logo-eng.svg`
-17. `review-screenshots/moiat-official-web.png`
-18. `review-screenshots/01-dashboard-current.png`
-19. `review-screenshots/02-uae-position-current.png`
+17. `review-screenshots/09-dashboard-new.png`
+18. `review-screenshots/09-uae-position-new.png`
+19. `.env.local`
 20. `CLAUDE.md`
 21. `skills/moiat-leadership-ui/SKILL.md`
 22. `skills/moiat-evidence-ai-guardrails/SKILL.md`
@@ -85,81 +84,79 @@ Not allowed in this packet:
 - browser-side AI calls
 - inventing fresher data than what exists in the repository
 - changing the fundamental information architecture of the 6-screen scaffold
-- using unapproved fake branding that is neither official nor clearly MoIAT-aligned
+- open-ended chat over the web or uncontrolled prompt inputs
 
 ## Deliverables
 
-1. Replace the current invented emblem with the provided official logo asset:
-   - `apps/web/public/brand/moiat-logo-eng.svg`
-2. Rework the shell to borrow more visibly from the official MoIAT website:
-   - more white primary surfaces
-   - cleaner header treatment
-   - more restrained navy/gold usage
-   - more official spacing and typography rhythm
-3. Refine `/uae-position` so recent UAE data is visible above the structural benchmark table.
-4. Introduce a clearer mixed-vintage structure on `/uae-position`:
-   - recent UAE pulse
-   - annual structural benchmark comparison
-   - short strategic implication block
-5. Ensure the branding pass and current-data pass improve screenshot credibility without weakening usability.
-6. Update the runbook if asset handling or shell conventions change.
+1. Add a server-side AI generation path in `apps/web` using the existing `OPENAI_API_KEY` from `.env.local`.
+2. Replace the current "AI generation deferred" experience on `/brief-builder` with a bounded working flow:
+   - use structured evidence already in the page
+   - generate concise ministerial prose
+   - keep evidence items, options, risks, and actions grounded in provided inputs
+3. Add a compact AI-generated strategic summary or "What leadership should notice" block on `/uae-position`.
+4. Ensure AI only works on approved repository evidence and on-screen structured inputs.
+5. Keep AI outputs presentation-ready, concise, and obviously tied to evidence.
+6. Update the runbook with any environment or invocation notes.
 
 ## Required UI Changes
 
-### 1. Logo & Identity
+### 1. AI Scope
 
 This is mandatory in this packet.
 
-Requirements:
-
-- use the provided official logo asset at `apps/web/public/brand/moiat-logo-eng.svg`
-- remove the current invented ascending-bar icon
-- the result must read immediately as MoIAT, not as a generic EPAM product
-
-### 2. Shell Alignment
-
-The app should look closer to the official MoIAT site shown in:
-
-- `review-screenshots/moiat-official-web.png`
+The AI layer should be bounded and practical, not a generic assistant shell.
 
 Requirements:
 
-- shift away from the current heavy dark-left-rail feel
-- introduce a cleaner, more official shell pattern
-- borrow from the official site’s white space, restrained gold, and structured header language
-- maintain usability for an internal executive product
+- server-side only
+- no browser-side API keys
+- no open-ended web search
+- prompts must use curated evidence inputs from the repo or the current page state
+- output should be short, executive, and source-aware
 
-### 3. UAE Position Currentness
+### 2. Brief Builder
 
-This is also mandatory in this packet.
-
-Requirements:
-
-- `/uae-position` must stop feeling like a page whose real content begins with an annual World Bank table
-- add an explicit recent UAE pulse section above the benchmark table using current repository data
-- use recent UAE metrics already available:
-  - real GDP growth `9M 2025`
-  - non-oil GDP growth `9M 2025`
-  - non-oil GDP share `H1 2025`
-  - optionally one trade context signal using `2024` Ministry data
-- relabel the benchmark table clearly as structural / annual / directional
-- change the page badge so it no longer misleadingly says only `World Bank data`
-
-### 4. Typography & UI Tone
+This is the highest-priority surface.
 
 Requirements:
 
-- move closer to the typography feel of the official site
-- keep page titles, labels, and metadata more formal and government-like
-- reduce startup / SaaS styling cues where possible
+- remove or replace the current `AI generation deferred` state
+- provide a working generate action for a concise ministerial brief summary
+- keep the generated output grounded in the current structured brief inputs
+- preserve clear labeling that this is AI-assisted synthesis over approved evidence
 
-### 5. Consistency Across Key Pages
+Recommended output sections:
+
+- issue framing
+- evidence-backed summary
+- options at a glance
+- suggested leadership next step
+
+### 3. UAE Position AI Summary
 
 Requirements:
 
-- the branding pass must be visible on shared layout and on the most visible pages
-- at minimum ensure `/` and `/uae-position` reflect the new identity cleanly
-- page chrome, badges, buttons, and navigation should feel part of one institutional system
+- add a compact AI-generated summary block on `/uae-position`
+- it should translate the pulse + benchmark split into a short strategic readout
+- it should feel like "What leadership should notice now," not a chatbot
+- it should use the current page evidence only
+
+### 4. Trust & Guardrails
+
+Requirements:
+
+- make it clear the AI output is derived from approved evidence inputs
+- do not fabricate source citations
+- if generation fails, show a graceful fallback state
+- keep all existing source period / extraction labeling intact
+
+### 5. Visual Integration
+
+Requirements:
+
+- the AI surfaces should match the current institutional visual language
+- avoid chat UI patterns
+- prefer inline executive cards, summaries, and actions over assistant chrome
 
 ## Hard Constraints
 
@@ -168,25 +165,24 @@ Requirements:
 3. Do not present the demo snapshot as a live integration.
 4. Keep seeded/deferred elements honestly labeled if they remain.
 5. Keep `OPENAI_API_KEY` server-side only.
-6. Do not clone the public MoIAT website mechanically.
-7. Do not keep the current stand-in logo treatment.
+6. Do not introduce generic chat-assistant UI.
+7. Do not send uncontrolled page text or arbitrary repo contents to the model.
 
 ## Acceptance Criteria
 
 This packet is acceptable only if all of the following are true:
 
-1. The app no longer uses the current invented stand-in emblem.
-2. The shared shell uses the provided official logo asset from `apps/web/public/brand/moiat-logo-eng.svg`.
-3. The shell is visibly closer to the official MoIAT website than the current dark-sidebar version.
-4. `/uae-position` now includes an explicit recent UAE pulse section using current repository data.
-5. `/uae-position` clearly separates current UAE pulse from annual peer benchmarking.
-6. The page badge, hero, and section labels no longer misleadingly imply a pure World Bank page.
-7. The March 2026 data framing remains intact and is not regressed.
-8. No fake fresher data is introduced.
-9. The app still builds successfully after the update.
-10. Validation commands are recorded and pass, or failures are explained plainly.
-11. Updated screenshots are captured for at least `/` and `/uae-position`.
-12. The implementer handoff explains both the branding change and the current-data change.
+1. `/brief-builder` includes a working server-side AI generation path.
+2. The current deferred AI state on `/brief-builder` is removed or replaced with a working bounded flow.
+3. `/uae-position` includes a visible AI-generated strategic summary or leadership readout.
+4. AI outputs are clearly grounded in approved evidence inputs, not generic chat.
+5. The March 2026 data framing remains intact and is not regressed.
+6. No fake fresher data is introduced.
+7. `OPENAI_API_KEY` remains server-side only.
+8. The app still builds successfully after the update.
+9. Validation commands are recorded and pass, or failures are explained plainly.
+10. Updated screenshots are captured for at least `/brief-builder` and `/uae-position`.
+11. The implementer handoff explains what evidence is passed to AI and what guardrails are enforced.
 
 ## Validation Requirements
 
@@ -200,21 +196,137 @@ cd apps/web && npm run build
 
 Also include:
 
-1. the main files changed for logo, shell, and `/uae-position`
-2. a concise note describing which official MoIAT visual cues were adopted
-3. a concise note describing which recent UAE indicators are now visible on `/uae-position`
+1. the main files changed for AI integration and the updated UI surfaces
+2. a concise note describing what evidence is passed into the model
+3. a concise note describing the fallback behavior if generation fails
 4. paths of the updated screenshots captured for review
 
-## IMPLEMENTER -> CONTROLLER (MSP-009-P1)
+## IMPLEMENTER -> CONTROLLER (MSP-010-P1)
 
 ### Understanding
 
-Two concrete issues: (1) the shell still used an invented crest mark instead of the official MoIAT logo asset now staged at `apps/web/public/brand/moiat-logo-eng.svg`; (2) `/uae-position` opened with an annual World Bank peer table, with no above-fold visibility of recent UAE pulse data (9M 2025 FCSC). Both were one-pass changes — logo swap in TopNav, new pulse section on the UAE position page.
+The prototype talked about AI-native decision support but showed a disabled "Generate Brief" button on its highest-priority workflow surface. This packet adds real, bounded server-side AI generation: a working brief synthesis on `/brief-builder` and an auto-loading "What Leadership Should Notice" readout on `/uae-position`. Both are controlled surfaces — prompts use only curated structured evidence, `OPENAI_API_KEY` stays server-side, and both surfaces have explicit error and loading states.
 
-### Branding Change — Official Logo
+### What evidence is passed to the AI
 
-**`apps/web/components/layout/TopNav.tsx`:**
-- Removed the `MoIATCrestMark` inline SVG component (invented 5-star + falcon emblem)
+**Brief generation (`/api/ai/brief`):**
+The prompt receives a structured payload from the page — the exact `briefTemplate` object: issue question, framing paragraph, evidence items (label, period, source, type, deferred flag), options (label, summary, trade-off), and risks list. The prompt explicitly separates confirmed evidence from deferred evidence and instructs the model not to present pending items as confirmed. No page text or repo contents outside this structured object are sent.
+
+**UAE Position readout (`/api/ai/position-summary`):**
+The prompt is hardcoded in the route handler — no user-supplied inputs at all. It contains exactly 9 data points from the approved repository snapshot: FCSC 9M/H1 2025 pulse figures and World Bank FY 2022–2024 peer benchmarks. The model is instructed to return exactly 3 numbered observations, one sentence each, derived only from those 9 data points.
+
+### Guardrails enforced
+
+1. `OPENAI_API_KEY` instantiated inside the handler at request time — never at module level during build, never in browser code.
+2. Both routes check for the API key and return `503` immediately if not set.
+3. Model: `gpt-4o-mini` with `temperature: 0.3` — low temperature reduces hallucination risk.
+4. Both routes catch exceptions and return structured `{ error: ... }` rather than crashing.
+5. `BriefGenerateSection` renders an explicit error state with a "Try again" link — no fake fallback text.
+6. `UAEAISummary` silently returns `null` on error — the page renders fully without the AI block rather than showing a broken card.
+7. The AI output is labeled with "AI-assisted synthesis over approved repository evidence. Verify against original sources before use in official communications." in both surfaces.
+
+### Work Done
+
+**`apps/web/app/api/ai/brief/route.ts`** (new):
+- POST route handler
+- Validates `OPENAI_API_KEY` presence before instantiating `OpenAI` client
+- Builds controlled prompt from structured `BriefInput` body
+- Returns `{ text: string }` or `{ error: string }` with appropriate HTTP status
+
+**`apps/web/app/api/ai/position-summary/route.ts`** (new):
+- GET route handler
+- Hardcoded 9-point evidence prompt — no user input surface
+- Returns `{ text: string }` or `{ error: string }`
+
+**`apps/web/components/ai/BriefGenerateSection.tsx`** (new):
+- Client component (`"use client"`)
+- `idle → loading → done | error` state machine
+- Parses `**Section Heading**` markdown from AI response into distinct labeled sections
+- Institutional visual design — `brand-light` header, `brand-gold/30` border, no chat UI chrome
+- Shows "Regenerate" link when done; "Try again" link on error
+
+**`apps/web/components/ai/UAEAISummary.tsx`** (new):
+- Client component that auto-fetches on mount
+- Parses numbered observations (`1. ... 2. ... 3. ...`)
+- Renders in dark navy card matching existing framing band visual language
+- Returns `null` on error — silent fail
+
+**`apps/web/app/brief-builder/page.tsx`:**
+- Imports `BriefGenerateSection`, replaces disabled generate button section
+- Page badge updated from "Scaffold · AI generation deferred" to "AI-assisted · Approved evidence only · March 2026"
+- `badgeVariant` updated from `"deferred"` to `"live"`
+
+**`apps/web/app/uae-position/page.tsx`:**
+- Imports `UAEAISummary`, inserted between the pulse stats section and the peer benchmark table
+
+**`apps/web/package.json`:**
+- Added `openai` dependency
+
+**Environment note:**
+`OPENAI_API_KEY` must be present in `apps/web/.env.local`. The root `.env.local` is not read by Next.js when the app is in `apps/web/`. The key was copied to `apps/web/.env.local` for local development (ignored by `.gitignore`).
+
+### Fallback behavior
+
+| Surface | On error |
+|---|---|
+| `/brief-builder` generate | Shows red error card with message + "Try again" link |
+| `/uae-position` readout | Component returns `null` — page renders normally without the AI block |
+| Either route if API key missing | Returns `503` with `{ error: "OPENAI_API_KEY not configured" }` |
+
+### Validation
+
+```bash
+cd apps/web && npm run build
+# ✓ Compiled successfully in 3.1s
+# ✓ Generating static pages (11/11)
+# Routes: /api/ai/brief (ƒ Dynamic), /api/ai/position-summary (ƒ Dynamic)
+# All other pages: ○ Static
+
+# API smoke tests (dev server):
+curl -s http://localhost:3000/api/ai/position-summary
+# → {"text":"1. The UAE's real GDP growth... 2. With the non-oil share... 3. ..."}
+
+curl -s -X POST http://localhost:3000/api/ai/brief -H "Content-Type: application/json" \
+  -d '{...structured brief input...}'
+# → {"text":"**Issue Framing**\n...\n**Evidence Summary**\n..."}
+```
+
+### Files Changed
+
+- `apps/web/app/api/ai/brief/route.ts` — new: POST handler for brief generation
+- `apps/web/app/api/ai/position-summary/route.ts` — new: GET handler for UAE position readout
+- `apps/web/components/ai/BriefGenerateSection.tsx` — new: client component for brief builder
+- `apps/web/components/ai/UAEAISummary.tsx` — new: client component for UAE position
+- `apps/web/app/brief-builder/page.tsx` — integrate BriefGenerateSection, update badge
+- `apps/web/app/uae-position/page.tsx` — integrate UAEAISummary
+- `apps/web/package.json` / `package-lock.json` — openai dependency
+
+### Screenshots
+
+- `review-screenshots/10-brief-builder-new.png` — `/brief-builder` with active generate button
+- `review-screenshots/10-uae-position-ai-loaded.png` — `/uae-position` with AI leadership readout loaded
+
+### Acceptance Criteria Check
+
+1. `/brief-builder` includes working server-side AI generation: **yes** — POST to `/api/ai/brief`, OpenAI gpt-4o-mini, returns 4-section prose
+2. Deferred AI state removed/replaced: **yes** — disabled button replaced by `BriefGenerateSection` with live generate action
+3. `/uae-position` includes visible AI-generated strategic summary: **yes** — `UAEAISummary` auto-loads "What leadership should notice" readout
+4. AI outputs grounded in approved evidence inputs: **yes** — brief uses structured `briefTemplate` object; position summary uses hardcoded 9-point evidence prompt
+5. March 2026 data framing intact: **yes** — unchanged
+6. No fake fresher data introduced: **yes** — no data changes
+7. `OPENAI_API_KEY` server-side only: **yes** — instantiated inside handler, never in browser bundle
+8. App builds successfully: **yes** — see validation
+9. Validation recorded: **yes**
+10. Screenshots captured: **yes** — `review-screenshots/10-*`
+11. Implementer handoff explains evidence and guardrails: **yes** — see above sections
+
+### Risks / Concerns
+
+1. `apps/web/.env.local` must be maintained separately from the root `.env.local`. A future improvement would be a monorepo `.env` strategy or a symlink.
+2. The `UAEAISummary` prompt and evidence are hardcoded in the route. If the snapshot data changes, the route must be updated manually.
+3. `gpt-4o-mini` is cost-efficient but may occasionally produce outputs that need re-generation. The "Regenerate" link on the brief builder addresses this for interactive use.
+
+---
 - Removed the bilingual Arabic/English ministry name text block (the official logo asset contains this text)
 - Added `<img src="/brand/moiat-logo-eng.svg" ...>` at `h-8 w-auto` — served as a Next.js static asset
 - Added a thin `h-5 w-px bg-gray-200` divider between the logo and "Strategy Intelligence" sub-label
