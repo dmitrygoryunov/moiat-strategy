@@ -2,8 +2,8 @@
 
 ## Controller Packet
 
-- Packet ID: `MSP-002-P1`
-- Issue: `MSP-002`
+- Packet ID: `MSP-003-P1`
+- Issue: `MSP-003`
 - Status: `ACTIVE`
 - Owner roles:
   - Codex = controller
@@ -16,27 +16,21 @@ Controller packet rule:
 
 ## Objective
 
-Build the first real web application scaffold in `apps/web`: a leadership-grade product shell with 5-7 screens, core navigation, and the key content sections needed to make the prototype reviewable and demoable.
+Improve the credibility of the scaffold by fixing date framing, message quality, and data labeling across the current screens, while also establishing the first explicit data contract layer for the existing seeded content.
 
-This packet is intentionally UI-first. It should establish the application shell, route structure, and evidence-aware layout patterns without overclaiming live data, AI capability, or full analytics completeness.
+This is not yet a full ETL packet. It is a content-and-contract correction packet that should make the prototype feel current as of March 2026 and more trustworthy in how it presents source periods, extraction dates, and illustrative placeholders.
 
 ## Why This Packet Exists
 
-The repository now has product, architecture, UI, and source documents, plus an initial raw-data cache. The next step is to make the prototype tangible through a real web shell that reflects the planned product structure:
+The first scaffold was accepted structurally, but there is a trust issue in the way dates and messages are framed. We are in March 2026, while many headline annual metrics are from 2024 and were extracted on 2026-03-26.
 
-- Leadership Dashboard
-- UAE Position
-- Sector Prioritization
-- Emirate Portfolio
-- Decision Brief Builder
-- Roadmap & Operating Model
-- evidence access patterns
+Today the UI can read as though the product is "in 2024" rather than showing:
 
-This should follow the same practical approach as the reference project:
+- current date context: March 2026
+- latest available annual data context: mostly 2024
+- extraction date context: 2026-03-26
 
-- real product shell, not disconnected mockups
-- honest empty/deferred states where data is not wired yet
-- visible structure that Claude can build on iteratively
+This packet should correct that and improve overall copy clarity, evidence labeling, and content discipline.
 
 ## Required Repo Docs
 
@@ -55,127 +49,110 @@ Read before coding:
 11. `docs/data-sources.md`
 12. `data/raw/source_manifests/download-manifest.md`
 13. `CLAUDE.md`
+14. `skills/moiat-leadership-ui/SKILL.md`
+15. `skills/moiat-evidence-ai-guardrails/SKILL.md`
 
 ## Scope
 
 Allowed surfaces:
 
 - `apps/web`
-- `tests`
 - `docs/deployment-runbook.md`
 - `AI_LOOP.md` implementer section only
 
 Not allowed in this packet:
 
-- broad ETL implementation
-- KPI computation pipelines
-- backend services beyond the minimum required by a Next.js scaffold
-- fake live data integrations
-- browser-side secret exposure
+- broad ETL pipelines
+- introducing fake new data
+- changing product structure or adding new major routes
+- exposing secrets or implementing browser-side AI calls
 
 ## Deliverables
 
-1. Initialize the Next.js web app in `apps/web`.
-2. Implement a shared application shell with navigation for 5-7 screens.
-3. Add routes/pages for:
-   - Leadership Dashboard
-   - UAE Position
-   - Sector Prioritization
-   - Emirate Portfolio
-   - Decision Brief Builder
-   - Roadmap & Operating Model
-4. Add shared UI primitives for:
-   - KPI cards
-   - insight cards
-   - page narrative headers
-   - evidence drawer or evidence side-panel pattern
-5. Populate each screen with realistic scaffold sections and honest placeholder/deferred states where real data wiring is not yet implemented.
-6. Keep the design aligned with `docs/ui-design.md`:
-   - leadership-grade
-   - editorial and evidence-led
-   - not a generic BI dashboard
+1. Fix date framing across the scaffold so it reads correctly in March 2026.
+2. Improve narrative and microcopy quality across the current screens.
+3. Introduce a clearer display contract for:
+   - source period
+   - extraction date
+   - evidence type
+   - deferred / illustrative status
+4. Tighten the seeded data contract so current screens rely on one explicit data-shaping layer rather than ad hoc inline copy.
+5. Update the deployment runbook if startup or verification notes need to reflect the refined scaffold.
 
-## Required Screen Content
+## Required Corrections
 
-### 1. Leadership Dashboard
+### 1. Date Framing
 
-Must include:
+The app must stop implying that the current period is 2024.
 
-- top narrative summary
-- six hero KPI placeholders or static seed values clearly tied to the documented KPI set
-- momentum / opportunity / risk insight row
-- anomaly or watchlist section
-- recommended brief section
+It must distinguish clearly between:
 
-### 2. UAE Position
+- current context date: March 2026
+- latest complete official annual data: usually 2024
+- extraction date: 2026-03-26
 
-Must include:
+Examples of acceptable framing:
 
-- benchmark narrative header
-- peer comparison section
-- competitiveness dimensions section
-- methodology / evidence access entry point
+- "Latest official annual snapshot available as of March 26, 2026"
+- "Most headline indicators currently reflect 2024 annual data"
+- "Extracted 2026-03-26"
 
-### 3. Sector Prioritization
+### 2. Leadership Narrative
 
-Must include:
+The leadership dashboard narrative must be rewritten so it does not say or imply:
 
-- national prioritization framing
-- sector matrix or card grid
-- opportunity and risk sections
-- evidence access pattern
+- "The UAE enters 2024..."
 
-### 4. Emirate Portfolio
+Instead it should say, in effect:
 
-Must include:
+- as of March 2026, the latest complete official snapshot shows the UAE starting from strength
 
-- emirate portfolio framing
-- emirate cards, table, or map-placeholder section
-- comparative strengths and dependencies section
+### 3. KPI and Evidence Messaging
 
-### 5. Decision Brief Builder
+Each KPI area should make the date model clearer:
 
-Must include:
+- value period
+- extraction date
+- whether it is official, modeled, or illustrative
 
-- issue framing section
-- supporting evidence section
-- options and trade-offs section
-- risks and next actions section
+The UI should make it harder to confuse extraction date with source period.
 
-### 6. Roadmap & Operating Model
+### 4. Screen Copy Quality
 
-Must include:
+Improve wording across the six screens so it feels:
 
-- AI-Native MoIAT framing
-- 0-3, 3-12, and 12-24 month sections
-- governance, data, and capability sections
+- more ministerial
+- more precise
+- less generic
+- less repetitive
+
+### 5. Seed Data Contract
+
+The seed-data layer should explicitly support:
+
+- display period / source period
+- extracted at
+- current context label where relevant
+- concise caveat text for cards and sections
 
 ## Hard Constraints
 
-1. No fake live integrations.
-   - If data is static or seeded, present it honestly as scaffold/demo content.
-
-2. No generic "AI copilot" shell.
-   - The UI must feel like ministerial decision support, not a chatbot wrapper.
-
-3. Evidence access must be visible.
-   - The UI must include a reusable evidence drawer or panel pattern, even if backed by static seed content in this packet.
-
-4. Keep the UI bounded.
-   - Fewer polished sections are better than broad superficial coverage.
-
-5. Keep `OPENAI_API_KEY` server-side only.
+1. Do not fabricate fresher annual data if it is not available.
+2. Do not silently change a metric’s implied period.
+3. Do not overcomplicate the UI with data jargon.
+4. Keep the improvements bounded to message quality and data-display credibility.
+5. Keep all seeded or illustrative content honestly labeled.
 
 ## Acceptance Criteria
 
 This packet is acceptable only if all of the following are true:
 
-1. `apps/web` contains a runnable Next.js app scaffold.
-2. The app has 5-7 real routes/screens matching the product structure above.
-3. There is a shared shell/navigation pattern across screens.
-4. There are shared reusable components for KPI/insight/evidence-oriented content.
-5. The UI clearly follows the leadership-first, evidence-led direction in `docs/ui-design.md`.
-6. Any seeded or illustrative content is presented honestly and does not pretend to be live ministry data.
+1. The leadership dashboard and other scaffold screens no longer read as if the current period is 2024.
+2. The UI clearly distinguishes current context, source period, and extraction date where relevant.
+3. Narrative and microcopy quality across the six screens is visibly improved and more credible.
+4. The seeded data contract is strengthened so date/evidence messaging is driven from explicit fields rather than scattered text.
+5. No fake newer data is introduced.
+6. The app still builds successfully after the refinements.
 7. Validation commands are recorded and pass, or failures are explained plainly.
 
 ## Validation Requirements
@@ -185,99 +162,113 @@ Record exact commands and outcomes in the implementer handoff.
 Minimum expected validation:
 
 ```bash
-cd apps/web && npm install
 cd apps/web && npm run build
 ```
 
 Also include:
 
-1. the command used to start the app locally
-2. a brief note describing each implemented route
+1. a concise note describing how the date-framing model now works
+2. the main files changed for the copy/data-contract cleanup
 
 ## IMPLEMENTER -> CONTROLLER
 
 ### Understanding
 
-Packet MSP-002-P1 calls for a leadership-grade scaffold with 6 screens, shared navigation, reusable KPI/insight/evidence primitives, and honest seeded/deferred states — without fake live integrations, AI shell behavior, or browser-side secret exposure.
-
-I treated evidence visibility and honest deferred labeling as non-negotiable: every metric carries an evidence badge, every capability gap carries a DeferredBadge or explicit status note, and the brief builder's AI generation button is disabled with a plain explanation.
+The core issue in this packet: the prototype was treating "FY 2024" as the current date rather than as the data vintage. The fix required a three-tier date model — context (March 2026), vintage (FY 2024), extraction (2026-03-26) — and driving it from a single explicit contract rather than scattered ad hoc copy.
 
 ### Work Done
 
-**Initialized apps/web** — Next.js 15, React 19, TypeScript, Tailwind CSS 3. Config files: `package.json`, `next.config.ts`, `tsconfig.json`, `tailwind.config.ts`, `postcss.config.mjs`, `.env.example` (OPENAI_API_KEY server-side only).
+**`lib/seed-data.ts`:**
+- Added `APP_DATA_CONTEXT` — single source of truth for all three date tiers, imported across every page
+- `EvidenceMeta` now has `display_period` (what the value represents, e.g. "FY 2024"), `period_label` (display string for cards/footers), and `caveat_short` (inline one-liner for KPI cards)
+- Removed `source_period` (replaced by `display_period` + `period_label`)
+- Updated all 6 hero KPI evidence objects with precise source IDs, fuller caveats, and correct period labels
+- Renamed `date` → `data_period` in `InsightCard` interface
+- Rewrote all insight summaries and sector notes with more specific, ministerial language and explicit FY 2024 references
+- Improved sector notes and emirate portfolio notes throughout
 
-**Seed data (`lib/seed-data.ts`)** — 6 hero KPIs (4 real World Bank values extracted 2026-03-26, 1 FCSC headline, 1 illustrative/deferred); 3 insight cards (momentum/opportunity/risk); watchlist item; 7 sector rows; 6 emirate rows; 3 roadmap phases. All entries carry `evidence_type`, source, date, caveats.
+**`components/primitives/EvidenceDrawer.tsx`:**
+- New three-row "Date Model" panel: Context date (March 2026, highlighted), Data period (what the value represents), Extracted (when pulled)
+- Evidence type block now shows a description alongside the label
+- Source ID shown in footer for audit
+- Drawer is wider (420px) and better structured
 
-**Shared components:**
-- `SideNav.tsx` — 6-item navigation with active-state highlighting
-- `EvidenceDrawer.tsx` — slide-in right panel with metadata, type badge, formula, caveats, illustrative warning
-- `KpiCard.tsx` — value, delta, unit, deferred state with hover tooltip
-- `InsightCard.tsx` — signal type badge (momentum/opportunity/risk/action), summary, evidence count
-- `PageHeader.tsx` — title, subtitle, badge variant, action slot
-- `DeferredBadge.tsx` — explicit "content deferred" placeholder
+**`components/primitives/KpiCard.tsx`:**
+- `period_label` displayed under the value (e.g. "FY 2024 · World Bank API")
+- `caveat_short` shown as inline note above the evidence badge
+- Deferred state refined
 
-**6 routes implemented:**
+**`components/primitives/InsightCard.tsx`:**
+- Uses `data_period` instead of `date`
 
-| Route | Content |
-| --- | --- |
-| `/` | Leadership Dashboard — "UAE Starts From Strength" narrative band, 6 KPI cards, 3 insight cards, watchlist, Operation 300bn tracker (illustrative + DeferredBadge), recommended brief |
-| `/uae-position` | Narrative header, real World Bank peer comparison table (UAE/KSA/SGP/KOR/NLD), 6 competitiveness dimensions with evidence status |
-| `/sectors` | Prioritization framing, 7 sector cards with signal type and evidence labels, opportunity + risk callouts |
-| `/emirates` | Portfolio framing, 6 emirate role cards with strengths and portfolio notes, cross-emirate logic section |
-| `/brief-builder` | Structured brief scaffold (issue, evidence items, options A/B/C, risks, actions), AI generation explicitly disabled with deferred state |
-| `/roadmap` | AI-Native framing, 3-horizon roadmap (Foundation/Build/Scale), governance model, capability priorities, 4 visible risk cards |
+**`app/page.tsx` (Leadership Dashboard):**
+- Data context bar added at the top — shows all three date tiers at a glance
+- Narrative band rewritten: "As of March 2026, the latest official annual snapshot shows..." (no "enters 2024")
+- Section footer updated: "FY 2024 annual data · World Bank API + FCSC · Extracted 2026-03-26"
+- Recommended brief copy updated to reference 2026–2031 horizon
 
-**Deployment runbook:** `docs/deployment-runbook.md` updated with validated build output, route table, implemented vs. deferred feature inventory.
+**All other pages (`/uae-position`, `/sectors`, `/emirates`, `/brief-builder`, `/roadmap`):**
+- All "2024" references now explicitly framed as "FY 2024" or "as of March 2026 ... FY 2024 data"
+- UAE Position: peer table now shows "Year" column per country; footer uses APP_DATA_CONTEXT
+- Brief Builder: evidence items show "Period" column; framing copy explicitly references March 2026 context and FY 2024 data
+- Roadmap: illustrative timeline disclaimer added; risk cards reference APP_DATA_CONTEXT.as_of
 
-**Git note:** P0 bootstrap and P1 web scaffold landed in a single initial commit — no prior git history existed. Future packets will be committed as separate vertical slices per CLAUDE.md §3.
+### How the date-framing model now works
+
+One source (`APP_DATA_CONTEXT`) holds three tiers:
+1. `as_of` = "March 2026" — what the prototype user sees as today's context
+2. `data_vintage` = "FY 2024" — the period most official metrics reflect
+3. `extraction_date` = "2026-03-26" — when the raw files were downloaded
+
+`EvidenceMeta.display_period` on each KPI holds the value-specific data period (which may differ, e.g. Q4 2024 or 2023 for some peer figures). The evidence drawer shows all three tiers side-by-side in a labelled panel. No value implies it is "current" unless clearly labelled as such.
 
 ### Validation
 
 ```bash
-cd apps/web && npm install
-# 104 packages added, 0 vulnerabilities
-
 cd apps/web && npm run build
-# ✓ Compiled successfully in 2.8s
+# ✓ Compiled successfully in 1990ms
 # ✓ Generating static pages (9/9)
 # No TypeScript errors, no lint errors
 
 # Route (app)                              Size  First Load JS
-# ┌ ○ /                                 1.73 kB         107 kB
+# ┌ ○ /                                   175 B         108 kB
 # ├ ○ /brief-builder                      130 B         102 kB
 # ├ ○ /emirates                           130 B         102 kB
 # ├ ○ /roadmap                            130 B         102 kB
 # ├ ○ /sectors                            162 B         106 kB
-# └ ○ /uae-position                     1.71 kB         104 kB
+# └ ○ /uae-position                       160 B         104 kB
 ```
 
-Start command:
+Dev server restarted at: `http://localhost:3000`
 
-```bash
-cd apps/web && npm run dev
-# App at http://localhost:3000
-```
+### Files Changed
 
-All 6 routes render. Evidence drawer opens on every KPI card. All deferred states are explicitly labeled. No secrets in browser code. Build is clean.
+- `apps/web/lib/seed-data.ts`
+- `apps/web/components/primitives/EvidenceDrawer.tsx`
+- `apps/web/components/primitives/KpiCard.tsx`
+- `apps/web/components/primitives/InsightCard.tsx`
+- `apps/web/app/page.tsx`
+- `apps/web/app/uae-position/page.tsx`
+- `apps/web/app/sectors/page.tsx`
+- `apps/web/app/emirates/page.tsx`
+- `apps/web/app/brief-builder/page.tsx`
+- `apps/web/app/roadmap/page.tsx`
 
 ### Risks / Concerns
 
-1. **Single initial commit** — P0 bootstrap and P1 scaffold in the same root commit due to no prior git history. Future packets will be cleanly separated.
-2. **Peer comparison years may differ** — The World Bank table uses latest available year per country. KSA manufacturing is a 2022 estimate. Table carries a caveat; acceptable for demo but should be harmonized for formal review.
-3. **Operation 300bn baseline is illustrative** — The "~AED 196bn / 65%" figure is a DeferredBadge placeholder. The real value requires FCSC structured export (not yet complete).
-4. **No automated tests in this packet** — Scaffold has no business logic to unit test. Tests deferred to the packet that introduces ETL and data contracts. Build + manual verification is the validation record here.
-5. **Google Fonts import** — `globals.css` imports Inter via Google Fonts CDN. Cosmetic fallback only if offline; no functional impact.
+1. `InsightCard.data_period` is now a string label (e.g. "FY 2024") not a calendar date — this is intentional but differs from what a future time-series component might expect. If the field is extended, it should accept a structured date range, not just a display string.
+2. The data context bar on the dashboard is desktop-only for the full vintage note (`hidden lg:block`). On smaller screens only the three key values show. This is acceptable for a leadership prototype.
 
 ### Questions / Decisions Needed
 
-1. **Peer country list** — UAE Position page shows KSA, Singapore, South Korea, Netherlands. Should this be confirmed or revised before benchmark charts are built?
-2. **Sector list** — 7 sectors are directional. Should Codex approve or revise before scoring logic is built in MSP-003/004?
-3. **Operation 300bn real figure** — If the correct manufacturing GDP baseline is available from FCSC, it should replace the illustrative tracker value.
-4. **Next packet priority** — Is the next packet MSP-003 (ETL/data) or MSP-004 (wire real data to dashboard)? The scaffold is ready to receive either.
+None blocking acceptance. Optional for controller review:
+
+1. Should the peer country list for UAE Position be confirmed before chart components are built?
+2. Should the Operation 300bn tracker be removed entirely until the real FCSC manufacturing GDP figure is available, rather than showing an illustrative placeholder?
 
 ### Review Diff Command
 
 ```bash
 git show --stat HEAD
-git show HEAD -- apps/web/ docs/deployment-runbook.md
+git diff HEAD~1..HEAD -- apps/web/
 ```
