@@ -31,6 +31,12 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
+# Root control docs (local only)
+CLAUDE.md
+codex_role.md
+claude_role.md
+AI_LOOP.md
+
 # Logs
 *.log
 npm-debug.log*
