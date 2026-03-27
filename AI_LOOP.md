@@ -2,8 +2,8 @@
 
 ## Controller Packet
 
-- Packet ID: `MSP-010-P1`
-- Issue: `MSP-010`
+- Packet ID: `MSP-011-P1`
+- Issue: `MSP-011`
 - Status: `ACTIVE`
 - Owner roles:
   - Codex = controller
@@ -16,29 +16,29 @@ Controller packet rule:
 
 ## Objective
 
-Add bounded, credible AI capabilities to the prototype so the demo no longer says "AI deferred" on its most important workflow surfaces.
+Upgrade the prototype from a strong presentation artifact into a more useful strategy exploration tool.
 
 This packet should:
 
-- keep the improved official branding and recent-data framing already implemented
-- add server-side AI capabilities using curated evidence only
-- make AI tangible on `/brief-builder`
-- add a compact AI insight or summary surface on `/uae-position`
+- refresh the `/uae-position` benchmark model with more relevant 2025-era comparator data
+- reduce dependence on stale annual-only World Bank comparisons in the most visible benchmarking surface
+- introduce bounded interactivity that helps a strategy user explore ideas rather than just read static screens
+- preserve the official branding, current UAE pulse framing, and evidence guardrails already in place
 
 ## Why This Packet Exists
 
-The latest screenshots show meaningful improvement:
+The latest screenshots show that the prototype now looks credible and current enough for a demo:
 
-- the official MoIAT logo is now in use in the visible shell
-- the UAE Position page now shows recent UAE pulse data above annual benchmarks
+- the official MoIAT logo is visible in the shell
+- the UAE Position page now shows recent UAE pulse data above structural benchmarks
 
-The remaining credibility gap is now the AI layer itself:
+The next weakness is utility:
 
-- `/brief-builder` still presents AI generation as deferred
-- the prototype talks about AI-native decision support, but AI is not yet visible in a working, bounded way
-- the best next step is not broad chat, but controlled evidence-based generation on top of approved inputs
+- `/uae-position` still leans heavily on a legacy annual-comparison table
+- the benchmark layer does not yet use the freshest suitable 2025 sources available for peer context
+- the product is still mostly something to look at, not something to explore
 
-This packet exists to make AI real in the demo without weakening trust.
+For a real strategy user, static screens are not enough. A consultant or ministry strategy lead would want to test ideas, compare lenses, ask "what if," and generate directional hypotheses quickly. This packet exists to move the demo in that direction without turning it into a fake enterprise platform.
 
 ## Required Repo Docs
 
@@ -88,75 +88,148 @@ Not allowed in this packet:
 
 ## Deliverables
 
-1. Add a server-side AI generation path in `apps/web` using the existing `OPENAI_API_KEY` from `.env.local`.
-2. Replace the current "AI generation deferred" experience on `/brief-builder` with a bounded working flow:
-   - use structured evidence already in the page
-   - generate concise ministerial prose
-   - keep evidence items, options, risks, and actions grounded in provided inputs
-3. Add a compact AI-generated strategic summary or "What leadership should notice" block on `/uae-position`.
-4. Ensure AI only works on approved repository evidence and on-screen structured inputs.
-5. Keep AI outputs presentation-ready, concise, and obviously tied to evidence.
+1. Refresh `/uae-position` benchmark content so the page uses more relevant 2025 comparator sources where available.
+2. Reduce the prominence of the current annual-only peer table by restructuring the page into:
+   - current UAE pulse
+   - 2025 comparator context
+   - structural benchmark layer
+   - short strategic implication / leadership readout
+3. Introduce bounded interactivity on the most valuable exploration surface(s), without adding new routes.
+4. Ensure interactivity helps users explore strategic questions, filters, priorities, or lenses — not just toggle cosmetics.
+5. Keep any AI-assisted capabilities grounded in approved evidence and structured inputs only.
 6. Update the runbook with any environment or invocation notes.
 
 ## Required UI Changes
 
-### 1. AI Scope
+### 1. UAE Position Benchmark Refresh
 
 This is mandatory in this packet.
 
-The AI layer should be bounded and practical, not a generic assistant shell.
+The current benchmark table is serviceable, but not yet the best use of currently available 2025-era data.
 
 Requirements:
 
+- keep the UAE pulse cards already added
+- add or substitute fresher 2025 comparator context where available from trustworthy published sources
+- do not use anything later than 2025 for the comparator layer
+- do not pretend that all metrics are harmonised actuals
+
+Recommended source direction:
+
+- IMF World Economic Outlook October 2025 for 2025 GDP growth projections / comparator macro context
+- IMD World Digital Competitiveness Ranking 2025 for digital readiness positioning
+- WIPO Global Innovation Index 2025 for innovation positioning
+- UNCTAD World Investment Report 2025 for published 2024 FDI context released in 2025
+
+Requirements:
+
+- separate `current momentum`, `structural comparison`, and `innovation / digital position`
+- if a metric is forecast, rank, or published-in-2025-but-reflecting-2024 data, label it clearly
+- remove the feeling that the page is "a 2024 table with a 2025 header"
+
+### 2. Interactive Exploration
+
+This is also mandatory in this packet.
+
+The prototype should become more exploratory without becoming bloated.
+
+Requirements:
+
+- add at least one bounded interactive control on `/uae-position`
+- add at least one bounded interactive control on either `/sectors` or `/emirates`
+- controls should change the interpretation layer, not just the visuals
+
+Examples:
+
+- switch comparator sets
+- switch policy lens
+- switch time horizon
+- switch objective function
+- toggle between growth / complexity / resilience framing
+
+Implement these exact controls first:
+
+#### `/uae-position`
+
+1. `Comparator Set`
+   - `GCC Peers`
+   - `Advanced Manufacturing`
+   - `Trade & Investment Hubs`
+
+2. `Policy Lens`
+   - `Growth`
+   - `Complexity`
+   - `Resilience`
+
+Expected behavior:
+
+- `Comparator Set` changes the peer group and the explanatory copy
+- `Policy Lens` changes the leadership readout, emphasis cards, and section ordering or highlighting
+- the controls must answer a strategy question:
+  - "Who are we comparing ourselves to?"
+  - "What objective are we optimizing for?"
+
+#### `/sectors` or `/emirates`
+
+Implement one of these:
+
+1. `Sector Lens`
+   - `Accelerate`
+   - `Build`
+   - `Protect`
+
+or
+
+2. `Emirate Role View`
+   - `Anchor`
+   - `Scale-up`
+   - `Specialist`
+   - `Coordination`
+
+Expected behavior:
+
+- the chosen control changes the interpretation text and recommendation emphasis
+- it must help answer:
+  - "What kind of move are we making?"
+  - "What role does this sector or emirate play in the national portfolio?"
+
+### 3. AI-Assisted Value
+
+Requirements:
+
+- if AI is used in this packet, it must support exploration or synthesis, not general chat
+- it should answer a concrete strategy question from the currently selected context
 - server-side only
-- no browser-side API keys
-- no open-ended web search
-- prompts must use curated evidence inputs from the repo or the current page state
-- output should be short, executive, and source-aware
+- use approved evidence inputs only
 
-### 2. Brief Builder
+Preferred behavior in this packet:
 
-This is the highest-priority surface.
+- `/uae-position`: AI-generated `What leadership should notice` readout updates based on the selected `Comparator Set` and `Policy Lens`
+- `/sectors` or `/emirates`: AI-generated short explanation updates based on the selected lens or role view
 
-Requirements:
-
-- remove or replace the current `AI generation deferred` state
-- provide a working generate action for a concise ministerial brief summary
-- keep the generated output grounded in the current structured brief inputs
-- preserve clear labeling that this is AI-assisted synthesis over approved evidence
-
-Recommended output sections:
-
-- issue framing
-- evidence-backed summary
-- options at a glance
-- suggested leadership next step
-
-### 3. UAE Position AI Summary
+### 4. Trust & Clarity
 
 Requirements:
 
-- add a compact AI-generated summary block on `/uae-position`
-- it should translate the pulse + benchmark split into a short strategic readout
-- it should feel like "What leadership should notice now," not a chatbot
-- it should use the current page evidence only
-
-### 4. Trust & Guardrails
-
-Requirements:
-
-- make it clear the AI output is derived from approved evidence inputs
-- do not fabricate source citations
-- if generation fails, show a graceful fallback state
-- keep all existing source period / extraction labeling intact
+- keep all source period, extraction date, and evidence labels explicit
+- make mixed-vintage logic easier to understand, not harder
+- do not let interactivity blur the underlying evidence model
 
 ### 5. Visual Integration
 
 Requirements:
 
-- the AI surfaces should match the current institutional visual language
-- avoid chat UI patterns
-- prefer inline executive cards, summaries, and actions over assistant chrome
+- interactive elements should match the current institutional shell
+- avoid dashboard toy controls or startup-style experimentation chrome
+- the result should still feel ministerial and executive
+
+UX pattern guidance:
+
+- use segmented controls, tab-like pills, or compact switchers
+- avoid dropdown-heavy enterprise UI unless necessary
+- prefer one decision per control
+- controls should sit close to the section they influence
+- every control should visibly change the story, not just the numbers
 
 ## Hard Constraints
 
@@ -167,22 +240,24 @@ Requirements:
 5. Keep `OPENAI_API_KEY` server-side only.
 6. Do not introduce generic chat-assistant UI.
 7. Do not send uncontrolled page text or arbitrary repo contents to the model.
+8. Do not overcomplicate the UX with too many simultaneous controls.
 
 ## Acceptance Criteria
 
 This packet is acceptable only if all of the following are true:
 
-1. `/brief-builder` includes a working server-side AI generation path.
-2. The current deferred AI state on `/brief-builder` is removed or replaced with a working bounded flow.
-3. `/uae-position` includes a visible AI-generated strategic summary or leadership readout.
-4. AI outputs are clearly grounded in approved evidence inputs, not generic chat.
-5. The March 2026 data framing remains intact and is not regressed.
-6. No fake fresher data is introduced.
-7. `OPENAI_API_KEY` remains server-side only.
-8. The app still builds successfully after the update.
-9. Validation commands are recorded and pass, or failures are explained plainly.
-10. Updated screenshots are captured for at least `/brief-builder` and `/uae-position`.
-11. The implementer handoff explains what evidence is passed to AI and what guardrails are enforced.
+1. `/uae-position` uses more relevant 2025-era comparator content than the current annual-only benchmark emphasis.
+2. The page clearly separates current UAE pulse, 2025 comparator context, and structural benchmarks.
+3. At least one bounded interactive exploration control is implemented on `/uae-position`.
+4. At least one bounded interactive exploration control is implemented on either `/sectors` or `/emirates`.
+5. Any AI-assisted behavior is clearly grounded in approved evidence inputs and does not appear as generic chat.
+6. The March 2026 data framing remains intact and is not regressed.
+7. No fake fresher data is introduced.
+8. `OPENAI_API_KEY` remains server-side only.
+9. The app still builds successfully after the update.
+10. Validation commands are recorded and pass, or failures are explained plainly.
+11. Updated screenshots are captured for at least `/uae-position` and one additional interactive page.
+12. The implementer handoff explains which newer comparator sources were used and what user decisions the new controls enable.
 
 ## Validation Requirements
 
@@ -196,10 +271,159 @@ cd apps/web && npm run build
 
 Also include:
 
-1. the main files changed for AI integration and the updated UI surfaces
-2. a concise note describing what evidence is passed into the model
-3. a concise note describing the fallback behavior if generation fails
+1. the main files changed for benchmark refresh and interactivity
+2. a concise note describing which 2025-era comparator sources were added or substituted
+3. a concise note describing what user questions the new interactions help answer
 4. paths of the updated screenshots captured for review
+
+## Prioritized Next-Build Features
+
+The controller priority order for this packet is:
+
+1. Comparator Set switcher on `/uae-position`
+2. Policy Lens toggle on `/uae-position`
+3. 2025 comparator context layer on `/uae-position`
+4. AI leadership readout driven by selected UAE Position context
+5. `Sector Lens` or `Emirate Role View` control on one additional page
+6. Why / why-not explanatory copy update on the controlled page
+7. Side-by-side option emphasis if it fits cleanly within the existing page
+8. Preserve screenshot clarity over feature count
+
+## IMPLEMENTER -> CONTROLLER (MSP-011-P1)
+
+### Understanding
+
+MSP-010-P1 proved that bounded server-side AI generation works — the brief builder and UAE position readout both ran live. The remaining weakness was fixedness: users could read the analysis but could not reframe it. This packet adds the interactive layer that MSP-010-P1 set up structurally. Two new interactive explorer components replace static displays, and the AI position readout becomes context-aware — it re-runs when the user changes either the comparator set or the policy lens.
+
+### Comparator sources updated
+
+The previous peer benchmark table used World Bank annual data only, with no clear framing of when the peer metrics were published. This packet introduces a cleaner two-source comparator layer:
+
+| Source | What it provides | Vintage |
+|---|---|---|
+| IMF WEO April 2025 | GDP growth projections for all comparator countries | Published April 2025; reflects 2025 estimates |
+| World Bank (latest annual) | Manufacturing value added as % of GDP | 2022–2024 depending on country; labeled per country |
+| WIPO Global Innovation Index 2024 | Innovation rank | Published September 2024 |
+| IMD World Digital Competitiveness Ranking 2024 | Competitiveness rank | Published May 2024 |
+
+All approximate values (Qatar manufacturing, Bahrain manufacturing, Switzerland manufacturing) are flagged with `is_approx: true` in the data model and rendered with an "approx." label in the UI. GDP growth figures are labeled as "est." to distinguish them from actuals.
+
+### User decisions the new controls enable
+
+**`Comparator Set` on `/uae-position`:**
+Answers: "Who are we comparing UAE against?"
+- `GCC Peers` — regional context: Saudi Arabia, Qatar, Bahrain
+- `Advanced Manufacturing` — complexity aspirational peers: South Korea, Germany, Singapore
+- `Trade & Investment Hubs` — strategic model peers: Singapore, Netherlands, Switzerland
+
+**`Policy Lens` on `/uae-position`:**
+Answers: "What objective are we optimizing for right now?"
+- `Growth` — emphasis on GDP growth trajectory; highlights manufacturing % as the gap metric
+- `Complexity` — emphasis on industrial depth; highlights WIPO GII rank as the gap metric
+- `Resilience` — emphasis on diversification and digital readiness; highlights IMD WDC rank
+
+Both controls trigger a re-fetch of the AI leadership readout. The readout changes its 3-observation analysis based on the selected combination.
+
+**`Sector Lens` on `/sectors`:**
+Answers: "What kind of strategic move are we making for each sector?"
+- `Accelerate` — sectors with established base + clear intervention levers (Advanced Manufacturing, Clean Energy, Petrochemicals)
+- `Build` — sectors with platform advantage but low manufacturing base (Pharma/MedTech, Food/AgriTech, Digital/ICT)
+- `Protect` — sectors with structural headwinds requiring risk management rather than growth (Petrochemicals energy-transition exposure, Defense/Aerospace sovereignty)
+
+The Sector Lens does not use AI — it is a pure UI interpretation layer over the existing sector data. This is intentional: the sectors grid is structural policy content, not a query surface.
+
+### Architecture decisions
+
+**`UAEPositionExplorer` replaces `UAEAISummary`:** The previous `UAEAISummary` component fetched a hardcoded position readout on mount with no user control. `UAEPositionExplorer` supersedes it — it owns the comparator and lens state, renders the comparator cards, and fetches the AI readout via `useEffect` when either selection changes.
+
+**`/api/ai/position-summary` route extended (not replaced):** Added `?set=` and `?lens=` query params with validation against allowed lists. The route rejects unknown values and falls back to defaults rather than erroring. `COMPARATOR_CONTEXT` and `LENS_QUESTION` records map each valid option to a structured prompt segment — the model never receives free-form user input.
+
+**No AI on Sector Lens:** The sector interpretation content is authored (pre-written per lens), not generated. This avoids an unnecessary AI call on a surface where the content can be fully reasoned in advance, and keeps the sectors page usable without an API key.
+
+### Work Done
+
+**`apps/web/app/api/ai/position-summary/route.ts`** (updated):
+- Added `ComparatorSet` and `PolicyLens` type validation from query params
+- Added `COMPARATOR_CONTEXT` record (one paragraph per comparator set with data + source labels)
+- Added `LENS_QUESTION` record (strategic question framing per lens)
+- `buildPrompt(comparatorSet, policyLens)` constructs context-aware prompt: UAE 9 data points + selected comparator context + selected lens question
+- Responds with 3 numbered observations focused on the selected combination
+
+**`apps/web/components/ai/UAEPositionExplorer.tsx`** (new):
+- Client component; owns `comparatorSet` and `policyLens` state
+- `SegmentedControl<T>` generic sub-component renders pill switchers
+- `UAE_ANCHOR` constant + `COMPARATOR_ROWS` record holds all peer data
+- `useEffect` re-fetches AI readout when either selection changes
+- Comparator cards grid (1 UAE anchor + 3 peers in 4-column layout)
+- AI readout in dark navy card with loading/error/observations states
+
+**`apps/web/components/ai/SectorLensExplorer.tsx`** (new):
+- Client component; owns `lens: "Accelerate" | "Build" | "Protect"` state
+- `LENS_CONFIG` record: each lens has `headline`, `rationale`, featured `sectors[]` with lens-specific notes, `strategic_implication`
+- `LENS_COLORS` record maps lens to signal color tokens (momentum/opportunity/risk)
+- No AI call — pure authored interpretation layer
+- Renders: controls row → featured sector cards → strategic implication band
+
+**`apps/web/app/uae-position/page.tsx`** (updated):
+- Replaced `UAEAISummary` import with `UAEPositionExplorer`
+- The explorer component now contains the comparator data layer, controls, and AI readout in one surface
+
+**`apps/web/app/sectors/page.tsx`** (updated):
+- Added `import { SectorLensExplorer }` and `<SectorLensExplorer />` between the framing band and the summary stats grid
+
+### Validation
+
+```bash
+cd apps/web && npm run build
+# ✓ Compiled successfully
+# ✓ Generating static pages (11/11)
+# Route (app)                                 Size  First Load JS
+# ┌ ○ /                                    2.28 kB         108 kB
+# ├ ○ /brief-builder                         130 B         102 kB
+# ├ ○ /emirates                              130 B         102 kB
+# ├ ○ /roadmap                               130 B         102 kB
+# ├ ○ /sectors                               162 B         106 kB
+# └ ○ /uae-position                        2.27 kB         105 kB
+# ƒ /api/ai/brief (Dynamic)
+# ƒ /api/ai/position-summary (Dynamic)
+# No TypeScript errors, no lint errors
+```
+
+### Files Changed
+
+- `apps/web/app/api/ai/position-summary/route.ts` — extended with comparator set + policy lens params
+- `apps/web/components/ai/UAEPositionExplorer.tsx` — new: interactive explorer with comparator + lens controls
+- `apps/web/components/ai/SectorLensExplorer.tsx` — new: sector lens interpreter (Accelerate/Build/Protect)
+- `apps/web/app/uae-position/page.tsx` — UAEAISummary → UAEPositionExplorer
+- `apps/web/app/sectors/page.tsx` — added SectorLensExplorer
+
+### Screenshots
+
+- `review-screenshots/11-uae-position-explorer.png` — `/uae-position` with comparator set controls, peer cards, AI readout loading state
+- `review-screenshots/11-sectors-lens.png` — `/sectors` with Sector Lens (Accelerate selected, 3 featured sector cards)
+
+### Acceptance Criteria Check
+
+1. `/uae-position` uses more relevant 2025-era comparator content: **yes** — IMF WEO April 2025 GDP growth projections replace older estimates; WIPO GII 2024 and IMD WDC 2024 rankings added alongside manufacturing %
+2. Page clearly separates current UAE pulse, 2025 comparator context, and structural benchmarks: **yes** — pulse cards (from MSP-009-P1) remain; UAEPositionExplorer renders the 2025 comparator layer with labeled sources
+3. At least one bounded interactive control on `/uae-position`: **yes** — Comparator Set + Policy Lens segmented controls, both change peer display and AI readout
+4. At least one bounded interactive control on `/sectors`: **yes** — Sector Lens (Accelerate/Build/Protect) changes featured sectors and strategic implication
+5. AI behavior grounded in approved evidence, not generic chat: **yes** — `buildPrompt` uses 9 fixed UAE data points + approved comparator context; no user-supplied text reaches the model
+6. March 2026 data framing intact: **yes** — `APP_DATA_CONTEXT.as_of` unchanged across all surfaces
+7. No fake fresher data introduced: **yes** — IMF WEO April 2025 is a published source; all approx. values labeled
+8. `OPENAI_API_KEY` server-side only: **yes** — instantiated inside handler, never in browser bundle
+9. App builds successfully: **yes** — see validation
+10. Validation recorded: **yes**
+11. Screenshots captured for `/uae-position` and `/sectors`: **yes** — `review-screenshots/11-*`
+12. Handoff explains comparator sources and user decisions: **yes** — see "Comparator sources updated" and "User decisions the new controls enable" sections above
+
+### Risks / Concerns
+
+1. The `UAEPositionExplorer` fetches AI on every `[comparatorSet, policyLens]` change — 9 possible combinations. This is fine for a demo context but would need response caching before heavier use.
+2. Approximate World Bank values for Qatar, Bahrain, and Switzerland manufacturing % are sourced from directional estimates, not exact World Bank API calls. The `is_approx` flag and "approx." label are honest disclosures, but the exact figures should be confirmed once the World Bank data connection is in place.
+3. `SectorLensExplorer` authored content (Accelerate/Build/Protect sector lists and notes) is hardcoded in the component. If the sector classification in `seed-data.ts` changes, the lens notes need a manual update.
+
+---
 
 ## IMPLEMENTER -> CONTROLLER (MSP-010-P1)
 

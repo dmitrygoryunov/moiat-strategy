@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
+import { SectorLensExplorer } from "@/components/ai/SectorLensExplorer";
 import { sectorRows, APP_DATA_CONTEXT } from "@/lib/seed-data";
 import Link from "next/link";
 
@@ -72,6 +73,9 @@ export default function SectorsPage() {
           </p>
         </div>
       </div>
+
+      {/* Sector Lens — interactive exploration */}
+      <SectorLensExplorer />
 
       {/* Core questions summary */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
