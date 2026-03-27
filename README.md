@@ -16,13 +16,6 @@ This repository is intentionally set up around a controller/implementer workflow
 - `scripts` - ETL and utility scripts
 - `tests` - repository-level test surfaces
 
-## Core repository workflow
-
-1. Codex writes the active packet in `AI_LOOP.md`.
-2. Claude reads required docs and implements within the approved boundary.
-3. Claude records exact validation evidence in `AI_LOOP.md`.
-4. Codex reviews repo state and records `ACCEPT`, `REQUEST CHANGES`, `REJECT`, or `HOLD`.
-
 ## Secrets
 
 Use `.env.local` for local development only. Never commit real secrets.
