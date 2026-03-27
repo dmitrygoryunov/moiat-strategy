@@ -1,0 +1,173 @@
+{
+  "snapshot_id": "moiat-demo-current-2026-03-26",
+  "current_context_date": "2026-03-26",
+  "notes": [
+    "Curated snapshot for prototype screenshots and demo realism.",
+    "Combines latest available official 2025 pulse data with latest complete 2024 annual data.",
+    "Not a production integration model."
+  ],
+  "freshness_model": {
+    "latest_complete_annual_year": 2024,
+    "latest_official_pulse_periods": [
+      "2025-H1",
+      "2025-9M"
+    ],
+    "extracted_on": "2026-03-26"
+  },
+  "latest_official_pulse": {
+    "gdp_real_growth_9m_2025": {
+      "value": 5.1,
+      "unit": "percent",
+      "source_period": "2025-9M",
+      "source_type": "official",
+      "source_name": "FCSC latest news / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      "source_url": "https://fcsc.gov.ae/",
+      "published_date": "2026-02-20"
+    },
+    "gdp_value_9m_2025": {
+      "value": 1.4,
+      "unit": "AED trillion",
+      "source_period": "2025-9M",
+      "source_type": "official",
+      "source_name": "FCSC latest news / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      "source_url": "https://fcsc.gov.ae/",
+      "published_date": "2026-02-20"
+    },
+    "non_oil_gdp_growth_9m_2025": {
+      "value": 6.1,
+      "unit": "percent",
+      "source_period": "2025-9M",
+      "source_type": "official",
+      "source_name": "FCSC latest news / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      "source_url": "https://fcsc.gov.ae/",
+      "published_date": "2026-02-20"
+    },
+    "gdp_real_growth_h1_2025": {
+      "value": 4.2,
+      "unit": "percent",
+      "source_period": "2025-H1",
+      "source_type": "official",
+      "source_name": "FCSC latest news / Non-oil Gross Domestic Product (GDP) of the UAE grows by 5.7% in the first half of 2025",
+      "source_url": "https://fcsc.gov.ae/?language=english",
+      "published_date": "2025-12-11"
+    },
+    "non_oil_gdp_growth_h1_2025": {
+      "value": 5.7,
+      "unit": "percent",
+      "source_period": "2025-H1",
+      "source_type": "official",
+      "source_name": "FCSC latest news / Non-oil Gross Domestic Product (GDP) of the UAE grows by 5.7% in the first half of 2025",
+      "source_url": "https://fcsc.gov.ae/?language=english",
+      "published_date": "2025-12-11"
+    },
+    "non_oil_gdp_value_h1_2025": {
+      "value": 720,
+      "unit": "AED billion",
+      "source_period": "2025-H1",
+      "source_type": "official",
+      "source_name": "FCSC latest news / Non-oil Gross Domestic Product (GDP) of the UAE grows by 5.7% in the first half of 2025",
+      "source_url": "https://fcsc.gov.ae/?language=english",
+      "published_date": "2025-12-11"
+    },
+    "non_oil_gdp_share_h1_2025": {
+      "value": 77.5,
+      "unit": "percent of real GDP",
+      "source_period": "2025-H1",
+      "source_type": "official",
+      "source_name": "FCSC latest news / Non-oil Gross Domestic Product (GDP) of the UAE grows by 5.7% in the first half of 2025",
+      "source_url": "https://fcsc.gov.ae/?language=english",
+      "published_date": "2025-12-11"
+    }
+  },
+  "latest_complete_annual_snapshot": {
+    "non_oil_gdp_share_2024": {
+      "value": 75.5,
+      "unit": "percent of real GDP",
+      "source_period": "2024",
+      "source_type": "official",
+      "source_name": "FCSC national summary 2024",
+      "source_url": "https://fcsc.gov.ae/en-us/Pages/Press-Release/19-02-2020.aspx"
+    },
+    "real_gdp_growth_2024": {
+      "value": 4.0,
+      "unit": "percent",
+      "source_period": "2024",
+      "source_type": "official",
+      "source_name": "World Bank GDP growth (annual %)",
+      "source_url": "https://api.worldbank.org/v2/country/ARE/indicator/NY.GDP.MKTP.KD.ZG?format=json",
+      "source_last_updated": "2026-02-24"
+    },
+    "manufacturing_value_added_pct_gdp_2024": {
+      "value": 9.37363347602288,
+      "display_value": 9.4,
+      "unit": "percent of GDP",
+      "source_period": "2024",
+      "source_type": "official",
+      "source_name": "World Bank Manufacturing, value added (% of GDP)",
+      "source_url": "https://api.worldbank.org/v2/country/ARE/indicator/NV.IND.MANF.ZS?format=json",
+      "source_last_updated": "2026-02-24"
+    },
+    "inflation_cpi_2024": {
+      "value": 1.66336510224894,
+      "display_value": 1.7,
+      "unit": "percent",
+      "source_period": "2024",
+      "source_type": "official",
+      "source_name": "World Bank Inflation, consumer prices (annual %)",
+      "source_url": "https://api.worldbank.org/v2/country/ARE/indicator/FP.CPI.TOTL.ZG?format=json",
+      "source_last_updated": "2026-02-24"
+    }
+  },
+  "trade_snapshot_2024": {
+    "year": 2024,
+    "currency_mode": "BED",
+    "currency_label": "Billion Dirhams",
+    "source_type": "official",
+    "source_name": "Ministry of Economy & Tourism International Trade Map endpoint",
+    "source_url": "https://trademap.economy.ae/en/trademap.aspx",
+    "endpoint": "https://trademap.economy.ae/en/Server.aspx/GetDataYears",
+    "totals": {
+      "re_exports_bed": 717.82149909469,
+      "non_oil_exports_bed": 559.34352356739,
+      "imports_bed": 1694.09000846495,
+      "total_trade_bed": 2971.25503112703
+    },
+    "top_partners": [
+      {
+        "country": "China",
+        "re_exports_bed": 10.2842814884771,
+        "non_oil_exports_bed": 8.93889342457464,
+        "imports_bed": 308.406544648524,
+        "total_trade_bed": 327.629719561576
+      },
+      {
+        "country": "India",
+        "re_exports_bed": 41.4131839670206,
+        "non_oil_exports_bed": 75.6314075922989,
+        "imports_bed": 121.601942775782,
+        "total_trade_bed": 238.646534335102
+      },
+      {
+        "country": "Saudi Arabia",
+        "re_exports_bed": 78.9070897478855,
+        "non_oil_exports_bed": 41.409086966826,
+        "imports_bed": 31.1597244800074,
+        "total_trade_bed": 151.475901194719
+      },
+      {
+        "country": "Türkiye",
+        "re_exports_bed": 18.1686698629655,
+        "non_oil_exports_bed": 54.1957165741583,
+        "imports_bed": 71.2588053846115,
+        "total_trade_bed": 143.623191821735
+      },
+      {
+        "country": "Iraq",
+        "re_exports_bed": 67.9306222265313,
+        "non_oil_exports_bed": 53.2363575285912,
+        "imports_bed": 19.618043931807,
+        "total_trade_bed": 140.78502368693
+      }
+    ]
+  }
+}

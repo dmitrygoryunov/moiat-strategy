@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/Harvard-shield-favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Visualize global trade data and economic growth opportunities for every country"
+    />
+    <meta
+      property="og:title"
+      content="The Atlas of Economic Complexity by @HarvardGrwthLab"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Visualize global trade data and economic growth opportunities for every country"
+    />
+    <meta property="og:image" content="/og/GL_logo_black.png" data-rh="true" />
+    <link rel="apple-touch-icon" href="/Harvard-shield-favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>The Atlas of Economic Complexity</title>
+    <script type="module" crossorigin src="/assets/index-D4rNqC9S.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BI_9xw1J.css">
+  </head>
+  <body>
+    <script>
+      // Initialize hero element tracking variables (used by country-profiles)
+      window.HERO_ELEMENT_NAME = "";
+      window.HERO_ELEMENT_NAMES = [];
+
+      // Performance monitoring for hero elements
+      if ("performance" in window && performance.mark !== undefined) {
+        performance.mark("atlas-page-load");
+      }
+    </script>
+
+    <!-- TTI Polyfill for country-profiles -->
+    <script>
+      try {
+        !(function () {
+          if ("PerformanceLongTaskTiming" in window) {
+            var g = (window.__tti = { e: [] });
+            g.o = new PerformanceObserver(function (l) {
+              g.e = g.e.concat(l.getEntries());
+            });
+            g.o.observe({ entryTypes: ["longtask"] });
+          }
+        })();
+      } catch (e) {
+        console.error(e);
+      }
+    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- Off-screen rendering container for measuring scrollbar width and other calculations -->
+    <div
+      id="offscreen-rendering"
+      style="position: absolute; top: 0; left: -9999px"
+    ></div>
+  </body>
+</html>

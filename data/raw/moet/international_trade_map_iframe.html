@@ -1,0 +1,1410 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Trade Map
+</title><meta content="width=device-width, height=device-height, initial-scale=1" name="viewport" />
+    <script src="JSLibrary/jquery-3.3.0.min.js"></script>
+    <script src="JSLibrary/jquery-migrate-3.3.0.min.js"></script>
+    <link rel="stylesheet" href="JqueryUI/jquery-ui.css" /><link rel="icon" href="Images/computer.ico" type="image/x-icon" /><link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet" /><link href="Style/Style2.css" rel="stylesheet" type="text/css" />
+    <script src="JqueryUI/jquery-ui.js"></script>
+    <script src="JSLibrary/Functions.js"></script>
+    <script src="JSLibrary/jspdf.min.js"></script>
+    <script src="JSLibrary/highcharts.src.js"></script>
+    <script src="JSLibrary/map.js"></script>
+    <script src="JSLibrary/data.js"></script>
+    <script src="JSLibrary/exporting.js"></script>
+    <script src="JSLibrary/export-data.js"></script>
+    <script src="JSLibrary/mobTouch.js"></script>
+    <script src="JSLibrary/print.js"></script>
+    <script src="JSLibrary/html2canvas.js"></script>
+    <script src="JSLibrary/table2excel.js"></script>
+    
+</head>
+<body>
+    <input type="hidden" value="" id="materialChartDataHolder" />
+  
+   <div id="chartViewrContainer" style="position: absolute; background-color: rgba(255,255,255,0.9); display:none; z-index: 20; width:100%; height:200%">
+       <img id="viewerClose" src="Images/colse.png" style="float:left; width:20px; height:20px; cursor:pointer"/>
+       <div id="chartTitle" style="width:100%; font-size:2em; color:#333; text-align:center;"></div>
+       <div id="viewerScroll" style="max-height:600px;height:600px;overflow:hidden;overflow-y:scroll;width:90%;margin-left:5%; margin-top:1%;display:block;border:1px solid #ccc">
+       <div id="chartViewer" style="width:100%;height:auto; "></div>
+    </div>
+    </div>
+    
+    <div id="container">
+        <div id="header">
+            <div id="logo">
+            </div>
+            <div id="mapTitle">
+                <span id="mapTitleText">Non-Oil Foreign Trade between the UAE and countries of the world
+                </span>
+            </div>
+        </div>
+        <div id="legend">
+            <div id="yearsSelect">
+                <span id="yearSel">Year</span>
+                <select id="slcYear">
+                    
+                </select>
+            </div>
+
+            <div class="chartColorsContainer" id="chartsColors">
+                <div class="tradeColorContainer">
+                    <span class="trColor" id="reexportColor"></span>
+                    <span id="reexportTxt" class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" id="nonoilColor"></span>
+                    <span id="nonOilTxt" class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" id="importsColor"></span>
+                    <span id="importTxt" class="trText">Imports</span>
+                </div>
+                 <img src="Images/arrowDown.png" id="mapColorSwitch" />
+            </div>
+            <ul class="mapColorsSelect">
+
+                <li><div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#38CAF6" ></span>
+                    <span  class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#8DDF72"></span>
+                    <span  class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#EB432B"></span>
+                    <span class="trText">Imports</span>
+                </div></li>
+
+                <li><div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#e74c3c" ></span>
+                    <span  class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#e67e22"></span>
+                    <span  class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#f1c40f"></span>
+                    <span class="trText">Imports</span>
+                </div></li>
+
+
+                <li><div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#2c3e50" ></span>
+                    <span  class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#8e44ad"></span>
+                    <span  class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#2980b9"></span>
+                    <span class="trText">Imports</span>
+                </div></li>
+
+                <li><div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#636e72" ></span>
+                    <span  class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#e84393"></span>
+                    <span  class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#2d3436"></span>
+                    <span class="trText">Imports</span>
+                </div></li>
+
+                <li><div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#cc8e35" ></span>
+                    <span  class="trText">Re-Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#218c74"></span>
+                    <span  class="trText">Non-Oil Exports</span>
+                </div>
+                <div class="tradeColorContainer">
+                    <span class="trColor" style="background-color:#b33939"></span>
+                    <span class="trText">Imports</span>
+                </div></li>
+            </ul>
+        </div>
+        <div   id="menu">Menu</div>
+        <div id="filter">
+            <div class="filterSelect">
+                <div class="selectContainer">
+                    <span id="currencyTxt" class="selTitle">Currency</span>
+                    <select id="currency" class="regSelect">
+                        <option value="BED" selected="selected">Billion Dirhams</option>
+                        <option value="MED">Million Dirhams</option>
+                        <option value="BUD">Billion US Dollars</option>
+                        <option value="MUD">Million US Dollars</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                    <span id="contenentTxt" class="selTitle">Continent</span>
+                    <div id="listContinentContainer" class="selectDiv">
+                        <div id="conListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                        <div class="listDataContainer">
+                            <div id="continentCHList" class="listData"></div>
+                            <input type="button" class="btnSelC" disabled="disabled" id="continentCancel"  value="Cancel" />
+                            <input type="button" class="btnSelA" disabled="disabled" id="continentApply"  value="Apply" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                    <span id="regionTxt" class="selTitle">Region</span>
+                    <div id="listRegionContainer" class="selectDiv">
+                        <div id="regListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                        <div class="listDataContainer">
+                            <div id="regionCHList" class="listData"></div>
+                            <input type="button" class="btnSelC" disabled="disabled" id="regionCancel"  value="Cancel" />
+                            <input type="button" class="btnSelA" disabled="disabled" id="regionApply"  value="Apply" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                <span id="countryTxt" class="selTitle">Country</span>
+                        <div id="listCountryContainer" class="selectDiv">
+                            <div id="cntListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                            <div class="listDataContainer">
+                            <div id="countryCHList" class="listData">
+                                <input type="text" placeholder="Search.." class="srcFilter" id="countrySrc" /><br  />
+                            </div>
+                            <input type="button" class="btnSelC" disabled="disabled" id="countryCancel" value="Cancel" />
+                            <input type="button" class="btnSelA" disabled="disabled" id="countryApply" value="Apply" />
+                                </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                <span id="grpTxt" class="selTitle">Country Groups</span>
+                    <select id="slcgroup" class="regSelect">
+                        <option value="ALL" selected="selected">ALL</option>
+                        <option value="Arabic Countries">Arabic Countries</option>
+                        <option value="Gulf Countries">Gulf Countries</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                 <span id="trCategoryTxt" class="selTitle">Trade Category</span>
+                    <div id="listTRCatContainer" class="selectDiv">
+                        <div id="TRCatListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                        <div class="listDataContainer">
+                        <div id="TRCatCHList" class="listData"></div>
+                        <input type="button" class="btnSelC" disabled="disabled" id="TRCatCancel" value="Cancel" />
+                        <input type="button" class="btnSelA" disabled="disabled" id="TRCatApply" value="Apply" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                 <span id="trTypeTxt" class="selTitle">Trade Type</span>
+                    <div id="listTRTypeContainer" class="selectDiv">
+                        <div id="TRTypeListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                        <div class="listDataContainer">
+                        <div id="TRTypeCHList" class="listData"></div>
+                        <input type="button" class="btnSelC" disabled="disabled" id="TRTypeCancel" value="Cancel" />
+                        <input type="button" class="btnSelA" disabled="disabled" id="TRTypeApply" value="Apply" />
+                            </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                <span id="sectionTxt" class="selTitle">Section</span>
+                <div id="listSectionContainer" class="selectDiv">
+                    <div id="sectionListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                    <div class="listDataContainer">
+                    <div id="sectionCHList" class="listData">
+                        <input type="text" placeholder="Search.." class="srcFilter" id="sectionSrc" /><br  />
+                    </div>
+                        <input type="button" class="btnSelC" disabled="disabled" id="sectionCancel" value="Cancel" />
+                        <input type="button" class="btnSelA" disabled="disabled" id="sectionApply" value="Apply" />
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="filterSelect">
+                <div class="selectContainer">
+                <span id="chapterTxt" class="selTitle">Chapter</span>
+                <div id="listChapterContainer" class="selectDiv">
+                    <div id="chapterListInit" class="listHeader"><span>ALL</span><img src="Images/arrow.png" class="imgArrow" /></div>
+                    <div class="listDataContainer">
+                    <div id="chapterCHList" class="listData" style="">
+                        <input type="text" placeholder="Search.." class="srcFilter" id="chapterSrc" /><br  />
+                    </div>
+                    <input type="button" class="btnSelC" disabled="disabled" id="chapterCancel" value="Cancel" />
+                    <input type="button" class="btnSelA" disabled="disabled" id="chapterApply" value="Apply" />
+                    </div>
+                </div>
+                 </div>
+            </div>
+        </div>
+        <div id="mapContainer" class="chartsContainerWide">
+            <div class="chartHeader" id="mapHeader">
+                 <img src="Images/chart_resize.png" class="chartResize"/>
+                <span id="mapTxt">Map</span>
+                 <img src="Images/menu.png"  class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>  
+            </div>
+
+            <div class="scrollAble">
+                <div id="map" style="display: block;"></div>
+                <div class="dataTable" style="visibility:hidden;">
+                    </div>
+             </div>
+        </div>
+         <div id="topCountriesContainer" class="chartsContainerWide">
+             <div class="chartHeader" id="topCountriesHeader">
+                  <img src="Images/chart_resize.png" class="chartResize"/>
+                  <span id="topCountriesTxt">Top Countries by Value</span>
+                  <input type="text" id="countryNum" value="5" class="top" />
+                     <img src="Images/menu.png"   class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                            <li value="changColor">Color</li>
+                            <li value="changeType">Chart type</li>
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>
+                         <ul id="colorSwapSelect" class="colorSwapSelectCls">
+                                 <li value="#38CAF6|#8DDF72|#EB432B"><span class="colorHolder" style="background-color:#38CAF6; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8DDF72; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#EB432B; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#e74c3c|#e67e22|#f1c40f"><span class="colorHolder" style="background-color:#e74c3c; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e67e22; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#f1c40f; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#2c3e50|#8e44ad|#2980b9"><span class="colorHolder" style="background-color:#2c3e50; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8e44ad; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#2980b9; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#636e72|#e84393|#2d3436"><span class="colorHolder" style="background-color:#2d3436; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e84393; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#636e72; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#cc8e35|#218c74|#b33939"><span class="colorHolder" style="background-color:#cc8e35; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#218c74; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#b33939; display:inline-block; width:10px; height:10px;"></span></li>
+
+                             </ul>
+                  <ul id="chartChangeSelect" class="chartChangeSelectCls">
+                         <li value="bar">Bar</li>
+                         <li value="line">Line</li>
+                         <li value="column">Column</li>
+                     </ul>
+            </div>
+
+            <div class="scrollAble">
+                   <div id="countryValue" style="width: 100%; height: auto"></div>
+                    <div class="dataTable" style="visibility:hidden;">
+                    </div>
+             </div>
+        </div>
+         <div id="topMaterialsContainer" class="chartsContainerWide">
+
+             <div class="chartHeader" id="topMaterialsHeader">
+                  <img src="Images/chart_resize.png" class="chartResize"/>
+                 <span id="topItemsTxt">Top Items by Value</span>
+                 <input type="text" id="matNum" value="5" class="top" />
+                 <img src="Images/menu.png"  class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                            <li value="changColor">Color</li>
+                            <li value="changeType">Chart type</li>
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>
+                         <ul id="colorSwapSelect" class="colorSwapSelectCls">
+                                 <li value="#38CAF6|#8DDF72|#EB432B"><span class="colorHolder" style="background-color:#38CAF6; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8DDF72; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#EB432B; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#e74c3c|#e67e22|#f1c40f"><span class="colorHolder" style="background-color:#e74c3c; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e67e22; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#f1c40f; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#2c3e50|#8e44ad|#2980b9"><span class="colorHolder" style="background-color:#2c3e50; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8e44ad; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#2980b9; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#636e72|#e84393|#2d3436"><span class="colorHolder" style="background-color:#2d3436; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e84393; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#636e72; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#cc8e35|#218c74|#b33939"><span class="colorHolder" style="background-color:#cc8e35; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#218c74; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#b33939; display:inline-block; width:10px; height:10px;"></span></li>
+
+                             </ul>
+                  <ul id="chartChangeSelect" class="chartChangeSelectCls">
+                         <li value="bar">Bar</li>
+                         <li value="line">Line</li>
+                         <li value="column">Column</li>
+                         
+
+                     </ul>
+
+            </div>
+
+            <div class="scrollAble">
+                  <div id="materialCanvas" style="width: 100%; height: auto; display: block"></div>
+                <div class="dataTable" style="visibility:hidden;">
+
+                    </div>
+            </div>
+
+        </div>
+
+        <div id="growthTableContainer" class="chartsContainerWideT">
+
+            <div class="chartHeader" id="growthTableHeader">
+                 <img src="Images/chart_resize.png" class="chartResize"/>
+                <span id="growthTxt">Top Countries by Growth</span>
+                <input id="precentageFrom" class="top" value="0" />
+                <input id="precentageTo" class="top" value="200" />
+              
+            </div>
+
+            <div class="scrollAble">
+                <table id="tblCountries" style="text-align: left">
+                    <tr>
+                        <td id="tblHCountry">Country</td>
+                        <td id="tblHGrowth">Growth</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div id="sliderCharts" class="chartsNarrowContainer">
+              <div id="sliderContainer">
+                
+                <label id="amount"></label>
+                <div id="slider" style="display: inline-block;"></div>
+               
+            </div>
+             <div id="yearsTradeContainer" class="chartsContainerNarrow">
+
+                <div class="chartHeader" id="yearsTradeHeader">
+                     <img src="Images/chart_resize.png" class="chartResize"/>
+                    <span id="yearValueTxt">Value by Years</span>
+                    <img src="Images/menu.png" class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                            <li value="changColor">Color</li>
+                            <li value="changeType">Chart type</li>
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>
+                         <ul id="colorSwapSelect" class="colorSwapSelectCls">
+                                 <li value="#38CAF6|#8DDF72|#EB432B"><span class="colorHolder" style="background-color:#38CAF6; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8DDF72; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#EB432B; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#e74c3c|#e67e22|#f1c40f"><span class="colorHolder" style="background-color:#e74c3c; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e67e22; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#f1c40f; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#2c3e50|#8e44ad|#2980b9"><span class="colorHolder" style="background-color:#2c3e50; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#8e44ad; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#2980b9; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#636e72|#e84393|#2d3436"><span class="colorHolder" style="background-color:#2d3436; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#e84393; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#636e72; display:inline-block; width:10px; height:10px;"></span></li>
+                                 <li value="#cc8e35|#218c74|#b33939"><span class="colorHolder" style="background-color:#cc8e35; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#218c74; display:inline-block; width:10px; height:10px;"></span><span class="colorHolder" style="background-color:#b33939; display:inline-block; width:10px; height:10px;"></span></li>
+
+                             </ul>
+                  <ul id="chartChangeSelect" class="chartChangeSelectCls">
+                         <li value="bar">Bar</li>
+                         <li value="line">Line</li>
+                         <li value="column">Column</li>
+                         
+
+                     </ul>
+                 
+
+                </div>
+
+                <div class="scrollAble">
+                    <div id="yearsCanvas" style="width: 100%; height: 100%"></div>
+                    <div class="dataTable" style="visibility:hidden;">
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="yearsGrowthContainer" class="chartsContainerNarrow">
+
+                <div class="chartHeader" id="yearsGrowthHeader">
+                     <img src="Images/chart_resize.png" class="chartResize"/>
+                    <span id="growthRateTxt">Growth Rate by Years</span>
+                    <img src="Images/menu.png"  class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                            
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>
+                         
+                 
+                 
+                </div>
+
+                <div class="scrollAble">
+                    <div id="precentageCanvas" style="width: 100%; height: 100%;"></div>
+                    <div class="dataTable" style="visibility:hidden;">
+
+                    </div>
+                </div>
+
+            </div>
+             <div id="yearsBalanceContainer" class="chartsContainerNarrow">
+
+                <div class="chartHeader" id="yearsBalanceHeader">
+                     <img src="Images/chart_resize.png" class="chartResize"/>
+                    <span id="tradeBalanceTxt">Trade Balance by Year</span>
+                   <img src="Images/menu.png"  class="menuButton" />
+                        <ul class="menuSelect">
+                            <li value="printChart">Print</li>
+                           
+                            
+                            <li value="jpeg">Export to JPEG</li>
+                            <li value="pdf">Export to PDF</li>
+                            <li value="xls">Export to Excel</li>
+                            <li value="dataTable">View data table</li>
+                            <li value="resize">Full screen</li>
+                        </ul>
+                         
+                 
+                </div>
+
+                <div class="scrollAble">
+                    <div id="balanceCanvas" style="width: 100%; height: 100%;"></div>
+                    <div class="dataTable" style="visibility:hidden;">
+
+                    </div>
+                </div>
+
+            </div>
+           
+
+        </div>
+         <footer>
+       
+             <div id="buttons">
+                 <img src="Images/print.png" class="mapButtons" id="printMap" />
+                 <img src="Images/pdf.png" class="mapButtons" id="mapPDF" />
+                 <img src="Images/image.png" class="mapButtons"  id="mapPNG"/>
+                 <img src="Images/home.png" class="mapButtons" id="mapReset" />
+
+             </div>
+              <span class="footerText">
+                  Source: Ministry of Economy - Federal Competitiveness & Statistics Authority - Federal Customs Authority
+             </span>
+             <span class="footerText">
+                  Note: free zone data is only from 2011
+             </span>
+    </footer>
+    </div>
+    <!-- input for filter array values -->
+    <input type="hidden" class="filterInput" id="currencyIn" value="BED" />
+    <input type="hidden" class="filterInput" id="continentIn" value="ALL" />
+    <input type="hidden" class="filterInput" id="regionIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="countryIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="groupIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="trcatIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="trtypeIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="sectionIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="chapterIn" value="ALL"/>
+    <input type="hidden" class="filterInput" id="datacodeIn" value=""/>
+    <input type="hidden"  id="pointIndex" value="0"/>
+    <div id="elem_container" style="visibility:hidden;margin:auto;width:70%;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;border:1px solid #ccc;padding:1%;color: #000;grid-gap:8px;"></div>
+    <input type="hidden" id="canvas_container" value=""/>
+
+
+    <div id="loader">
+        <img id="loaderGif" src="Images/loading.gif"/>
+    </div>
+    <script>
+        //start of the script
+        $(function () {
+            $("#countryNum").change(function () {
+                $("#loader").css('visibility', 'visible');
+                filterArray = getFilter();
+                drawTopCountriesChart(filterArray, colors);
+
+
+                $("#loader").css('visibility', 'hidden');
+            })
+            var chartContainer;
+            countryTextStr = "";
+            contenentTextStr = "";
+            regionTextStr = "";
+            sectionTextStr = "";
+            chapterTextStr = "";
+            trTypeTextStr = "";
+            categoryTextStr = "";
+            //$("#container").css("visibility", "hidden");
+           // $("#container").css("opacity", 0);
+            $("#menu").click(function () {
+                $("#filter").slideToggle();
+            })
+            Highcharts.getSVG = function (charts) {
+                var svgArr = [],
+                    top = 0,
+                    width = 0;
+
+                Highcharts.each(charts, function (chart) {
+                    var svg = chart.getSVG(),
+                        // Get width/height of SVG for export
+                        svgWidth = +svg.match(
+                            /^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/
+                        )[1],
+                        svgHeight = +svg.match(
+                            /^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/
+                        )[1];
+
+                    svg = svg.replace(
+                        '<svg',
+                        '<g transform="translate(0,' + top + ')" '
+                    );
+                    svg = svg.replace('</svg>', '</g>');
+
+                    top += svgHeight;
+                    width = Math.max(width, svgWidth);
+
+                    svgArr.push(svg);
+                });
+
+                return '<svg height="' + top + '" width="' + width +
+                    '" version="1.1" xmlns="http://www.w3.org/2000/svg">' +
+                    svgArr.join('') + '</svg>';
+            };
+            Highcharts.exportCharts = function (charts, options) {
+
+                // Merge the options
+                options = Highcharts.merge(Highcharts.getOptions().exporting, options);
+
+                // Post to export server
+                Highcharts.post(options.url, {
+                    filename: options.filename || 'chart',
+                    type: options.type,
+                    width: options.width,
+                    svg: Highcharts.getSVG(charts)
+                });
+            };
+            var winWidth = $(window).innerWidth();
+            var filterSelectW = $(".filterSelect").innerWidth();
+            if (winWidth > 1200 ) {
+                
+
+                var listDataWidth = filterSelectW * 0.8;
+                $(".listDataContainer").css("width", listDataWidth);
+                
+            } else if (winWidth < 1200 && winWidth > 800) {
+                var listDataWidth = filterSelectW - 3;
+                $(".listDataContainer").css("width", listDataWidth);
+            } else {
+                $(".listDataContainer").css("width", "96%");
+            }
+           
+            var containerW = $("#container").innerWidth() + "px";
+            var containerH = $("#container").innerHeight() + "px";
+            var containerTop = $("#container").offset().top + "px";
+            var containerLeft = $("#container").offset().left + "px";
+            
+           
+            $("#loader").css('visibility', 'visible');
+
+           
+            //$("#lodingPrecentag").html("0%");
+           
+            $("#chartViewrContainer").hide();
+            $("#viewerClose").click(function () {
+                $("#chartViewrContainer").hide();
+                chartContainer.highcharts().update({
+                    exporting: {
+                        enabled: false
+                    }
+                })
+            })
+            $(".scrollAble").each(function () {
+                var height = Number($(this).parent().innerHeight()) - Number($(".chartHeader").innerHeight()) - 10;
+                $(this).css("max-height", height + "px");
+               
+            })
+           
+
+            //}
+            $("#mapColorSwitch").click(function () {
+                $(".mapColorsSelect").slideToggle();
+            })
+            $(".mapColorsSelect li").click(function () {
+                $("#loader").css('visibility', 'visible');
+                var colorAr = [];
+                $(this).children(".tradeColorContainer").children(".trColor").each(function () {
+                    colorAr.push($(this).css("background-color"));
+                });
+                $("#reexportColor").css("background-color", colorAr[0]);
+                $("#nonoilColor").css("background-color", colorAr[1]);
+                $("#importsColor").css("background-color", colorAr[2]);
+
+                countryValueChart.update({
+
+                    colors: colorAr,
+                    animation: true
+
+                });
+                materialChart.update({
+
+                    colors: colorAr,
+                    animation: true
+
+                });
+                yearsChart.update({
+
+                    colors: colorAr,
+                    animation: true
+
+                });
+                $("#loader").css('visibility', 'hidden');
+            })
+            $(".menuButton").each(function () {
+                $(this).click(function () {
+                    $(this).siblings(".colorSwapSelectCls").fadeOut();
+                    $(this).siblings(".chartChangeSelectCls").fadeOut();
+                    var parentWidth = $(this).parents(".chartHeader").innerWidth();
+
+                    $(this).siblings(".menuSelect").css("top", "20px"  );
+                    $(this).siblings(".menuSelect").css("left", parentWidth - 120 + "px");
+                    var $this = $(this).siblings(".menuSelect")[0];
+                    $(".menuSelect").each(function () {
+                        $(this).not($this).hide();
+                    })
+                    $(this).siblings(".menuSelect").toggle();
+                })
+            });
+            $(".menuSelect li").click(function () {
+                $(".colorSwapSelectCls").hide();
+                $(".chartChangeSelectCls").hide();
+            })
+            $(".menuSelect li").click(function(){
+                var val = $(this).attr("value");
+                switch (val) {
+                    case "printChart":
+                       
+                        var chartContainer = jQuery(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+                        
+                        chartContainer.print();
+                        $(".menuSelect").hide();
+                        break;
+                    case "changColor":
+                        var parentWidth = $(this).parents(".chartHeader").innerWidth();
+                        $(this).parents(".menuSelect").siblings(".colorSwapSelectCls").css("top", "30px");
+                        $(this).parents(".menuSelect").siblings(".colorSwapSelectCls").css("left", parentWidth - 180 +"px");
+                        $(this).parents(".menuSelect").siblings(".colorSwapSelectCls").fadeToggle();
+                       
+                        break;
+                    case "changeType":
+                        var parentWidth = $(this).parents(".chartHeader").innerWidth();
+                        $(this).parents(".menuSelect").siblings(".chartChangeSelectCls").css("top", "40px");
+                        $(this).parents(".menuSelect").siblings(".chartChangeSelectCls").css("left", parentWidth - 160 + "px");
+                        $(this).parents(".menuSelect").siblings(".chartChangeSelectCls").fadeToggle();
+                        
+                        break;
+                    case "jpeg":
+                        var chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+                        Highcharts.exportCharts([chartContainer.highcharts()]);
+                        $(".menuSelect").hide();
+                        break;
+                    case "pdf":
+                        var chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+                        Highcharts.exportCharts([chartContainer.highcharts()], {
+                            type: 'application/pdf'
+                        });
+                        $(".menuSelect").hide();
+                        break;
+                    case "xls":
+                        
+                        var chartTable = $(this).parents(".chartHeader").siblings(".scrollAble").children(".dataTable").children("table");
+                        
+                        var chartName = $(this).parents(".chartHeader").children("span").html();
+                        chartTable.table2excel({
+                            filename: chartName + ".xls"
+                        });
+                        $(".menuSelect").hide();
+                        break;
+                    case "dataTable":
+
+                        var chartTable = $(this).parents(".chartHeader").siblings(".scrollAble").children(".dataTable").children("table");
+
+                        chartTable.css("visibility", "visible");
+                        $(this).parents(".chartHeader").siblings(".scrollAble").animate({
+                            scrollTop: $(this).parents(".chartHeader").siblings(".scrollAble").children(".dataTable").children("table").offset().top - $(this).parents(".chartHeader").offset().top -30
+                        }, 1000);
+                        $(".menuSelect").hide();
+                        break;
+                    case "resize":
+
+                        $("#chartTitle").html();
+                        $("#viewerScroll").html('<div id="chartViewer" style="width:100%;height:auto; "></div>');
+                        chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+
+                        var chartTitle = $(this).parents(".chartHeader").children("span").html();
+                        $("#chartTitle").html(chartTitle);
+                        chartContainer.highcharts().update({
+
+                            chart: {
+                                renderTo: 'chartViewer',
+                                height: null
+                            }, exporting: {
+                                enabled: true
+                            },stackLabels: {
+                            enabled: true,
+                            crop: false,
+                            textOutline: "0px contrast",
+                            style: { "font-weight": "lighter", "color": "#111", "font-size": "0.8em" },
+
+                                //format: '{total:,.0f}',
+                            y: -120,
+                            x: null
+                        }
+
+                        });
+                        chart = new Highcharts.Chart(chartContainer.highcharts().options);
+                        chart.render();
+
+                        $("#chartViewrContainer").show();
+                        $("html, body").animate({
+                            scrollTop: 0
+                        }, 1000);
+
+
+                        $(".menuSelect").hide();
+                        break;
+                }
+            })
+            $('.chartResize').each(function () {
+                $(this).click(function () {
+                    $("#chartTitle").html();
+                    $("#viewerScroll").html('<div id="chartViewer" style="width:100%;height:auto; "></div>');
+                    chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+
+                    var chartTitle = $(this).parents(".chartHeader").children("span").html();
+                    $("#chartTitle").html(chartTitle);
+                    chartContainer.highcharts().update({
+                        chart: {
+                            renderTo: 'chartViewer',
+                            height: null
+                        }, exporting: {
+                            enabled: true
+                        }, stackLabels: {
+                            enabled: true,
+                            crop: false,
+                            textOutline: "0px contrast",
+                            style: { "font-weight": "lighter", "color": "#111", "font-size": "0.8em" },
+
+                            //format: '{total:,.0f}',
+                            y: -120,
+                            x: null
+                        }
+
+                    });
+                    chart = new Highcharts.Chart(chartContainer.highcharts().options);
+                    chart.render();
+
+                    $("#chartViewrContainer").show();
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 1000);
+
+
+                    //$(".menuSelect").hide();
+                })
+            })
+            $(".chartChangeSelectCls li").each(function () {
+               
+                
+                $(this).click(function () {
+                    
+                    var chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+                    
+                    var chartType = $(this).attr("value");
+                    var stack = "normal";
+                    var labels = true;
+                    if (chartType == "column") {
+                        stack = false;
+                        labels = true;
+                    }
+                    
+                   
+
+                    chartContainer.highcharts().update({
+                        
+                        chart: {
+                            type: chartType
+                        },
+                        plotOptions: {
+                            column: {
+                               
+                                reversed: false,
+                            },
+                            series: {
+                                enableMouseTracking: false,
+                                reversed: false,
+                                stacking: '',
+                                dataLabels: {
+                                    allowOverlap: true,
+                                    style:{
+                                        fontSize: '8px',
+                                        fontWeight: 'lighter',
+                                        borderColor: "",
+                                    },
+                                    color: "#444",
+                                    enabled: true,
+                                    rotation: -90,
+                                    crop: false,
+                                    overflow :'none',
+                                    y: -15
+                                }
+                            },
+                        },
+                        xAxis: {
+                            alternateGridColor: 'rgba(0, 0, 0, .1)',
+                           // opposite: false,
+                            labels: {
+                                style: { "color": "#111" }
+                            }
+                        },
+                        yAxis: {
+                            
+                          
+                            reversed: false,
+                            stackLabels: {
+                                enabled: false
+                            }
+                        }
+                    });
+                })  
+            })
+
+           
+
+
+            $(".colorSwapSelectCls li").each(function (){
+
+                $(this).click(function () {
+
+                    var chartContainer = $(this).parents(".chartHeader").siblings(".scrollAble").children("div");
+
+                    var colorsStr = $(this).attr("value");
+                    var colorArr = colorsStr.split("|");
+
+                    chartContainer.highcharts().update({
+
+                        colors: colorArr,
+                        animation: true
+
+                    });
+                })
+            });
+            var filterArray = [["init", "init"]];
+            var colors = [];
+            $(".tradeColorContainer").children(".trColor").each(function () {
+                colors.push($(this).css("background-color"));
+            });
+            
+
+            //holds initial value for language
+           
+            //holds the initial value for currency
+            var curr = "BED";
+            //holds the initial value for document layout direction
+           
+           
+            //applying css rule for responsive
+            $("#menueButton").hide();
+            var tblCounter = 0;
+
+            var winWidth = window.innerWidth;
+
+            //for smaller devices
+            if (winWidth < 800) {
+                $("#menueButton").show();
+                $("#filter").hide();
+
+            }
+            $("#menueButton").click(function () {
+                $("#filter").slideToggle(100);
+            })
+
+
+            //variable to handle the direction of the labels
+            yearFrom = 0;
+            yearTo = 0;
+            maxYearValue = 0;
+            onePixelRate = 0;
+            tradeType = "";
+            year = "";
+            yearFrom = 0;
+            yearTo = 0;
+
+            var lastYear = "";
+            $.ajax({
+                type: "POST",
+                url: "Server.aspx/GetYears",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var dataBack = response.d;
+                    var dataLen = dataBack.length;
+                    $(dataBack).each(function () {
+                        if (dataLen == 1) {
+                            $("#slcYear").append('<option selected value="' + this.year + '">' + this.year + '</option>');
+
+                        } else {
+                            $("#slcYear").append('<option value="' + this.year + '">' + this.year + '</option>');
+
+                        }
+                        lastYear = this.year;
+                        dataLen--;
+                    })
+
+                },
+                failure: function (response) {
+
+                },
+                async: false,
+                cache: false
+            });
+           
+            $("#slcYear option").each(function () {
+                if ($(this).val() == lastYear) {
+                    $(this).prop("selected", "selected");
+                }
+
+            })
+
+
+
+
+            $("#filter select").change(function () {
+                
+                reloadLists(0);
+                
+               
+            })
+
+            $('#filter :button[value="Apply"]').click(function () {
+                
+                
+                reloadLists(0);
+                
+
+            })
+            $.ajax({
+                type: "POST",
+                url: "Server.aspx/GetData",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var dataBack = response.d;
+                    var dataArray = dataBack.split("|");
+                    yearFrom = dataArray[0];
+                    yearTo = dataArray[1];
+
+                },
+                failure: function (response) {
+                },
+                async: false,
+                cache: false
+            });
+
+            $("#amount").text(2014 + " - " + yearTo);
+            
+            $("#matNum").change(function () {
+                $(document).find("#loader").css('visibility', 'visible');
+                console.log("start loading")
+                filterArray = getFilter();
+                drawMaterialChart( filterArray, colors);
+
+                $(document).find("#loader").css('visibility', 'hidden');
+            })
+
+
+
+            //inital the whole map
+            /////////////////
+            
+
+            var y = drawMap(filterArray);
+           
+
+            var y = drawMaterialChart( filterArray, colors);
+            
+            
+            var y = drawTopCountriesChart( filterArray, colors);
+           
+           
+            var y = drawSliderCharts( filterArray, colors);
+           
+            var y = drawBalanceChart(filterArray, colors);
+
+            var y = drawGrowthTable(filterArray);
+            
+            $("#loader").css('visibility', 'hidden');
+            //$("#container").css("visibility", "visible");
+            //$("#container").css("opacity", "1");
+            $("#printMap").click(function () {
+                $("#container").print();
+            })
+           
+            $("#mapPNG").click(function () {
+                html2canvas(document.querySelector("#container")).then(canvas => {
+                    a = document.createElement('a');
+                    document.body.appendChild(a);
+                    a.download = "Trade-Map.png";
+                    a.href = canvas.toDataURL();
+                    a.click();
+                });
+            })
+
+
+            $("#mapPDF").click(function () {
+                
+                var currency = $("#currency option:selected").html();
+                var selectedYear = $("#slcYear").val();
+                var yearRang = $("#amount").html();
+                var yearArr = yearRang.split("-");
+                var yearFrom = Number.parseInt($.trim(yearArr[0]));
+                var yearTo = Number.parseInt($.trim(yearArr[1]));
+                var canvasCounter = 0;
+                if (!$("body").find("#toPdfContainer").length) {
+                    $('<div id="toPdfContainer"></div>').appendTo("body");
+                }
+                var colors = [];
+                $("#chartsColors").find(".trColor").each(function () {
+                    colors.push($(this).css("background-color"));
+                });
+                colors.reverse();
+                var pdf = new jsPDF('a4');
+                var image = new Image();
+                var filters = [];
+                $(".selectContainer").each(function () {
+                    var title = $(this).find(".selTitle").html();
+                    var value = "";
+                    if ($(this).find("select").length) {
+                        value = $(this).find("select option:selected").html();
+                    } else {
+                        value=  $(this).find(".listHeader").children("span").html();
+                    }
+                    var bitFilter = { title: title, value: value };
+                    filters.push(bitFilter);
+                })
+                
+                addImageToPdf(pdf, image, "Images/pdfLogo.png", "tempCanvas", 104, 20, 53, 5);
+                pdf.setDrawColor(230, 230, 230);
+                pdf.setFillColor(230,230,230);
+                pdf.rect(0, 30, 210, 297, 'FD');
+                pdf.setFillColor(255);
+                pdf.rect(10, 35, 190, 290, 'FD');
+                pdf.setTextColor(182, 138, 52);
+                pdf.setFontSize(16);
+                
+                pdf.text("Non-Oil Foreign Trade", 75, 50);
+                pdf.text("between the UAE and countries of the world", 50, 56);
+                pdf.setTextColor(0);
+                drowHeader(pdf, 17, 70, "Filter");
+                drowHeader(pdf, 17, 175, "Map");
+                getHtmlImage("map",pdf);
+                
+                
+                function next(pdf) {
+                    canvasCounter++;
+                    var imgsArray = ["Images/currency.png", "Images/continent.png", "Images/region.png", "Images/country.png", "Images/country_group.png", "Images/tradeCategory.png", "Images/tradeType.png", "Images/section.png", "Images/chapter.png"];
+
+                    if (canvasCounter == 1) {
+                        
+                        $(".to_pdf").remove();
+                        $("#toPdfContainer").html();
+                        var img = $("#canvas_container").val();
+                        
+                        pdf.addImage(img, 'JPEG', 15, 180, 180, 115);
+                        var gridArray = drawGrid(17.5, 82, 175, 80, 3, 3, 4, 10);
+                        for (var i = 0; i < gridArray.length; i++) {
+                            var rectX = gridArray[i].x;
+                            var rectY = gridArray[i].y;
+                            var rectW = gridArray[i].w;
+                            var rectH = gridArray[i].h;
+
+                            addImageToPdf(pdf, image, imgsArray[i], "tempCanvas1", rectW, rectH, rectX, rectY);
+                            pdf.setFontSize(10);
+
+                            pdf.setTextColor(100, 100, 100);
+                            pdf.text(filters[i].title, rectX + 20, rectY + 8);
+                            pdf.setTextColor(0);
+                            pdf.setFontSize(13);
+                            pdf.text(filters[i].value, rectX + 20, rectY + 15);
+                        }
+
+                        pdf.addPage();
+                        drowHeader(pdf, 17, 10, "Top Countries by Value");
+                        drawLegend(pdf, 50, 20, 100, colors, ["Imports", " Non-Oil Exports", "Re-Export"]);
+                        pdf.text("Year:" + selectedYear + ", Currency:" + currency, 75, 30);
+                        drawBarChart(pdf, "h", 40,  cntDataArray, colors, 10, 4, 3, 4, 0);
+                        pdf.addPage();
+                        for (var i = 0; i < matDataArray.length; i++) {
+                            matDataArray[i][0] = matDataArray[i][0].split("||")[0];
+                            matDataArray[i].splice(1, 1);
+                        }
+                        console.dir(matDataArray);
+                        pdf.setFontSize(14);
+                        pdf.setTextColor(0);
+                        drowHeader(pdf, 17, 10, "Top Items by Value");
+                        drawLegend(pdf, 50, 20, 100, colors, ["Imports", " Non-Oil Exports", "Re-Export"]);
+                        pdf.text("Year:" + selectedYear + ", Currency:" + currency, 75, 30);
+                        console.dir("the material data array is ", matDataArray);
+                        drawBarChart(pdf, "h",  40,  matDataArray, colors, 20, 1.3, 13, 3, 3);
+                        pdf.addPage();
+                        drowHeader(pdf, 17, 10, "Top Countries by Growth");
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(100);
+                        //pdf.text("Year:" + selectedYear + ", Currency:" + currency, 75, 20);
+                        var growthTableRows = growthTableData.length;
+                       
+                        if (growthTableRows > 50) {
+                            growthTableRows = 50;
+                        }
+                        var growthHeaderGrid = drawGrid(17.5, 20, 175, 7, 2, 1, 1, 1);
+                        var growthGrid = drawGrid(17.5, 28, 175, growthTableRows*5.5, 2, growthTableRows, 1, 0.5);
+                        
+                        pdf.setFontSize(14);
+                        pdf.setTextColor(0);
+                        pdf.setDrawColor(100);
+                        pdf.setFillColor(200);
+                        pdf.rect(growthHeaderGrid[0].x, growthHeaderGrid[0].y , growthHeaderGrid[0].w, growthHeaderGrid[0].h, 'FD');
+                        pdf.text("Country", growthHeaderGrid[0].x+1, growthHeaderGrid[0].y + growthHeaderGrid[0].h / 2+ 2);
+                        pdf.setFillColor(200);
+                        pdf.rect(growthHeaderGrid[1].x, growthHeaderGrid[1].y, growthHeaderGrid[1].w, growthHeaderGrid[1].h, 'FD');
+                        pdf.text("Growth", growthHeaderGrid[1].x+1, growthHeaderGrid[1].y + growthHeaderGrid[0].h / 2 + 2);
+
+                        for (var i = 0; i < growthTableRows * 2 ; i++) {
+                            var x = growthGrid[i].x;
+                            var y = growthGrid[i].y;
+                            var w = growthGrid[i].w;
+                            var h = growthGrid[i].h;
+                            pdf.setDrawColor(100);
+                            pdf.setFillColor(255);
+                            pdf.rect(x, y, w, h,'FD');
+                            
+                        }
+                        pdf.setFontSize(9);
+                        for (var i = 0; i < growthTableRows ; i++) {
+                            var x = growthGrid[i].x;
+                            var y = growthGrid[i].y;
+                            var w = growthGrid[i].w;
+                            var h = growthGrid[i].h;
+                            var title = growthTableData[i].country;
+                            var value = growthTableData[i].value;
+                            pdf.text(title, x + 1, y +h/2+1.5);
+                            pdf.text("" + parseFloat(value).toFixed(2)+"%", x + w + 1.5, y +h/2+1.5);
+                        }
+                        pdf.addPage();
+
+                        drowHeader(pdf, 2, 10, "Trade Value, Growth Rate And Trade Balance Between Years ");
+           
+                        pdf.text(90,20, yearRang);
+                        drawLegend(pdf, 50, 25, 100, colors, ["Imports", " Non-Oil Exports", "Re-Export"]);
+                        //pdf.text("Year:" + selectedYear + ", Currency:" + currency, 75, 35);
+                        drowHeader(pdf, 17, 40, "Value by Years");
+
+                        drawBarChart(pdf, "v",  50,  dataArray, colors, 15, 6, 1, 4, 0);
+
+                        drowHeader(pdf, 17, 110, "Growth Rate by Years");
+
+                        drawLineChart(pdf, "v",  130,  precentageArr, "#B68A33", 15, 6, 1, 4, 0);
+
+                        drowHeader(pdf, 17, 180, "Trade Balance by Year");
+
+                        drawBarChart(pdf, "vr", 170, balDataArray, ["#FF5555"], 15, 6, 1, 4, 0);
+
+                       pdf.save('Trade Map.pdf');
+
+                    }
+
+                }
+                
+                function getHtmlImage(selector, pdf) {
+                    var sel = '#' + selector;
+                    var scaledElement;
+                    var oldWidth = $(sel).width();
+                    var oldHeight = $(sel).height();
+                    var newWidth = oldWidth * 4 + "px";
+                    var newHeight = oldHeight * 4 + "px";
+
+                    $("#toPdfContainer").css("width", newWidth);
+                    $("#toPdfContainer").css("height", newHeight);
+                    scaledElement = $(sel).clone()
+                    .css({
+                        'transform': 'scale(4,4)',
+                        'transform-origin': '0 0',
+                    }).addClass("to_pdf").appendTo("#toPdfContainer");
+
+
+                    html2canvas(document.querySelector("#toPdfContainer"))
+                    .then(function (canvas) {
+                        img = canvas.toDataURL("image/JPEG");
+                        $("#canvas_container").val(img);
+                        next(pdf);
+                    })
+                }
+                
+               
+            })
+
+            $("#mapReset").click(function () {
+                $('#currency option[value ="BED"]').prop("selected", true);
+                $('#slcgroup option[value ="ALL" ]').prop("selected", true);
+                $("#trcatIn").val("ALL");
+                $("#continentIn").val("ALL");
+                $("#countryIn").val("ALL");
+                $("#trtypeIn").val("ALL");
+                $("#sectionIn").val("ALL");
+                $("#chapterIn").val("ALL");
+                $("#regionIn").val("ALL");
+                $("#datacodeIn").val("");
+                $("#reexportColor").css("background-color", "#38CAF6");
+                $("#nonoilColor").css("background-color", "#8DDF72");
+                $("#importsColor").css("background-color", "#EB432B");
+                $('#slcYear option[value = "2017"]').prop("selected", true);
+                $("#amount").html("2013 - 2017");
+                $("#matNum").val(5);
+                $("#precentageFrom").val(0);
+                $("#precentageTo").val(200);
+                $("#countryNum").val(5);
+                $("#slider").slider('values', [14, yearTo - 2000]);
+                $("#loader").css('visibility', 'visible');
+
+                filterArray = getFilter();
+                var y = buildList("countryCHList", "cntListInit", "countryApply", "countryCancel", "GetCountryDataSelect", "", "", "countrySrc", filterArray);
+                //getting continents list
+                var y = buildList("continentCHList", "conListInit", "continentApply", "continentCancel", "GetContenentData", "", "", "", filterArray);
+                //getting region list
+                var y = buildList("regionCHList", "regListInit", "regionApply", "regionCancel", "GetRegionData", "", "", "", filterArray);
+                //get section list
+                var y = buildList("sectionCHList", "sectionListInit", "sectionApply", "sectionCancel", "GetSectionData", "", "", "sectionSrc", filterArray);
+                //get chapter list
+                var y = buildList("chapterCHList", "chapterListInit", "chapterApply", "chapterCancel", "GetChapterData", "", "", "chapterSrc", filterArray);
+                //getting trade types list
+                var y = buildList("TRTypeCHList", "TRTypeListInit", "TRTypeApply", "TRTypeCancel", "GetTradeTypesSelect", "", "", "", filterArray);
+                //getting trade Category list
+                var y = buildList("TRCatCHList", "TRCatListInit", "TRCatApply", "TRCatCancel", "GetTradeCtegorySelect", "", "", "", filterArray);
+
+                var y = drawMap( filterArray);
+
+                var y = drawMaterialChart(filterArray, colors);
+
+                var y = drawTopCountriesChart( filterArray, colors);
+
+                var y = drawSliderCharts( filterArray, colors);
+                var y = drawBalanceChart(filterArray, colors);
+
+                var y = drawGrowthTable( filterArray);
+                $("#loader").css('visibility', 'hidden');
+
+                //viewing the filter array
+                
+                //redrawing the whole map
+
+            })
+
+            //viewing the filter array
+
+            var y = buildList("countryCHList", "cntListInit", "countryApply", "countryCancel", "GetCountryDataSelect", "","", "countrySrc", filterArray);
+            //getting continents list
+            var y = buildList("continentCHList", "conListInit", "continentApply", "continentCancel", "GetContenentData", "", "", "", filterArray);
+            //getting region list
+            var y = buildList("regionCHList", "regListInit", "regionApply", "regionCancel", "GetRegionData", "", "", "", filterArray);
+            //get section list
+            var y = buildList("sectionCHList", "sectionListInit", "sectionApply", "sectionCancel", "GetSectionData", "", "", "sectionSrc", filterArray);
+            //get chapter list
+            var y = buildList("chapterCHList", "chapterListInit", "chapterApply", "chapterCancel", "GetChapterData", "", "", "chapterSrc", filterArray);
+            //getting trade types list
+            var y = buildList("TRTypeCHList", "TRTypeListInit", "TRTypeApply", "TRTypeCancel", "GetTradeTypesSelect", "", "", "", filterArray);
+            //getting trade Category list
+            var y = buildList("TRCatCHList", "TRCatListInit", "TRCatApply", "TRCatCancel", "GetTradeCtegorySelect", "", "", "", filterArray);
+
+            tblCounter = 0;
+
+            $("#precentageTo ,#precentageFrom").change(function () {
+                $("#loader").css('visibility', 'visible');
+                filterArray = getFilter();
+                drawGrowthTable( filterArray);
+
+                $("#loader").css('visibility', 'hidden');
+            })
+
+
+            $("#slcYear").change(function () {
+                $("#loader").css('visibility', 'visible');
+                filterArray = getFilter();
+                drawTopCountriesChart(filterArray, colors);
+
+                drawMaterialChart( filterArray, colors);
+
+
+                drawGrowthTable( filterArray);
+
+                drawMap( filterArray);
+
+                $("#loader").css('visibility', 'hidden');
+            })
+
+
+
+            dataTxtS = $("#amount").text();
+            dataArrS = dataTxt.split(" - ");
+            minYearS = dataArr[0];
+            maxYearS = dataArr[1];
+            //jquery ui slider to change the range between the years from the user
+            $("#slider").slider({
+                range: true,
+
+                max: yearTo - yearFrom,
+                values: [minYearS - 1999, yearTo - yearFrom],
+                slide: function (event, ui) {
+                    minYear = Number.parseInt(ui.values[0]) + Number.parseInt(yearFrom);
+                    maxYear = Number.parseInt(ui.values[1]) + Number.parseInt(yearFrom);
+                    $("#amount").text(minYear + " - " + maxYear);
+                    $("#slider").slider("disable");
+
+
+                },
+                change: function () {
+                    $("#loader").css('visibility', 'visible');
+                    filterArray = getFilter();
+                    drawSliderCharts( filterArray, colors);
+                    drawBalanceChart(filterArray, colors);
+                    $("#loader").css('visibility', 'hidden');
+                    $("#slider").slider("enable");
+                }
+            });
+            //end of slider
+
+
+            //showing the country growth table
+
+
+            //when country num is changed
+            
+
+          
+
+        });
+
+
+    </script>
+</body>
+</html>

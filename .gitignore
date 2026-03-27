@@ -25,11 +25,7 @@ venv/
 .env.local
 .env.*.local
 
-# Data artifacts
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+# Data artifacts — tracked
 
 # Root control docs (local only)
 CLAUDE.md
