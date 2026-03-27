@@ -1,5 +1,5 @@
 /**
- * Seed data for the MoIAT strategy prototype scaffold.
+ * Seed data for the strategy prototype scaffold.
  *
  * DATE MODEL — three tiers, always kept distinct:
  *
@@ -145,10 +145,10 @@ export const heroKpis: KpiDef[] = [
     delta_direction: "neutral",
     unit_label: "annual %",
     evidence: {
-      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_name: "FCSC / GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
       source_id: "fcsc_gdp_growth_9m_2025",
       publisher: "Federal Competitiveness and Statistics Centre",
-      geography: "UAE",
+      geography: "National",
       unit: "% real growth",
       extraction_date: "2026-03-26",
       display_period: "9M 2025",
@@ -169,17 +169,17 @@ export const heroKpis: KpiDef[] = [
     delta_direction: "neutral",
     unit_label: "real growth",
     evidence: {
-      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_name: "FCSC / GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
       source_id: "fcsc_non_oil_gdp_growth_9m_2025",
       publisher: "Federal Competitiveness and Statistics Centre",
-      geography: "UAE",
+      geography: "National",
       unit: "% real growth",
       extraction_date: "2026-03-26",
       display_period: "9M 2025",
       period_label: "9M 2025 · FCSC official",
       freshness_label: "Latest official pulse",
       caveats:
-        "FCSC press release published 2026-02-20. Covers first 9 months of 2025. Non-oil sector growth is the primary MoIAT tracking indicator for diversification progress.",
+        "FCSC press release published 2026-02-20. Covers first 9 months of 2025. Non-oil sector growth is the primary the Ministry tracking indicator for diversification progress.",
       caveat_short: "FCSC 9M 2025 · primary diversification indicator",
       confidence: "high",
       evidence_type: "official",
@@ -193,10 +193,10 @@ export const heroKpis: KpiDef[] = [
     delta_direction: "up",
     unit_label: "of real GDP",
     evidence: {
-      source_name: "FCSC / Non-oil GDP of the UAE grows by 5.7% in H1 2025",
+      source_name: "FCSC / Non-oil GDP grows by 5.7% in H1 2025",
       source_id: "fcsc_non_oil_share_h1_2025",
       publisher: "Federal Competitiveness and Statistics Centre",
-      geography: "UAE",
+      geography: "National",
       unit: "% of real GDP",
       extraction_date: "2026-03-26",
       display_period: "H1 2025",
@@ -218,10 +218,10 @@ export const heroKpis: KpiDef[] = [
     delta_direction: "neutral",
     unit_label: "first 9 months",
     evidence: {
-      source_name: "FCSC / UAE GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
+      source_name: "FCSC / GDP Reaches AED 1.4 Trillion with 6.1% Growth in Non-Oil GDP",
       source_id: "fcsc_gdp_value_9m_2025",
       publisher: "Federal Competitiveness and Statistics Centre",
-      geography: "UAE",
+      geography: "National",
       unit: "AED trillion",
       extraction_date: "2026-03-26",
       display_period: "9M 2025",
@@ -244,8 +244,8 @@ export const heroKpis: KpiDef[] = [
     evidence: {
       source_name: "Ministry of Economy & Tourism — International Trade Map endpoint",
       source_id: "moet_trade_total_2024",
-      publisher: "Ministry of Economy & Tourism, UAE",
-      geography: "UAE",
+      publisher: "Ministry of Economy & Tourism",
+      geography: "National",
       unit: "AED trillion",
       extraction_date: "2026-03-26",
       display_period: "2024",
@@ -269,7 +269,7 @@ export const heroKpis: KpiDef[] = [
       source_name: "World Bank — NV.IND.MANF.ZS",
       source_id: "wb_nv_ind_manf_zs_2024",
       publisher: "World Bank Open Data",
-      geography: "UAE (ARE)",
+      geography: "National (ARE)",
       unit: "% of GDP",
       extraction_date: "2026-03-26",
       display_period: "FY 2024",
@@ -296,7 +296,7 @@ export const dashboardInsights: InsightCard[] = [
     signal_type: "momentum",
     title: "Non-oil GDP share reaches 77.5% — diversification momentum is accelerating",
     summary:
-      "The latest FCSC official pulse (H1 2025) puts non-oil GDP at 77.5% of real output — up from 75.5% in FY 2024. Non-oil sector real growth reached 6.1% in the first 9 months of 2025. This sustained structural shift is the foundational evidence for MoIAT's industrial strategy narrative and the freshest available signal as of March 2026.",
+      "The latest FCSC official pulse (H1 2025) puts non-oil GDP at 77.5% of real output — up from 75.5% in FY 2024. Non-oil sector real growth reached 6.1% in the first 9 months of 2025. This sustained structural shift is the foundational evidence for the Ministry's industrial strategy narrative and the freshest available signal as of March 2026.",
     evidence_ids: ["non_oil_gdp_share", "non_oil_gdp_growth"],
     data_period: "H1 2025 / 9M 2025",
   },
@@ -356,7 +356,7 @@ export const sectorRows: SectorRow[] = [
     status: "strong",
     momentum_label: "Strong",
     notes:
-      "Underpinned by UAE net-zero commitment and a major confirmed project pipeline. High strategic priority for MoIAT's industrial policy agenda through 2031.",
+      "Underpinned by the national net-zero commitment and a major confirmed project pipeline. High strategic priority for the Ministry's industrial policy agenda through 2031.",
     evidence_type: "official",
   },
   {
@@ -436,7 +436,7 @@ export const emirateRows: EmirateRow[] = [
       "Regional HQ and talent attraction",
     ],
     portfolio_note:
-      "Primary market-facing interface for UAE industrial ambitions. Enables global reach and investor access at scale.",
+      "Primary market-facing interface for national industrial ambitions. Enables global reach and investor access at scale.",
     evidence_type: "official",
   },
   {
@@ -505,7 +505,7 @@ export const roadmapPhases = [
       {
         area: "Governance",
         action:
-          "Establish AI-Native MoIAT steering committee with data, strategy, and digital leads. Agree on evidence standards and KPI ownership rules.",
+          "Establish AI-Native the Ministry steering committee with data, strategy, and digital leads. Agree on evidence standards and KPI ownership rules.",
       },
       {
         area: "Data",
@@ -557,7 +557,7 @@ export const roadmapPhases = [
       {
         area: "Governance",
         action:
-          "Establish formal cross-emirate data-sharing agreements and a federated policy KPI framework. Define the MoIAT data stewardship model.",
+          "Establish formal cross-emirate data-sharing agreements and a federated policy KPI framework. Define the the Ministry data stewardship model.",
       },
       {
         area: "Data",
@@ -572,7 +572,7 @@ export const roadmapPhases = [
       {
         area: "Capability",
         action:
-          "MoIAT is recognised regionally as a benchmark for AI-Native government ministry operations and evidence-led industrial policy.",
+          "the Ministry is recognised regionally as a benchmark for AI-Native government ministry operations and evidence-led industrial policy.",
       },
     ],
   },

@@ -1,11 +1,11 @@
 import { PageHeader } from "@/components/primitives/PageHeader";
 import { DeferredBadge } from "@/components/primitives/DeferredBadge";
 import { EvidenceDrawer } from "@/components/primitives/EvidenceDrawer";
-import { UAEPositionExplorer } from "@/components/ai/UAEPositionExplorer";
+import { PositionExplorer } from "@/components/ai/UAEPositionExplorer";
 import type { EvidenceMeta } from "@/lib/seed-data";
 import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
-// ─── Recent UAE Pulse ──────────────────────────────────────────────────────────
+// ─── Recent National Pulse ───────────────────────────────────────────────────
 // FCSC official sub-annual releases — latest available as of extraction date.
 const pulseStats = [
   {
@@ -36,7 +36,7 @@ const pulseEvidence: EvidenceMeta = {
     "Federal Competitiveness and Statistics Centre (FCSC) — sub-annual GDP releases",
   source_id: "fcsc_gdp_9m_2025_h1_2025",
   publisher: "FCSC",
-  geography: "UAE",
+  geography: "National",
   unit: "Percent (real annual growth rate / share of real GDP)",
   extraction_date: "2026-03-26",
   display_period: "9M 2025 / H1 2025",
@@ -51,10 +51,10 @@ const pulseEvidence: EvidenceMeta = {
 
 // ─── Annual Structural Benchmarks ─────────────────────────────────────────────
 // World Bank indicators, latest available year per country.
-// UAE figure is FY 2024. Other countries reflect latest available (2022–2024).
+// National figure is FY 2024. Other countries reflect latest available (2022–2024).
 const peerData = [
   {
-    country: "UAE",
+    country: "National",
     period: "2024",
     gdp_growth: 4.0,
     manuf_pct_gdp: 9.4,
@@ -104,13 +104,13 @@ const peerEvidence: EvidenceMeta = {
   source_name: "World Bank Open Data — multiple indicators",
   source_id: "wb_peer_comparison_multi",
   publisher: "World Bank",
-  geography: "UAE, Saudi Arabia, Singapore, South Korea, Netherlands",
+  geography: "National, Saudi Arabia, Singapore, South Korea, Netherlands",
   unit: "Various (% of GDP, annual %)",
   extraction_date: "2026-03-26",
   display_period: "2022–2024 (latest per country)",
   period_label: "2022–2024 · latest available per country",
   caveats:
-    "Each country's values reflect the latest available year in the World Bank API as of extraction date 2026-03-26. UAE values are FY 2024. Saudi Arabia manufacturing figure is 2022. Other peers are 2023. Years differ by up to two years — this is a directional structural comparison, not a harmonised single-year ranking.",
+    "Each country's values reflect the latest available year in the World Bank API as of extraction date 2026-03-26. National values are FY 2024. Saudi Arabia manufacturing figure is 2022. Other peers are 2023. Years differ by up to two years — this is a directional structural comparison, not a harmonised single-year ranking.",
   caveat_short: "Latest available year per country — not harmonised to a single year",
   confidence: "medium",
   evidence_type: "official",
@@ -145,7 +145,7 @@ const competitivenessAreas = [
   {
     area: "Digital Government Readiness",
     uae_summary:
-      "UAE consistently ranks among the top globally on e-government and digital readiness indices. Digital infrastructure quality is a genuine competitive advantage and the foundational platform for an AI-Native MoIAT operating model.",
+      "The nation consistently ranks among the top globally on e-government and digital readiness indices. Digital infrastructure quality is a genuine competitive advantage and the foundational platform for an AI-Native ministry operating model.",
     status: "strength",
     data_status: "available",
   },
@@ -161,7 +161,7 @@ const competitivenessAreas = [
   {
     area: "Regulatory Enablement",
     uae_summary:
-      "ICV, ITTI, and the Industrial Registry are strong policy instruments with real operational reach. Regulatory turnaround time, licence cycle time, and conformity processing metrics are MoIAT-native KPIs that require direct ministry data connection — not yet available in the public data cache.",
+      "ICV, ITTI, and the Industrial Registry are strong policy instruments with real operational reach. Regulatory turnaround time, licence cycle time, and conformity processing metrics are ministry-native KPIs that require direct data connection — not yet available in the public data cache.",
     status: "opportunity",
     data_status: "deferred",
     deferred_note:
@@ -187,45 +187,45 @@ const statusConfig = {
   },
 };
 
-export default function UAEPositionPage() {
+export default function NationalPositionPage() {
   return (
     <div>
       <PageHeader
-        title="UAE Position & Peer Benchmarking"
-        subtitle="Current UAE performance pulse alongside structural peer benchmarks"
+        title="National Position & Peer Benchmarking"
+        subtitle="Current national performance pulse alongside structural peer benchmarks"
         badge={`FCSC pulse + World Bank benchmarks · ${APP_DATA_CONTEXT.extraction_label}`}
         badgeVariant="live"
       />
 
       {/* Narrative framing band */}
-      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+      <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
-            UAE Position · {APP_DATA_CONTEXT.as_of}
+          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
+            National Position · {APP_DATA_CONTEXT.as_of}
           </div>
-          <h2 className="text-xl font-bold leading-snug mb-2">
-            UAE real GDP grew 5.1% through September 2025 — ahead on key
+          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
+            National real GDP grew 5.1% through September 2025 — ahead on key
             foundations, the strategic gap is manufacturing complexity
           </h2>
-          <p className="text-sm text-blue-100 leading-relaxed">
+          <p className="text-base text-[#7C5E24] leading-relaxed">
             The latest official pulse (FCSC, 9M 2025) confirms strong momentum:
             5.1% real GDP growth and 6.1% non-oil GDP growth, with non-oil
             activity reaching 77.5% of real GDP in H1 2025. Against
             manufacturing-led benchmarks — Singapore at 21%, South Korea at 26%
             — the complexity gap is wide and the strategic opportunity is
-            significant. The central question for MoIAT is how to close that
+            significant. The central question for the Ministry is how to close that
             gap through targeted sector and emirate decisions over the next five
             years.
           </p>
         </div>
       </div>
 
-      {/* Recent UAE Pulse */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+      {/* Recent National Pulse */}
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h2 className="text-sm font-semibold text-gray-700">
-              Recent UAE Performance
+            <h2 className="text-base font-semibold text-gray-700 font-heading">
+              Recent National Performance
             </h2>
             <p className="text-xs text-gray-400 mt-0.5">
               Latest official sub-annual releases · FCSC
@@ -233,13 +233,13 @@ export default function UAEPositionPage() {
           </div>
           <EvidenceDrawer evidence={pulseEvidence} triggerLabel="FCSC pulse" />
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-5">
           {pulseStats.map((stat) => (
             <div
               key={stat.label}
               className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm"
             >
-              <div className="text-[10px] font-semibold text-signal-momentum uppercase tracking-wider mb-2">
+              <div className="text-xs font-semibold text-signal-momentum uppercase tracking-wider mb-2">
                 Latest official pulse
               </div>
               <div className="text-3xl font-bold text-brand-navy leading-none mb-1">
@@ -248,7 +248,7 @@ export default function UAEPositionPage() {
               <div className="text-sm font-medium text-gray-700">
                 {stat.label}
               </div>
-              <div className="text-[10px] text-gray-400 mt-1.5">
+              <div className="text-xs text-gray-400 mt-1.5">
                 {stat.period} · {stat.source} · {stat.note}
               </div>
             </div>
@@ -257,13 +257,13 @@ export default function UAEPositionPage() {
       </section>
 
       {/* Interactive exploration — Comparator Set, Policy Lens, AI readout */}
-      <UAEPositionExplorer />
+      <PositionExplorer />
 
       {/* Annual structural benchmark table */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h2 className="text-sm font-semibold text-gray-700">
+            <h2 className="text-base font-semibold text-gray-700 font-heading">
               Annual Structural Benchmarks — Peer Comparison
             </h2>
             <p className="text-xs text-gray-400 mt-0.5">
@@ -361,7 +361,7 @@ export default function UAEPositionPage() {
             </tbody>
           </table>
           <div className="px-5 py-2.5 bg-gray-50 border-t border-gray-100">
-            <span className="text-[10px] text-gray-400">
+            <span className="text-xs text-gray-400">
               World Bank Open Data API · Extracted {APP_DATA_CONTEXT.extraction_date} · Years vary per country · Annual structural data — compare directionally with FCSC pulse above
             </span>
           </div>
@@ -369,16 +369,16 @@ export default function UAEPositionPage() {
       </section>
 
       {/* Competitiveness dimensions */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-gray-700">
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-base font-semibold text-gray-700 font-heading">
             Competitiveness Dimensions
           </h2>
           <span className="text-xs text-gray-400">
             As of {APP_DATA_CONTEXT.as_of} · FY 2024 data where available
           </span>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {competitivenessAreas.map((area) => {
             const config = statusConfig[area.status as keyof typeof statusConfig];
             return (
@@ -396,7 +396,7 @@ export default function UAEPositionPage() {
                     {config.label}
                   </span>
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed mb-3">
+                <p className="text-sm text-gray-600 leading-relaxed mb-3">
                   {area.uae_summary}
                 </p>
                 {area.deferred_note && (
@@ -428,18 +428,18 @@ export default function UAEPositionPage() {
             <div className="text-sm font-semibold text-brand mb-1">
               Methodology & Evidence Access
             </div>
-            <p className="text-xs text-brand/80 leading-relaxed">
-              This page combines two data layers. The <strong>recent UAE pulse</strong>{" "}
+            <p className="text-sm text-brand/80 leading-relaxed">
+              This page combines two data layers. The <strong>recent national pulse</strong>{" "}
               uses FCSC official sub-annual releases: 9M 2025 (published
               2026-02-20) for real and non-oil GDP growth, H1 2025 (published
               2025-12-11) for non-oil share. The{" "}
               <strong>annual structural benchmarks</strong> use World Bank Open
               Data API (extracted {APP_DATA_CONTEXT.extraction_date}); years
               vary per country by 1–2 years. The two layers are intentionally
-              not merged — sub-annual UAE pulse figures are not directly
+              not merged — sub-annual national pulse figures are not directly
               comparable to full-year peer benchmarks and should be read as
               directional context only. The controlled comparator set will be
-              confirmed with MoIAT in the next phase.
+              confirmed with the Ministry in the next phase.
             </p>
           </div>
         </div>

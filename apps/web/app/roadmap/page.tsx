@@ -9,9 +9,9 @@ const focusAreaColors: Record<string, { bg: string; text: string }> = {
 };
 
 const horizonColors = [
-  { border: "border-brand-medium", bg: "bg-brand-navy", accent: "text-blue-300" },
-  { border: "border-signal-momentum", bg: "bg-signal-momentum", accent: "text-green-200" },
-  { border: "border-brand", bg: "bg-brand", accent: "text-blue-200" },
+  { border: "border-[#92722A]", bg: "bg-[#92722A]", accent: "text-[#E6D7A2]" },
+  { border: "border-signal-momentum", bg: "bg-signal-momentum", accent: "text-green-100" },
+  { border: "border-aeblack-600", bg: "bg-aeblack-600", accent: "text-gray-200" },
 ];
 
 export default function RoadmapPage() {
@@ -19,22 +19,22 @@ export default function RoadmapPage() {
     <div>
       <PageHeader
         title="Roadmap & Operating Model"
-        subtitle="What does an AI-Native MoIAT look like — and what does the transformation path require?"
+        subtitle="What does an AI-Native Ministry look like — and what does the transformation path require?"
         badge={`Structured content · ${APP_DATA_CONTEXT.as_of}`}
         badgeVariant="deferred"
       />
 
       {/* Framing */}
-      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
-        <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
-          Chapter 3 · MoIAT Can Become Evidence-Native · {APP_DATA_CONTEXT.as_of}
+      <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
+        <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
+          Chapter 3 · The Ministry Can Become Evidence-Native · {APP_DATA_CONTEXT.as_of}
         </div>
-        <h2 className="text-xl font-bold leading-snug mb-2">
+        <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
           The transformation is not primarily about technology — it is about
           embedding evidence discipline into every major decision cycle
         </h2>
-        <p className="text-sm text-blue-100 leading-relaxed max-w-3xl">
-          An AI-Native MoIAT does not simply digitise existing reporting. It
+        <p className="text-base text-[#7C5E24] leading-relaxed max-w-3xl">
+          An AI-Native Ministry does not simply digitise existing reporting. It
           restructures how evidence flows from source to decision: which KPIs are
           owned and refreshed, how briefs are prepared, how sector and emirate
           signals are monitored, and how the ministry coordinates across the
@@ -44,11 +44,11 @@ export default function RoadmapPage() {
       </div>
 
       {/* What AI-Native means */}
-      <section className="mb-8">
-        <h2 className="text-sm font-semibold text-gray-700 mb-4">
-          What AI-Native Means for MoIAT
+      <section className="mb-10">
+        <h2 className="text-base font-semibold text-gray-700 font-heading mb-5">
+          What AI-Native Means for the Ministry
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
           {[
             {
               icon: (
@@ -66,7 +66,7 @@ export default function RoadmapPage() {
                 </svg>
               ),
               title: "Better emirate integration",
-              body: "Connect sub-national industrial data across all seven emirates so MoIAT can coordinate national industrial policy rather than simply aggregate separate reporting.",
+              body: "Connect sub-national industrial data across all seven emirates so the Ministry can coordinate national industrial policy rather than simply aggregate separate reporting.",
             },
             {
               icon: (
@@ -95,16 +95,16 @@ export default function RoadmapPage() {
               <h3 className="text-sm font-semibold text-gray-900 mb-2">
                 {item.title}
               </h3>
-              <p className="text-xs text-gray-500 leading-relaxed">{item.body}</p>
+              <p className="text-sm text-gray-500 leading-relaxed">{item.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Roadmap phases */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-gray-700">
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-base font-semibold text-gray-700 font-heading">
             Transformation Roadmap
           </h2>
           <span className="text-xs text-gray-400">
@@ -128,7 +128,7 @@ export default function RoadmapPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                     {phase.focus_areas.map((fa) => {
                       const areaColors =
                         focusAreaColors[fa.area] || {
@@ -157,9 +157,9 @@ export default function RoadmapPage() {
       </section>
 
       {/* Governance and capability */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         <section>
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">
+          <h2 className="text-base font-semibold text-gray-700 font-heading mb-3">
             Governance Model
           </h2>
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-4">
@@ -187,14 +187,14 @@ export default function RoadmapPage() {
                 <div className="text-xs font-semibold text-brand mb-1">
                   {tier.tier} Layer
                 </div>
-                <p className="text-xs text-gray-600 leading-relaxed mb-1.5">
+                <p className="text-sm text-gray-600 leading-relaxed mb-1.5">
                   {tier.desc}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {tier.roles.map((r) => (
                     <span
                       key={r}
-                      className="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-medium"
+                      className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded font-medium"
                     >
                       {r}
                     </span>
@@ -206,7 +206,7 @@ export default function RoadmapPage() {
         </section>
 
         <section>
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">
+          <h2 className="text-base font-semibold text-gray-700 font-heading mb-3">
             Capability Building Priorities
           </h2>
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm space-y-3">
@@ -239,7 +239,7 @@ export default function RoadmapPage() {
             ].map((cap) => (
               <div key={cap.label} className="flex items-start gap-3">
                 <span
-                  className={`flex-shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded mt-0.5 ${
+                  className={`flex-shrink-0 text-xs font-semibold px-1.5 py-0.5 rounded mt-0.5 ${
                     cap.priority === "high"
                       ? "bg-signal-risk-bg text-signal-risk"
                       : "bg-gray-100 text-gray-500"
@@ -251,7 +251,7 @@ export default function RoadmapPage() {
                   <div className="text-xs font-semibold text-gray-800 mb-0.5">
                     {cap.label}
                   </div>
-                  <p className="text-xs text-gray-500 leading-snug">{cap.desc}</p>
+                  <p className="text-sm text-gray-500 leading-snug">{cap.desc}</p>
                 </div>
               </div>
             ))}
@@ -261,10 +261,10 @@ export default function RoadmapPage() {
 
       {/* Visible risks */}
       <section>
-        <h2 className="text-sm font-semibold text-gray-700 mb-3">
+        <h2 className="text-base font-semibold text-gray-700 font-heading mb-3">
           Chapter 4 — Risks Are Visible and Actionable
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {[
             {
               risk: "Data fragmentation across actors",
@@ -293,7 +293,7 @@ export default function RoadmapPage() {
                   <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
                     {item.risk}
                   </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

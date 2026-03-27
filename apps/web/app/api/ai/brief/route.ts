@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
   const risksLines = body.risks.map((r) => `  - ${r}`).join("\n");
 
-  const prompt = `You are a senior strategy analyst at the UAE Ministry of Industry and Advanced Technology (MoIAT). Write a concise executive decision brief synthesis for ministerial review. Use only the structured evidence provided — do not fabricate additional data, sources, or claims.
+  const prompt = `You are a senior strategy analyst at a national ministry responsible for industrial strategy and advanced technology. Write a concise executive decision brief synthesis for ministerial review. Use only the structured evidence provided — do not fabricate additional data, sources, or claims. Do not mention the country name directly — refer to "the nation" or "national".
 
 Return exactly four sections with these exact headings (bold, on their own lines):
 **Issue Framing**

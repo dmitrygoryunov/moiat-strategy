@@ -25,7 +25,7 @@ const navItems = [
   },
   {
     href: "/uae-position",
-    label: "UAE Position",
+    label: "National Position",
     icon: (
       <svg
         className="w-4 h-4"
@@ -137,15 +137,15 @@ export function SideNav() {
           </svg>
           <div>
             <div className="text-sm font-bold text-white leading-tight tracking-wide">
-              MoIAT
+              Strategy
             </div>
             <div className="text-[9px] text-white/50 leading-tight mt-0.5 tracking-wide">
-              Strategy Intelligence
+              Intelligence
             </div>
           </div>
         </div>
         <div className="text-[8px] text-white/25 leading-snug tracking-widest uppercase">
-          Ministry of Industry &amp; Advanced Technology
+          Evidence-led decision support
         </div>
       </div>
 
@@ -184,7 +184,7 @@ export function SideNav() {
         <div className="text-[10px] text-white/30 leading-snug">
           <span className="font-medium text-white/50">Prototype</span>
           {" · "}
-          EPAM × MoIAT
+          EPAM × the Ministry
           <br />
           Evidence-led decision support
         </div>

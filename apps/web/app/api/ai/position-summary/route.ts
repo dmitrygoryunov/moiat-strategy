@@ -20,20 +20,20 @@ const COMPARATOR_CONTEXT: Record<ComparatorSet, string> = {
 
 const LENS_QUESTION: Record<PolicyLens, string> = {
   Growth:
-    "Focus on growth momentum and investment attractiveness. Strategic question: Is UAE's growth leading this comparator set, and is it building economic complexity or remaining concentrated in existing strengths?",
+    "Focus on growth momentum and investment attractiveness. Strategic question: Is the nation's growth leading this comparator set, and is it building economic complexity or remaining concentrated in existing strengths?",
   Complexity:
     "Focus on manufacturing depth and innovation capacity. Strategic question: How large is the industrial complexity gap, and which moves can close it before the 2031 Operation 300bn deadline?",
   Resilience:
-    "Focus on diversification, digital readiness, and risk exposure. Strategic question: What structural foundations make UAE resilient, and what vulnerabilities require active management?",
+    "Focus on diversification, digital readiness, and risk exposure. Strategic question: What structural foundations make the nation resilient, and what vulnerabilities require active management?",
 };
 
 function buildPrompt(
   comparatorSet: ComparatorSet,
   policyLens: PolicyLens
 ): string {
-  return `You are a senior strategy analyst at the UAE Ministry of Industry and Advanced Technology (MoIAT). Based only on the verified data below, write a "What Leadership Should Notice" readout of exactly 3 concise observations for the selected comparator context and policy lens. Each observation must be one sentence. Do not add information not present in the data. Write in formal ministry tone.
+  return `You are a senior strategy analyst at a national ministry responsible for industrial strategy and advanced technology. Based only on the verified data below, write a "What Leadership Should Notice" readout of exactly 3 concise observations for the selected comparator context and policy lens. Each observation must be one sentence. Do not add information not present in the data. Write in formal ministry tone. Do not mention the country name directly — refer to "the nation" or "national".
 
-UAE data (verified, official sources):
+National data (verified, official sources):
 - Real GDP growth: 5.1% (9M 2025, FCSC, published 2026-02-20)
 - Non-oil GDP growth: 6.1% (9M 2025, FCSC)
 - Non-oil GDP share: 77.5% (H1 2025, FCSC, published 2025-12-11)

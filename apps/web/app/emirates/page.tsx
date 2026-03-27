@@ -31,28 +31,28 @@ export default function EmiratesPage() {
       />
 
       {/* Portfolio framing */}
-      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+      <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
             Emirate Portfolio · {APP_DATA_CONTEXT.as_of}
           </div>
-          <h2 className="text-xl font-bold leading-snug mb-2">
+          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
             Industrial strength is a coordinated portfolio — each emirate plays
-            a distinct role that MoIAT can amplify
+            a distinct role that the Ministry can amplify
           </h2>
-          <p className="text-sm text-blue-100 leading-relaxed">
+          <p className="text-base text-[#7C5E24] leading-relaxed">
             Rather than ranking emirates by size alone, this view frames each by
             strategic industrial role: what it does best, how it connects to the
             national ambition, and where it has untapped potential. The portfolio
-            logic reflects MoIAT&apos;s federation coordination mandate.
+            logic reflects the Ministry&apos;s federation coordination mandate.
           </p>
         </div>
       </div>
 
       {/* Emirate cards */}
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-gray-700">
+      <section className="mb-10">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-base font-semibold text-gray-700 font-heading">
             Emirate Industrial Roles
           </h2>
           <span className="text-xs text-gray-400">
@@ -70,7 +70,7 @@ export default function EmiratesPage() {
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <div className="w-6 h-6 rounded-full bg-brand-navy text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-[#92722A] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
                         {i + 1}
                       </div>
                       <h3 className="text-base font-bold text-brand-navy">
@@ -82,28 +82,28 @@ export default function EmiratesPage() {
                     </p>
                   </div>
                   <span
-                    className={`flex-shrink-0 text-[10px] font-medium px-2 py-0.5 rounded ${evidType.bg} ${evidType.color}`}
+                    className={`flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded ${evidType.bg} ${evidType.color}`}
                   >
                     {evidType.label}
                   </span>
                 </div>
 
                 <div className="mb-3">
-                  <div className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-2">
+                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
                     Industrial Strengths
                   </div>
                   <ul className="space-y-1">
                     {emirate.strengths.map((strength, j) => (
                       <li key={j} className="flex items-start gap-2">
                         <span className="w-1 h-1 rounded-full bg-brand-medium mt-1.5 flex-shrink-0" />
-                        <span className="text-xs text-gray-600">{strength}</span>
+                        <span className="text-sm text-gray-600">{strength}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div className="pt-3 border-t border-gray-100">
-                  <p className="text-xs text-gray-500 italic leading-relaxed">
+                  <p className="text-sm text-gray-500 italic leading-relaxed">
                     {emirate.portfolio_note}
                   </p>
                 </div>
@@ -114,16 +114,16 @@ export default function EmiratesPage() {
       </section>
 
       {/* Cross-emirate portfolio logic */}
-      <section className="mb-8">
-        <h2 className="text-sm font-semibold text-gray-700 mb-4">
+      <section className="mb-10">
+        <h2 className="text-base font-semibold text-gray-700 font-heading mb-5">
           Cross-Emirate Portfolio Logic
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <div className="text-xs font-semibold uppercase tracking-widest text-signal-momentum mb-3">
               Complementary Roles
             </div>
-            <p className="text-xs text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Abu Dhabi provides capital and sovereign direction. Dubai provides
               market access and global logistics. Sharjah provides cost-effective
               manufacturing land and academic capacity. The combined platform is
@@ -134,7 +134,7 @@ export default function EmiratesPage() {
             <div className="text-xs font-semibold uppercase tracking-widest text-signal-opportunity mb-3">
               Centre-of-Excellence Hypotheses
             </div>
-            <p className="text-xs text-gray-600 leading-relaxed mb-3">
+            <p className="text-sm text-gray-600 leading-relaxed mb-3">
               RAK for advanced materials and ceramics. Sharjah for SME and light
               manufacturing supply chains. Abu Dhabi for capital-intensive and
               strategically sensitive industries. Fujairah for energy and
@@ -147,13 +147,13 @@ export default function EmiratesPage() {
             <div className="text-xs font-semibold uppercase tracking-widest text-signal-risk mb-3">
               Dependencies & Risks
             </div>
-            <p className="text-xs text-gray-600 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Smaller northern emirates depend heavily on Abu Dhabi and Dubai
               supply chain integration for industrial viability. Talent
               retention outside the two major hubs is a persistent structural
               constraint. Cross-emirate industrial data sharing for shared KPI
               reporting remains fragmented and requires a deliberate federation-
-              level coordination agreement under MoIAT leadership.
+              level coordination agreement under ministry leadership.
             </p>
           </div>
         </div>
@@ -179,13 +179,13 @@ export default function EmiratesPage() {
             <div className="text-sm font-semibold text-brand mb-1">
               Evidence Status · {APP_DATA_CONTEXT.as_of}
             </div>
-            <p className="text-xs text-brand/80 leading-relaxed">
-              Sub-national industrial statistics for UAE emirates are not
+            <p className="text-sm text-brand/80 leading-relaxed">
+              Sub-national industrial statistics for the seven emirates are not
               available in the current data cache (extracted{" "}
               {APP_DATA_CONTEXT.extraction_date}). Emirate profiles are based on
-              public context from MoIAT, Ministry of Economy, and emirate
+              public context from the Ministry, Ministry of Economy, and emirate
               authority publications. Quantitative emirate-level KPIs will require
-              structured data agreements with UAE.Stat or individual emirate
+              structured data agreements with the national statistics portal or individual emirate
               statistical offices. All profile entries carry an evidence
               confidence label — none are presented as quantitative official data
               unless explicitly stated.

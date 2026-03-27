@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aegov/design-system": "^3.0.3",
     "next": "^15.1.0",
     "openai": "^6.33.0",
     "react": "^19.0.0",

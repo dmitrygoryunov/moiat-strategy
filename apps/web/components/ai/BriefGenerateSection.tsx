@@ -97,7 +97,7 @@ export function BriefGenerateSection({ brief }: { brief: BriefInput }) {
           </div>
           <button
             onClick={handleGenerate}
-            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-brand-navy text-white hover:bg-brand transition-colors"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#92722A] text-white hover:bg-[#B68A35] transition-colors"
           >
             <svg
               className="w-4 h-4"
@@ -168,7 +168,7 @@ export function BriefGenerateSection({ brief }: { brief: BriefInput }) {
             <p className="text-xs text-gray-600">{errorMsg}</p>
             <button
               onClick={() => setState("idle")}
-              className="mt-3 text-xs text-brand-medium underline"
+              className="mt-3 text-xs text-[#92722A] hover:text-[#B68A35] font-medium transition-colors"
             >
               Try again
             </button>
@@ -210,7 +210,7 @@ export function BriefGenerateSection({ brief }: { brief: BriefInput }) {
           </span>
           <button
             onClick={() => setState("idle")}
-            className="text-[10px] text-brand-medium underline"
+            className="text-xs text-[#92722A] hover:text-[#B68A35] font-medium transition-colors"
           >
             Regenerate
           </button>

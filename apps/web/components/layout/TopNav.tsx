@@ -5,51 +5,46 @@ import { usePathname } from "next/navigation";
 import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
 const navItems = [
-  { href: "/", label: "Dashboard", full: "Leadership Dashboard" },
-  {
-    href: "/uae-position",
-    label: "UAE Position",
-    full: "UAE Position & Peer Benchmarking",
-  },
-  { href: "/sectors", label: "Sectors", full: "Sector Prioritization" },
-  { href: "/emirates", label: "Emirates", full: "Emirate Portfolio" },
-  {
-    href: "/brief-builder",
-    label: "Decision Brief",
-    full: "Decision Brief Builder",
-  },
-  { href: "/roadmap", label: "Roadmap", full: "Roadmap & Operating Model" },
+  { href: "/", label: "Dashboard" },
+  { href: "/uae-position", label: "National Position" },
+  { href: "/sectors", label: "Sectors" },
+  { href: "/emirates", label: "Emirates" },
+  { href: "/brief-builder", label: "Decision Brief" },
+  { href: "/roadmap", label: "Roadmap" },
 ];
 
 export function TopNav() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-      {/* MoIAT gold accent bar — mirrors official site top stripe */}
-      <div className="h-[3px] bg-brand-gold" />
+    <header className="bg-white sticky top-0 z-30 shadow-sm">
+      {/* Gold gradient bar */}
+      <div className="h-2 bg-gradient-to-b from-[#CBA344] to-[#92722A]" />
 
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="flex items-center h-[60px] gap-6">
-          {/* Official MoIAT logo + product sub-label */}
-          <div className="flex items-center gap-2.5 flex-shrink-0">
+      {/* Single row: logo + nav + context */}
+      <div className="max-w-[1280px] mx-auto px-6">
+        <div className="flex items-center h-16 gap-6">
+          {/* Logo + title */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/brand/moiat-logo-eng.svg"
-              alt="Ministry of Industry & Advanced Technology"
-              className="h-8 w-auto"
+              src="/brand/uae-logo.png"
+              alt="National emblem"
+              className="h-10 w-auto"
             />
-            <div className="h-5 w-px bg-gray-200" />
-            <span className="text-[10px] font-semibold text-brand-medium tracking-wide whitespace-nowrap">
-              Strategy Intelligence
-            </span>
+            <div className="h-7 w-px bg-gray-200" />
+            <div className="leading-tight">
+              <div className="text-sm font-bold text-aeblack-900 font-heading">
+                Strategy Intelligence
+              </div>
+              <div className="text-[11px] text-aeblack-400">
+                Evidence-led decision support
+              </div>
+            </div>
           </div>
 
-          {/* Vertical divider */}
-          <div className="h-7 w-px bg-gray-200 flex-shrink-0" />
-
-          {/* Navigation links */}
-          <nav className="flex items-stretch flex-1 h-full">
+          {/* Navigation — inline with header */}
+          <nav className="flex items-center gap-1 flex-1">
             {navItems.map((item) => {
               const isActive =
                 item.href === "/"
@@ -59,11 +54,10 @@ export function TopNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  title={item.full}
-                  className={`px-4 flex items-center text-sm font-medium transition-colors border-b-2 -mb-px ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors no-underline ${
                     isActive
-                      ? "text-brand-navy border-brand-gold"
-                      : "text-gray-500 border-transparent hover:text-brand-navy hover:border-gray-300"
+                      ? "bg-[#F2ECCF] text-[#5D3B26]"
+                      : "text-aeblack-500 hover:text-[#6C4527] hover:bg-[#F9F7ED]"
                   }`}
                 >
                   {item.label}
@@ -72,12 +66,12 @@ export function TopNav() {
             })}
           </nav>
 
-          {/* Context date */}
-          <div className="flex-shrink-0 text-right pl-4 border-l border-gray-100">
-            <div className="text-[9px] text-gray-400 leading-none uppercase tracking-wider">
+          {/* Context date — right side */}
+          <div className="flex-shrink-0 text-right">
+            <div className="text-[11px] text-aeblack-400 uppercase tracking-wider font-heading">
               Context
             </div>
-            <div className="text-xs font-semibold text-brand-navy mt-0.5">
+            <div className="text-sm font-semibold text-aeblack-800">
               {APP_DATA_CONTEXT.as_of}
             </div>
           </div>

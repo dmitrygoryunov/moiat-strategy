@@ -8,9 +8,9 @@ import { APP_DATA_CONTEXT } from "@/lib/seed-data";
 
 const briefTemplate = {
   issue:
-    "Manufacturing sector adjacency: where should UAE concentrate industrial policy effort through 2026–2031?",
+    "Manufacturing sector adjacency: where should the nation concentrate industrial policy effort through 2026–2031?",
   framing:
-    `As of ${APP_DATA_CONTEXT.as_of}, the latest official pulse (FCSC 9M 2025) shows non-oil GDP growing at 6.1% with real GDP at 5.1%. Non-oil GDP share reached 77.5% in H1 2025, up from 75.5% in FY 2024. Manufacturing value added stands at 9.4% of GDP (FY 2024, World Bank). The strategic question for MoIAT is not whether to act, but where: which sector adjacencies offer the highest combination of strategic value, UAE platform advantage, and achievable complexity uplift before the 2031 Operation 300bn deadline. Answering this precisely requires completing the UN Comtrade and Harvard Atlas data connections.`,
+    `As of ${APP_DATA_CONTEXT.as_of}, the latest official pulse (FCSC 9M 2025) shows non-oil GDP growing at 6.1% with real GDP at 5.1%. Non-oil GDP share reached 77.5% in H1 2025, up from 75.5% in FY 2024. Manufacturing value added stands at 9.4% of GDP (FY 2024, World Bank). The strategic question for the Ministry is not whether to act, but where: which sector adjacencies offer the highest combination of strategic value, the nation platform advantage, and achievable complexity uplift before the 2031 Operation 300bn deadline. Answering this precisely requires completing the UN Comtrade and Harvard Atlas data connections.`,
   evidence: [
     {
       id: "non_oil_growth",
@@ -55,7 +55,7 @@ const briefTemplate = {
       id: "opt_a",
       label: "Option A: Accelerate existing strong sectors up the value chain",
       summary:
-        "Concentrate ICV, ITTI, and investment facilitation on sectors where UAE already has an established industrial base — petrochemicals, metals, building materials — and drive them toward higher-complexity, higher-margin output.",
+        "Concentrate ICV, ITTI, and investment facilitation on sectors where the nation already has an established industrial base — petrochemicals, metals, building materials — and drive them toward higher-complexity, higher-margin output.",
       tradeoff:
         "Lower transformation risk and quicker near-term Operation 300bn contribution. But this path may not generate the structural complexity shift needed to close the Singapore/South Korea gap within the 2031 horizon.",
     },
@@ -63,7 +63,7 @@ const briefTemplate = {
       id: "opt_b",
       label: "Option B: Build new capability in pharma, food tech, and medtech",
       summary:
-        "Target sectors where UAE has comparative logistics and infrastructure advantages but low current manufacturing base. Use free zone regulatory fast-tracks and anchor investor targeting to catalyse entry.",
+        "Target sectors where the nation has comparative logistics and infrastructure advantages but low current manufacturing base. Use free zone regulatory fast-tracks and anchor investor targeting to catalyse entry.",
       tradeoff:
         "Higher complexity upside but longer lead times and higher execution risk. Requires sustained cross-emirate coordination and committed policy continuity. Evidence base for adjacency scoring is currently partial — Comtrade data pending.",
     },
@@ -120,16 +120,16 @@ export default function BriefBuilderPage() {
       />
 
       {/* Executive framing band */}
-      <div className="bg-brand-navy rounded-xl px-6 py-5 mb-8 text-white">
+      <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
         <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-2">
+          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
             Decision Brief · {APP_DATA_CONTEXT.as_of}
           </div>
-          <h2 className="text-xl font-bold leading-snug mb-2">
-            Manufacturing sector adjacency: where should UAE concentrate
+          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
+            Manufacturing sector adjacency: where should the nation concentrate
             industrial policy effort through 2026–2031?
           </h2>
-          <p className="text-sm text-blue-100 leading-relaxed">
+          <p className="text-base text-[#7C5E24] leading-relaxed">
             The latest official pulse (9M 2025) confirms non-oil GDP growth at
             6.1% and non-oil GDP share at 77.5%. Manufacturing value added
             stands at 9.4% of GDP. This brief structures the evidence,
@@ -207,12 +207,12 @@ export default function BriefBuilderPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-[10px] font-medium text-gray-400">
+                    <span className="text-xs font-medium text-gray-400">
                       {ev.period}
                     </span>
                     <span className="text-xs text-gray-400">{ev.source}</span>
                     <span
-                      className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${config.bg} ${config.color}`}
+                      className={`text-xs font-medium px-1.5 py-0.5 rounded ${config.bg} ${config.color}`}
                     >
                       {config.label}
                     </span>
@@ -233,21 +233,21 @@ export default function BriefBuilderPage() {
             {briefTemplate.options.map((opt, i) => (
               <div key={opt.id} className="rounded-lg border border-gray-200 p-4">
                 <div className="flex items-start gap-3 mb-2">
-                  <span className="w-6 h-6 rounded-full bg-brand-navy text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="w-6 h-6 rounded-full bg-[#92722A] text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                     {String.fromCharCode(65 + i)}
                   </span>
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900 mb-1.5">
                       {opt.label}
                     </h3>
-                    <p className="text-xs text-gray-600 leading-relaxed mb-2">
+                    <p className="text-sm text-gray-600 leading-relaxed mb-2">
                       {opt.summary}
                     </p>
                     <div className="flex items-start gap-2">
-                      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mt-0.5 flex-shrink-0">
+                      <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide mt-0.5 flex-shrink-0">
                         Trade-off:
                       </span>
-                      <p className="text-xs text-gray-500 leading-relaxed italic">
+                      <p className="text-sm text-gray-500 leading-relaxed italic">
                         {opt.tradeoff}
                       </p>
                     </div>
