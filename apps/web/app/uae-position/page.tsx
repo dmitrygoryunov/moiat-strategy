@@ -199,24 +199,38 @@ export default function NationalPositionPage() {
 
       {/* Narrative framing band */}
       <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
-        <div className="max-w-3xl">
-          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
-            National Position · {APP_DATA_CONTEXT.as_of}
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-1">
+            <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
+              National Position · {APP_DATA_CONTEXT.as_of}
+            </div>
+            <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
+              National real GDP grew 5.1% through September 2025 — ahead on key
+              foundations, the strategic gap is manufacturing complexity
+            </h2>
+            <p className="text-base text-[#7C5E24] leading-relaxed">
+              The latest official pulse (FCSC, 9M 2025) confirms strong momentum:
+              5.1% real GDP growth and 6.1% non-oil GDP growth, with non-oil
+              activity reaching 77.5% of real GDP in H1 2025. Against
+              manufacturing-led benchmarks — Singapore at 21%, South Korea at 26%
+              — the complexity gap is wide and the strategic opportunity is
+              significant. The central question for the Ministry is how to close that
+              gap through targeted sector and emirate decisions over the next five
+              years.
+            </p>
           </div>
-          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
-            National real GDP grew 5.1% through September 2025 — ahead on key
-            foundations, the strategic gap is manufacturing complexity
-          </h2>
-          <p className="text-base text-[#7C5E24] leading-relaxed">
-            The latest official pulse (FCSC, 9M 2025) confirms strong momentum:
-            5.1% real GDP growth and 6.1% non-oil GDP growth, with non-oil
-            activity reaching 77.5% of real GDP in H1 2025. Against
-            manufacturing-led benchmarks — Singapore at 21%, South Korea at 26%
-            — the complexity gap is wide and the strategic opportunity is
-            significant. The central question for the Ministry is how to close that
-            gap through targeted sector and emirate decisions over the next five
-            years.
-          </p>
+          <div className="lg:w-56 flex-shrink-0 flex flex-col gap-3">
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">5.1%</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Real GDP Growth</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">9M 2025 · FCSC</div>
+            </div>
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">77.5%</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Non-oil GDP Share</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">H1 2025 · FCSC</div>
+            </div>
+          </div>
         </div>
       </div>
 

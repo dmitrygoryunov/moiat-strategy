@@ -3,9 +3,9 @@ import "./globals.css";
 import { TopNav } from "@/components/layout/TopNav";
 
 export const metadata: Metadata = {
-  title: "Strategy Intelligence",
+  title: "HORIZONS · Strategy Intelligence",
   description:
-    "Evidence-led decision support prototype for industrial strategy",
+    "Working prototype by EPAM — continuous, adaptive intelligence for industrial strategy",
 };
 
 export default function RootLayout({
@@ -16,10 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-gray-50">
-        {/* Prototype context banner */}
-        <div className="bg-brand-gold/10 border-b border-brand-gold/20 px-6 py-2 text-center">
-          <p className="text-[11px] font-medium text-brand-gold tracking-wide">
-            Envisioned experience approach and prototype over unconfirmed dataset for the future of strategy intelligence
+        {/* HORIZONS prototype context banner */}
+        <div className="bg-[#F9F7ED] border-b border-[#E6D7A2] px-6 py-2 text-center">
+          <p className="text-[11px] font-medium text-[#7C5E24] tracking-wide">
+            <span className="font-bold">HORIZONS</span> — working prototype by EPAM · Directional data over FY 2024 indicators · Final scope and experience to be shaped collaboratively with the Ministry
           </p>
         </div>
         <TopNav />

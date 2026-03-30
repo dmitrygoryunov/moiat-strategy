@@ -121,21 +121,35 @@ export default function BriefBuilderPage() {
 
       {/* Executive framing band */}
       <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
-        <div className="max-w-3xl">
-          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
-            Decision Brief · {APP_DATA_CONTEXT.as_of}
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-1">
+            <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
+              Decision Brief · {APP_DATA_CONTEXT.as_of}
+            </div>
+            <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
+              Manufacturing sector adjacency: where should the nation concentrate
+              industrial policy effort through 2026–2031?
+            </h2>
+            <p className="text-base text-[#7C5E24] leading-relaxed">
+              The latest official pulse (9M 2025) confirms non-oil GDP growth at
+              6.1% and non-oil GDP share at 77.5%. Manufacturing value added
+              stands at 9.4% of GDP. This brief structures the evidence,
+              trade-offs, and options available to leadership before the next
+              sector strategy review.
+            </p>
           </div>
-          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
-            Manufacturing sector adjacency: where should the nation concentrate
-            industrial policy effort through 2026–2031?
-          </h2>
-          <p className="text-base text-[#7C5E24] leading-relaxed">
-            The latest official pulse (9M 2025) confirms non-oil GDP growth at
-            6.1% and non-oil GDP share at 77.5%. Manufacturing value added
-            stands at 9.4% of GDP. This brief structures the evidence,
-            trade-offs, and options available to leadership before the next
-            sector strategy review.
-          </p>
+          <div className="lg:w-56 flex-shrink-0 flex flex-col gap-3">
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">3</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Options</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">A · B · C</div>
+            </div>
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">5</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Evidence Items</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">3 confirmed · 2 pending</div>
+            </div>
+          </div>
         </div>
       </div>
 

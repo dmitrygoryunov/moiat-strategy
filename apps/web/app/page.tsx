@@ -68,24 +68,38 @@ export default function LeadershipDashboard() {
 
       {/* Narrative band — AE Gold primary-50 treatment */}
       <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
-        <div className="max-w-3xl">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#7C5E24] mb-3 font-heading">
-            Chapter 1 · The Nation Starts From Strength · Latest official pulse: 9M 2025
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-1">
+            <div className="text-xs font-semibold uppercase tracking-wider text-[#7C5E24] mb-3 font-heading">
+              Chapter 1 · The Nation Starts From Strength · Latest official pulse: 9M 2025
+            </div>
+            <h2 className="text-xl font-bold leading-snug mb-3 font-heading text-[#5D3B26]">
+              As of March 2026, the latest official pulse shows real GDP growing at
+              5.1% with non-oil GDP accelerating to 6.1% through September 2025
+            </h2>
+            <p className="text-base text-[#7C5E24] leading-relaxed">
+              The freshest available official data — FCSC 9M 2025 — shows national real
+              GDP reaching AED 1.4 trillion with 5.1% real growth and non-oil GDP
+              growing at 6.1%. The H1 2025 pulse puts non-oil GDP share at 77.5%,
+              up from 75.5% in the FY 2024 annual snapshot. Manufacturing value
+              added stands at 9.4% of GDP (FY 2024, World Bank). The challenge
+              ahead is not ambition: it is precision — which sectors, which
+              emirates, which interventions, and which KPIs move the needle toward
+              the 2031 Operation 300bn targets.
+            </p>
           </div>
-          <h2 className="text-xl font-bold leading-snug mb-3 font-heading text-[#5D3B26]">
-            As of March 2026, the latest official pulse shows real GDP growing at
-            5.1% with non-oil GDP accelerating to 6.1% through September 2025
-          </h2>
-          <p className="text-base text-[#7C5E24] leading-relaxed">
-            The freshest available official data — FCSC 9M 2025 — shows national real
-            GDP reaching AED 1.4 trillion with 5.1% real growth and non-oil GDP
-            growing at 6.1%. The H1 2025 pulse puts non-oil GDP share at 77.5%,
-            up from 75.5% in the FY 2024 annual snapshot. Manufacturing value
-            added stands at 9.4% of GDP (FY 2024, World Bank). The challenge
-            ahead is not ambition: it is precision — which sectors, which
-            emirates, which interventions, and which KPIs move the needle toward
-            the 2031 Operation 300bn targets.
-          </p>
+          <div className="lg:w-56 flex-shrink-0 flex flex-col gap-3">
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">AED 1.4T</div>
+              <div className="text-xs text-[#7C5E24] mt-1">GDP Value</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">9M 2025 · FCSC</div>
+            </div>
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">6.1%</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Non-oil GDP Growth</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">9M 2025 · FCSC</div>
+            </div>
+          </div>
         </div>
       </div>
 

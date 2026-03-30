@@ -95,21 +95,35 @@ export default function SectorsPage() {
 
       {/* Framing */}
       <div className="bg-[#F9F7ED] border border-[#E6D7A2] rounded-2xl px-8 py-6 mb-10">
-        <div className="max-w-3xl">
-          <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
-            Sector Prioritisation · {APP_DATA_CONTEXT.as_of}
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-1">
+            <div className="text-xs font-heading font-semibold uppercase tracking-wider text-[#7C5E24] mb-3">
+              Sector Prioritisation · {APP_DATA_CONTEXT.as_of}
+            </div>
+            <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
+              Not every sector deserves equal attention — precision is the
+              strategic advantage
+            </h2>
+            <p className="text-base text-[#7C5E24] leading-relaxed">
+              The portfolio below organises national industrial sectors by current
+              strength, growth attractiveness, strategic importance, and risk
+              exposure. Classification is directional, drawing on FY 2024 data
+              and ministry public context. Full quantitative scoring awaits UN
+              Comtrade and UNIDO data connections.
+            </p>
           </div>
-          <h2 className="text-xl font-bold font-heading leading-snug mb-3 text-[#5D3B26]">
-            Not every sector deserves equal attention — precision is the
-            strategic advantage
-          </h2>
-          <p className="text-base text-[#7C5E24] leading-relaxed">
-            The portfolio below organises national industrial sectors by current
-            strength, growth attractiveness, strategic importance, and risk
-            exposure. Classification is directional, drawing on FY 2024 data
-            and ministry public context. Full quantitative scoring awaits UN
-            Comtrade and UNIDO data connections.
-          </p>
+          <div className="lg:w-56 flex-shrink-0 flex flex-col gap-3">
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">7</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Sectors Assessed</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">FY 2024 data</div>
+            </div>
+            <div className="bg-white/60 rounded-xl p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#5D3B26] font-heading">3</div>
+              <div className="text-xs text-[#7C5E24] mt-1">Strong Momentum</div>
+              <div className="text-[11px] text-[#92722A] mt-0.5">Accelerate candidates</div>
+            </div>
+          </div>
         </div>
       </div>
 
